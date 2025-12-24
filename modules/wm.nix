@@ -2,17 +2,23 @@
 
 {
   imports = [ 
-    inputs.mango.hmModules.mango
-    inputs.dms.homeModules.dank-material-shell
+    #inputs.mango.hmModules.mango
+    #inputs.niri.nixosModules.niri
+  ];
+  
+  user.packages = with pkgs; [
+    libsForQt5.qtstyleplugin-kvantum
+    kdePackages.qt6ct
+    pavucontrol
+    wl-clipboard
+    wlr-randr
+    swaybg
+    wofi
+    kanshi
+    foot
   ];
 
-  home.packages = with pkgs; [
-    swaybg
-    wl-clipboard
-    foot
-    grim
-    slurp
-    wmenu
-  ];
-  wayland.windowManager.mango.enable = false;
+  #programs.mango.enable = true;
+
+  programs.niri.enable = true;
 }

@@ -1,0 +1,13 @@
+profile undocked {
+  output "eDP-1" enable scale 1.5
+}
+
+profile pake_vga {
+  output "DP-1" enable scale 1
+  output "eDP-1" disable
+}
+
+profile pake_hdmi {
+  output eDP-1 disable            
+  output HDMI-A-1 enable scale 1  
+}

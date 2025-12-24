@@ -1,27 +1,33 @@
-{ config, pkgs, username, description, hostname, groups, timezone, defaultLocale, extraLocale, xkb, shell, ... }:
+{ config, pkgs, username, description, hashPasswd, hostname, groups, timezone, defaultLocale, extraLocale, xkb, shell, ... }:
 
 {
   imports =
     [
       ./hardware-configuration.nix
+      ./modules/fonts.nix
       ./modules/desktop.nix
+      # ./modules/wm.nix
       ./apps/kanata.nix
       ./apps/system-lv.nix
       # ./apps/flatpaks.nix
+      ./apps/gaming.nix
     ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
-  # latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Enabling experimental features
   nix = {
-  package = pkgs.nix;
-  extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
+    settings.experimental-features = [
+      "nix-command" 
+      "flakes"
+    ];
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
   };
 
   networking.hostName = "${hostname}";
@@ -31,7 +37,6 @@
   networking.networkmanager.enable = true;
 
   services.printing.enable = true;
-  services.pulseaudio.enable = false;
   services.libinput.enable = true;
   security.rtkit.enable = true;
 
@@ -40,11 +45,6 @@
 
   virtualisation.podman.enable = true;
   virtualisation.libvirtd.enable = true;
-
-  programs.virt-manager.enable = true;
-  programs.firefox.enable = true;
-  programs.steam.enable = true;
-  programs.fish.enable = true;
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "${extraLocale}";
@@ -58,29 +58,35 @@
     LC_TIME = "${extraLocale}";
   };
 
-  # Keymap in X11
   services.xserver.xkb = {
     layout = "${xkb.layout}";
     variant = "${xkb.variant}";
   };
 
-  environment.shells = with pkgs; [ pkgs."${shell}" ];
+  hardware.enableAllFirmware = true;
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;  
+  };
 
+  services.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = true;
+    wireplumber.enable = true;
+    jack.enable = false;
   };
 
   users.users."${username}" = {
     isNormalUser = true;
     description = "${description}";
     extraGroups = groups;
-    hashedPassword = "$6$KyNQWAqeKj9uX3G6$zoWMV0vtTLO1cEbnUDKnFGSIy.MGPnoCDQ3mmZisqx2qrr.Ywyp3ajoLhni2OQTWZ4kKAVMNcKSuKzIWPmhx7.";
-    # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA..." ];
+    hashedPassword = hashPasswd;
     shell = pkgs."${shell}";
   };
+
   system.stateVersion = "25.05";
 }

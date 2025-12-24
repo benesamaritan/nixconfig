@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   services.xserver = {
@@ -11,30 +11,16 @@
     enable = true;
     wayland.enable = true;
   };
-
-  hardware.graphics.enable = true;
   
-#  services.displayManager.sessionPackages = [ 
-#    inputs.mango.packages.${pkgs.system}.default 
-#  ];
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "${username}";
 
-  programs.mango.enable = true;
-
-  programs.dms-shell = {
+  xdg.portal = {
     enable = true;
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-  };
-
-  programs.dank-material-shell = {
-    enable = true;
-    systemd = {
-      enable = true;
-      restartIfChanged = true; 
-    };
-    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableVPN = true;                  # VPN management widget
-    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true;      # Audio visualizer (cava)
-    enableCalendarEvents = true;       # Calendar integration (khal)
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      xdg-desktop-portal-wlr 
+    ];
+    config.common.default = "*"; 
   };
 }

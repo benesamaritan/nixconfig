@@ -7,8 +7,14 @@ in
   imports = [
     # ./modules/wm.nix
     # ./modules/dms.nix
+    
+    # User-level packages and CLI tools - includes development tools, terminal utilities, and productivity apps
     ./apps/user-lv.nix
+    
+    # Web application shortcuts - creates desktop entries for web apps like Google Classroom, Drive, and WhatsApp
     ./apps/web-apps.nix
+    
+    # Online LLM CLI tools - configures GitHub Copilot, Gemini CLI, and OpenCode for AI-assisted coding
     ./apps/online-llm-cli.nix
   ];
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib ... }:
 
 let
   gemini-cli = pkgs.buildNpmPackage rec {

@@ -58,7 +58,7 @@
     };
     git = {
       user = "benesamaritan";
-      email = "samaritan@autistici.org";
+      email = "243715333+benesamaritan@users.noreply.github.com";
     };
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {

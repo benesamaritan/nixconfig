@@ -34,6 +34,7 @@
   services.libinput.enable = true;
   programs.firefox.enable = true;
   programs.steam.enable = true;
+  programs.fish.enable = true;
   nixpkgs.config.allowUnfree = true;
   nix.settings.auto-optimise-store = true;
   virtualisation.libvirtd.enable = true;
@@ -57,6 +58,7 @@
     layout = "us";
     variant = "";
   };
+  environment.shells = with pkgs; [ fish ];
 
   services.pipewire = {
     enable = true;
@@ -69,9 +71,10 @@
   users.users.bye = {
     isNormalUser = true;
     description = "Bayu Saputro";
-    extraGroups = [ "networkmanager" "wheel" "podman" "libvirtd];
+    extraGroups = [ "networkmanager" "wheel" "podman" "libvirtd" ];
     hashedPassword = "$6$KyNQWAqeKj9uX3G6$zoWMV0vtTLO1cEbnUDKnFGSIy.MGPnoCDQ3mmZisqx2qrr.Ywyp3ajoLhni2OQTWZ4kKAVMNcKSuKzIWPmhx7.";
     # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA..." ];
+    shell = pkgs.fish;
   };
   
   system.stateVersion = "25.05";

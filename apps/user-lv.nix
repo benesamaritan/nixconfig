@@ -29,13 +29,14 @@
         name = "${git.user}";
         email = "${git.email}";
       };
-    }; 
+    init.defaultBranch = "main";
+    };
   };
 
   programs.gh = {
     enable = true;
     settings = {
-      git_protocol = "ssh"; 
+      git_protocol = "ssh";
     };
   };
 

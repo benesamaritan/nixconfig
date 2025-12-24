@@ -36,6 +36,6 @@
   home.file = {
     ".config/nvim".source = ./../dot-config/nvim;
     ".tmux.conf".source = ./../dot-config/tmux.conf;
-    ".config/alacritty/alacritty.yml".source = ./../dot-config/alacritty.yml;
+    ".config/alacritty/alacritty.yml".source = ./../dot-config/alacritty/alacritty.yml;
   };
 }

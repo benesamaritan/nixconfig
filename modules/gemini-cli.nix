@@ -11,8 +11,8 @@ let
       hash = "sha256-97OppYbjSavel3Dvlk7Kzdj+4wl+YKvnBkk8TQlsF7s="; 
       # Update hash above on error
     };
-    npmDepsHash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="; 
-    # Update this on error
+    npmDepsHash = "sha256-YpZ6iMq7KUk5EgNh6BRYfzz1RbBO5pkF5Dd5ZL01LeM="; 
+    # Update npmDepsHash on error
     dontNpmBuild = true;
   };
 in

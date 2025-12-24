@@ -1,0 +1,71 @@
+;; defsrc is still necessary
+(defcfg
+  process-unmapped-keys yes
+)
+
+(defsrc
+  esc  F1   F2   F3   F4   F5   F6   F7   F8   F9   F10  F11  F12 ins del
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rctl
+)
+
+(defvar
+  ttime 200
+  htime 220
+)
+
+(defalias
+  capsM (tap-hold $ttime $htime bspc caps)
+  aM (tap-hold $ttime $htime a lalt)
+  rM (tap-hold $ttime $htime r lmet)
+  sM (tap-hold $ttime $htime s lsft)
+  tM (tap-hold $ttime $htime t lctl)
+  nM (tap-hold $ttime $htime n rctl)
+  eM (tap-hold $ttime $htime e rsft)
+  iM (tap-hold $ttime $htime i rmet)
+  oM (tap-hold $ttime $htime o ralt)
+  lsM (tap-hold $ttime $htime del lsft)
+  spcM (tap-hold $ttime $htime spc (layer-toggle numpadnav))
+  a_M (tap-hold $ttime $htime a lalt)
+  r_M (tap-hold $ttime $htime 4 lmet)
+  s_M (tap-hold $ttime $htime 5 lsft)
+  t_M (tap-hold $ttime $htime 6 lctl)
+  n_M (tap-hold $ttime $htime left rctl)
+  e_M (tap-hold $ttime $htime down rsft)
+  i_M (tap-hold $ttime $htime up rmet)
+  o_M (tap-hold $ttime $htime rght ralt)
+  DH (layer-switch colemakdh)
+  QW (layer-switch qwerty)
+  laltM (tap-hold $ttime $htime esc lalt)
+  raltM (tap-hold $ttime $htime ret ralt)
+)
+
+(deflayer colemakdh
+  _       _    _    _    _    _    _    _    _    _    _    _   _   lrld _
+  _       _    _    _    _    _    _    _    _    _    _    _   _   _
+  _       _    _    f    p    b    j    l    u    y    ;    _   _   _
+  @capsM  @aM  @rM  @sM  @tM  _    m    @nM  @eM  @iM  @oM  _   _
+  @lsM    x    c    d    _    z    k    h    _    _    _    _
+  _  _    @laltM              @spcM          @raltM    @QW
+)
+
+(deflayer numpadnav
+  _  _  _     _     _    _    _    _     _     _     _    _  _  _  _
+  _  _  _     _     _    /    S-/  _     home  _     _    _  _  _
+  _  _  7     8     9    S-9  S-0  pgup  end   pgdn  _    _  _  _
+  _  @a_M  @r_M  @s_M    @t_M [    ]    @n_M  @e_M  @i_M  @o_M _  _
+  _  _  1     2     3    S-[  S-]  _     _     _     _    _
+  _  _  0                _               _ _
+)
+
+(deflayer qwerty
+  _	_	_ 	_	_	_	_	_	_	_	_	_	_ _ _
+  _	_	_	_	_	_	_	_	_	_	_	_	_	_
+  _	_	_	_	_	_	_	_	_	_	_	_	_	_
+  _	_	_	_	_	_	_	_	_	_	_	_	_
+  _	_	_	_	_	_	_	_	_	_	_	_
+  _	_	_	_	_	@DH
+)

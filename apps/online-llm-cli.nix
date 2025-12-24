@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs.gh = {
@@ -12,5 +12,12 @@
         cs = "copilot suggest";
       };
     };
+  };
+  home.packages = [ 
+    pkgs.gemini-cli
+    inputs.opencode.packages.${pkgs.system}.default
+  ];
+  home.shellAliases = {
+    gem = "gemini";
   };
 }

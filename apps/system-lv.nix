@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -17,7 +17,15 @@
     eza
     fd 
     btop
+    cava
+    cmatrix
+    cliphist
+    khal
+    dgop
+    matugen
+    fastfetch
     nix-search-cli
+    inputs.zen-browser.packages.${pkgs.system}.beta
   ];
 }
 

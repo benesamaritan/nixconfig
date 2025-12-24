@@ -5,7 +5,7 @@
     enable = true;
     keyboards = {
       default = {
-        configFile = ~/.config/kanata/kanata.kbd;
+        configFile = ./../config-files/kanata/kanata.kbd;
 
         # Or you could dump kanata.kbd into
         # config = ''

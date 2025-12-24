@@ -28,21 +28,20 @@
     description = "Bayu Saputro";
     system = "x86_64-linux";
     hostname = "sol";
-    groups = [
+    shell = "fish";  
+    timezone = "Asia/Jakarta";
+    defaultLocale = "en_US.UTF-8";
+    extraLocale = "id_ID.UTF-8";groups = [
       "networkmanager" 
       "wheel" 
       "podman" 
       "libvirtd"
-      "input"
-    ];    
-    timezone = "Asia/Jakarta";
-    defaultLocale = "en_US.UTF-8";
-    extraLocale = "id_ID.UTF-8";
+      "input" #only if using kanata.nix on configuration.nix
+    ];
     xkb = {
       layout = "us";
       variant = "";
-    };
-    shell = "fish";
+    };  
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       inherit system;

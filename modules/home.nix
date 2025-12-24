@@ -12,18 +12,13 @@
   home.stateVersion = "24.05";
 
   home.file = {
-    ".config/nvim".source = ./../dot-config/nvim;
-    ".config/tmux".source = ./../dot-config/tmux;
-    ".config/alacritty".source = ./../dot-config/alacritty;
-    ".config/mango".source = ./../dot-config/mango;
-    ".config/btop".source = ./../dot-config/btop;
-    ".config/cava".source = ./../dot-config/cava;
-    ".config/fastfetch".source = ./../dot-config/fastfetch;
-    ".config/kanata".source = ./../dot-config/kanata;
-    #".config/atuin".source = ./../dot-config/atuin;
-    #".config/steam".source = ./../dot-config/steam;
-    #".config/VSCodium".source = ./../dot-config/VSCodium;
-    #".config/zed".source = ./../dot-config/zed;
+    ".config/nvim".source = ./../config-files/nvim;
+    ".config/tmux".source = ./../config-files/tmux;
+    ".config/alacritty".source = ./../config-files/alacritty;
+    ".config/mango".source = ./../config-files/mango;
+    ".config/btop".source = ./../config-files/btop;
+    ".config/cava".source = ./../config-files/cava;
+    ".config/fastfetch".source = ./../config-files/fastfetch;
   };
 
   programs.starship.enable = true;

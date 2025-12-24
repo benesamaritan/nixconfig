@@ -8,16 +8,16 @@ let
       owner = "google-gemini";
       repo = "gemini-cli";
       rev = "v${version}";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Update this on error
+      hash = "sha256-97OppYbjSavel3Dvlk7Kzdj+4wl+YKvnBkk8TQlsF7s="; 
+      # Update hash above on error
     };
-    npmDepsHash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="; # Update this on error
+    npmDepsHash = "sha256-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="; 
+    # Update this on error
     dontNpmBuild = true;
   };
 in
 {
   home.packages = [ gemini-cli ];
-  
-  # Optional: A shorter alias if you prefer
   home.shellAliases = {
     gem = "gemini";
   };

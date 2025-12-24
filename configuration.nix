@@ -69,7 +69,9 @@
   users.users.bye = {
     isNormalUser = true;
     description = "Bayu Saputro";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" "libvirtd];
+    hashedPassword = "$6$KyNQWAqeKj9uX3G6$zoWMV0vtTLO1cEbnUDKnFGSIy.MGPnoCDQ3mmZisqx2qrr.Ywyp3ajoLhni2OQTWZ4kKAVMNcKSuKzIWPmhx7.";
+    # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA..." ];
   };
   
   system.stateVersion = "25.05";

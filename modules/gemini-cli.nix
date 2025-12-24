@@ -13,7 +13,14 @@ let
     };
     npmDepsHash = "sha256-YpZ6iMq7KUk5EgNh6BRYfzz1RbBO5pkF5Dd5ZL01LeM="; 
     # Update npmDepsHash on error
+    Set makeCacheWritable = true
     dontNpmBuild = true;
+
+    meta = with lib; {
+    description = "Gemini CLI tool";
+    license = licenses.mit;
+    maintainers = [];
+  };
   };
 in
 {

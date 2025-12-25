@@ -38,6 +38,7 @@
   i_M (tap-hold $ttime $htime up rmet)
   o_M (tap-hold $ttime $htime rght ralt)
   DH (layer-switch colemakdh)
+  DHl (layer-switch colemakdhlight)
   QW (layer-switch qwerty)
   laltM (tap-hold $ttime $htime esc lalt)
   raltM (tap-hold $ttime $htime ret ralt)
@@ -49,7 +50,7 @@
   _       _    _    f    p    b    j    l    u    y    ;    _   _   _
   @capsM  @aM  @rM  @sM  @tM  _    m    @nM  @eM  @iM  @oM  _   _
   @lsM    x    c    d    _    z    k    h    _    _    _    _
-  _  _    @laltM              @spcM          @raltM    @QW
+  _  _    @laltM              @spcM          @raltM    @DHl
 )
 
 (deflayer numpadnav
@@ -59,6 +60,16 @@
   _  @a_M  @r_M  @s_M    @t_M [    ]    @n_M  @e_M  @i_M  @o_M _  _
   _  _  1     2     3    S-[  S-]  _     _     _     _    _
   _  _  0                _               _ _
+)
+
+
+(deflayer colemakdhlight
+  _       _    _    _    _    _    _    _    _    _    _    _   _   _ _
+  _       _    _    _    _    _    _    _    _    _    _    _   _   _
+  _       _    _    f    p    b    j    l    u    y    ;    _   _   _
+  @capsM  a  r  s  t  _    m    n  e  i  o  _   _
+  @lsM    x    c    d    _    z    k    h    _    _    _    _
+  _  _    @laltM              _          @raltM    @QW
 )
 
 (deflayer qwerty

@@ -1,25 +1,40 @@
-{ pkgs, inputs, git, ... }:
+{ pkgs, inputs, username, git, ... }:
 
 {
   home.packages = with pkgs; [
-    cmatrix
-    fastfetch
+    jq
+    duf
+    dust
+    tokei
+    glow
+    wl-clipboard
     nix-search-cli
     thunderbird
+    vscodium
+    inputs.zen-browser.packages.${pkgs.system}.beta
     anytype
+    appimage-run # use which command to look up path to be put onto lutris or other tools
   ];
+
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
   programs.starship.enable = true;
   programs.alacritty.enable = true;
   programs.fd.enable = true;
 
+  programs.tealdeer = {
+    enable = true;
+    settings.updates.auto_update = true;
+  };
+
   programs.fish = {
     enable = true;
       interactiveShellInit = ''
         set fish_greeting
-        alias gc="git clone"
       '';
-      # plugins = [  ];
   };
 
   programs.git = {
@@ -60,14 +75,14 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "GitHub";
+      theme = "catppuccin";
     };
   };
 
   programs.btop = {
     enable = true;
     settings = {
-      color_theme = "dracula";
+      color_theme = "catppuccin";
     };
   };
 
@@ -83,62 +98,5 @@
       style = "compact";
       inline_height = 20;
     };
-  };
-
-  programs.tmux = {
-    enable = true;
-    mouse = true;
-    baseIndex = 1;
-    keyMode = "vi";
-    disableConfirmationPrompt = true;
-    plugins = with pkgs.tmuxPlugins; [
-      catppuccin
-      sensible
-      vim-tmux-navigator
-      resurrect
-      continuum
-      yank
-      tmux-which-key
-    ];
-
-    extraConfig = ''
-      unbind C-b
-      set -g prefix C-Space
-      bind C-Space send prefix
-      bind -n M-H previous-window
-      bind -n M-L next-window
-
-      # Vim style pane selection
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-
-      # Start windows and panes at 1, not 0
-      set -g base-index 1
-      set -g pane-base-index 1
-      set-window-option -g pane-base-index 1
-      set-option -g renumber-windows on
-
-      # Use Alt-arrow keys without prefix key to switch panes
-      bind -n M-Left select-pane -L
-      bind -n M-Right select-pane -R
-      bind -n M-Up select-pane -U
-      bind -n M-Down select-pane -D
-
-      # Shift arrow to switch windows
-      bind -n S-Left  previous-window
-      bind -n S-Right next-window
-
-      # set vi-mode
-      set-window-option -g mode-keys vi
-
-      # keybindings
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-      bind '"' split-window -v -c "#{pane_current_path}"
-      bind % split-window -h -c "#{pane_current_path}"
-    '';
   };
 }

@@ -1,12 +1,16 @@
-{ config, pkgs, lib, username, git, ... }:
+{ config, pkgs, lib, hostname, username, git, ... }:
 
 let
   link = name: { source = ./config-files/${name}; };
+  dynamic = name: {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config-files/${name}";
+  };
 in
+
 {
   imports = [
-    # ./modules/wm.nix
-    # ./modules/dms.nix
+    ./apps/tmux.nix
+    ./apps/nvim.nix
     ./apps/user-lv.nix
     ./apps/web-apps.nix
     ./apps/online-llm-cli.nix
@@ -14,16 +18,19 @@ in
 
   programs.home-manager.enable = true;
 
-  home.stateVersion = "24.05";
-  home.username = "${username}";
-  home.homeDirectory = "/home/${username}";
+  home = {
+    stateVersion = "24.05";
+    username = "${username}";
+    homeDirectory = "/home/${username}";
+  };
 
   xdg.configFile = {
-    "nvim"          = link "nvim";
+    "tmux"          = dynamic "tmux";
+    "nvim"          = dynamic "nvim";
     "cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
-    #"tmux"          = link "tmux";
+    #"Kvantum"      = link "Kvantum";
     "alacritty"     = link "alacritty";
     "btop"          = link "btop";
     "atuin"         = link "atuin";
@@ -36,6 +43,32 @@ in
     EDITOR = "nvim";
     VISUAL = "nvim";
     QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
+    TERMINAL = "alacritty";
+    BROWSER = "zen";
+    NIXOS_OZONE_WL = "1";
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    MANROFFOPT = "-c";
+    XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";
+    CARGO_HOME = "$HOME/.local/share/cargo";
+    BUN_INSTALL = "$HOME/.local/share/bun";
+  };
+
+  home = {
+    sessionPath = [
+      "$HOME/.local/share/bun/bin"
+    ];
+    shellAliases = {
+      ".." = "z ..";
+      cd = "z";
+      cat = "bat";
+      ls = "eza --icons";
+      ll = "eza -l --icons --git -a";
+      lt = "eza --tree --level=2 --icons";
+      gc = "git clone";
+      osu = "env DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 appimage-run /home/${username}/Lutris/osu/osu.AppImage";
+      ossw = "git add --all && sudo nixos-rebuild switch --flake .#${hostname}";
+      hmsw = "git add --all && home-manager switch --flake .#${username}";
+    };
   };
 
   dconf = {

@@ -1,0 +1,4 @@
+[submodule "config-files/tmux/.tmux/plugins/tpm"]
+	path = config-files/tmux/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
+	ignore = dirty

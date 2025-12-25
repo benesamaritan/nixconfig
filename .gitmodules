@@ -1,4 +1,3 @@
-[submodule "config-files/tmux/.tmux/plugins/tpm"]
-	path = config-files/tmux/.tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm
-	ignore = dirty
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:benesamaritan/dotfiles.git

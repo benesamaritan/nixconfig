@@ -1,9 +1,8 @@
 { config, pkgs, lib, hostname, username, git, ... }:
 
 let
-  link = name: { source = ./config-files/${name}; };
-  dynamic = name: {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config-files/${name}";
+  link = name: {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/${name}";
   };
 in
 
@@ -25,18 +24,18 @@ in
   };
 
   xdg.configFile = {
-    "tmux"          = dynamic "tmux";
-    "nvim"          = dynamic "nvim";
+    "alacritty"     = link "alacritty";
+    "atuin"         = link "atuin";
+    "tmux"          = link "tmux";
+    "nvim"          = link "nvim";
+    "btop"          = link "btop";
+    "starship.toml" = link "starship.toml";
     "cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
     #"Kvantum"      = link "Kvantum";
-    "alacritty"     = link "alacritty";
-    "btop"          = link "btop";
-    "atuin"         = link "atuin";
     "lazydocker"    = link "lazydocker";
     "lazygit"       = link "lazygit";
-    "starship.toml" = link "starship.toml";
   };
 
   home.sessionVariables = {

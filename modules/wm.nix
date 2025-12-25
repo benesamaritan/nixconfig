@@ -1,8 +1,7 @@
 { config, pkgs, inputs, ... }:
 
 let
-  link = name: { source = ./config-files/${name}; };
-  dynamic = name: {
+  link = name: {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config-files/${name}";
   };
 in

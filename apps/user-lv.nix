@@ -2,11 +2,16 @@
 
 {
   home.packages = with pkgs; [
+    alacritty
     jq
     duf
     dust
     tokei
     glow
+    btop
+    kanshi
+    atuin
+    starship
     wl-clipboard
     nix-search-cli
     thunderbird
@@ -21,20 +26,20 @@
     indicator = true;
   };
 
-  programs.starship.enable = true;
-  programs.alacritty.enable = true;
+  programs.fish = {
+    enable = true;
+      interactiveShellInit = ''
+        set fish_greeting
+        atuin init fish | source
+        starship init fish | source
+      '';
+  };
+
   programs.fd.enable = true;
 
   programs.tealdeer = {
     enable = true;
     settings.updates.auto_update = true;
-  };
-
-  programs.fish = {
-    enable = true;
-      interactiveShellInit = ''
-        set fish_greeting
-      '';
   };
 
   programs.git = {
@@ -79,24 +84,8 @@
     };
   };
 
-  programs.btop = {
-    enable = true;
-    settings = {
-      color_theme = "catppuccin";
-    };
-  };
-
   programs.ripgrep = {
     enable = true;
     arguments = [ "--max-columns=150" "--max-columns-preview" ];
-  };
-
-  programs.atuin = {
-    enable = true;
-    enableFishIntegration = true;
-    settings = {
-      style = "compact";
-      inline_height = 20;
-    };
   };
 }

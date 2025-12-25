@@ -1,3 +1,1 @@
-config-files/tmux/.tmux/plugins/
-!config-files/tmux/.tmux/plugins/tpm
 hardware-configuration.nix

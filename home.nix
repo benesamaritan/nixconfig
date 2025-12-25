@@ -23,7 +23,7 @@ in
     "cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
-    "tmux"          = link "tmux";
+    #"tmux"          = link "tmux";
     "alacritty"     = link "alacritty";
     "btop"          = link "btop";
     "atuin"         = link "atuin";

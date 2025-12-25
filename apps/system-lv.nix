@@ -11,7 +11,6 @@
   services.xserver.excludePackages = [ pkgs.xterm ];
 
   environment.systemPackages = with pkgs; [
-    tmux
     neovim
     alacritty
     vscodium

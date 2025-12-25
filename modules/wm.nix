@@ -1,11 +1,19 @@
 { config, pkgs, inputs, ... }:
 
+let
+  link = name: { source = ./config-files/${name}; };
+  dynamic = name: {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/config-files/${name}";
+  };
+in
+
 {
-  imports = [ 
-    #inputs.mango.hmModules.mango
-    #inputs.niri.nixosModules.niri
+  imports = [
+    ./dms.nix
   ];
-  
+
+  programs.niri.enable = true;
+
   user.packages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
     kdePackages.qt6ct
@@ -18,7 +26,15 @@
     foot
   ];
 
-  #programs.mango.enable = true;
+  xdg.configFile = {
+    "Kvantum"      = link "Kvantum";
+  };
 
-  programs.niri.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-wlr
+    ];
+    config.common.default = "*";
+  };
 }

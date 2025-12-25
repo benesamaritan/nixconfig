@@ -4,29 +4,35 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./modules/environment.nix
+      ./modules/virtualization.nix
       ./modules/fonts.nix
-      ./modules/desktop.nix
-      # ./modules/wm.nix
       ./apps/kanata.nix
       ./apps/system-lv.nix
-      # ./apps/flatpaks.nix
       ./apps/gaming.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 10;  # Reduce swap usage for better gaming performance
-    "vm.max_map_count" = 2147483642;  # Required for memory-intensive games
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
+    };
+    kernelPackages = pkgs.linuxPackages_latest;
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "vm.max_map_count" = 2147483642;
+    };
   };
 
-  # Enabling experimental features
   nix = {
-    settings.experimental-features = [
-      "nix-command" 
+    settings = {
+      experimental-features = [
+      "nix-command"
       "flakes"
-    ];
+      ];
+      auto-optimise-store = true;
+      use-xdg-base-directories = true;
+    };
     gc = {
       automatic = true;
       dates = "weekly";
@@ -34,62 +40,67 @@
     };
   };
 
-  networking.hostName = "${hostname}";
-  time.timeZone = "${timezone}";
-  i18n.defaultLocale = "${defaultLocale}";
-  networking.wireless.enable = false;
-  networking.networkmanager.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
-  services.printing.enable = true;
-  services.libinput.enable = true;
+  time.timeZone = "${timezone}";
+
+  networking = {
+    wireless.enable = false;
+    networkmanager.enable = true;
+    hostName = "${hostname}";
+  };
+
+  hardware = {
+    enableAllFirmware = true;
+    cpu.intel.updateMicrocode = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+  };
+
+  i18n = {
+    defaultLocale = "${defaultLocale}";
+    extraLocaleSettings = {
+      LC_ADDRESS = "${extraLocale}";
+      LC_IDENTIFICATION = "${extraLocale}";
+      LC_MEASUREMENT = "${extraLocale}";
+      LC_MONETARY = "${extraLocale}";
+      LC_NAME = "${extraLocale}";
+      LC_NUMERIC = "${extraLocale}";
+      LC_PAPER = "${extraLocale}";
+      LC_TELEPHONE = "${extraLocale}";
+      LC_TIME = "${extraLocale}";
+    };
+  };
+
   security.rtkit.enable = true;
 
-  nixpkgs.config.allowUnfree = true;
-  nix.settings.auto-optimise-store = true;
-
-  virtualisation.podman.enable = true;
-  virtualisation.libvirtd.enable = true;
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "${extraLocale}";
-    LC_IDENTIFICATION = "${extraLocale}";
-    LC_MEASUREMENT = "${extraLocale}";
-    LC_MONETARY = "${extraLocale}";
-    LC_NAME = "${extraLocale}";
-    LC_NUMERIC = "${extraLocale}";
-    LC_PAPER = "${extraLocale}";
-    LC_TELEPHONE = "${extraLocale}";
-    LC_TIME = "${extraLocale}";
-  };
-
-  services.xserver.xkb = {
-    layout = "${xkb.layout}";
-    variant = "${xkb.variant}";
-  };
-
-  hardware.enableAllFirmware = true;
-  hardware.cpu.intel.updateMicrocode = true;
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;  
-  };
-
-  services.pulseaudio.enable = false;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-    jack.enable = false;
-    extraConfig.pipewire."92-low-latency" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.quantum" = 64;
-        "default.clock.min-quantum" = 32;
-        "default.clock.max-quantum" = 128;
+  services = {
+    printing.enable = true;
+    libinput.enable = true;
+    pulseaudio.enable = false;
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      wireplumber.enable = true;
+      jack.enable = false;
+      extraConfig.pipewire."92-low-latency" = {
+        "context.properties" = {
+          "default.clock.rate" = 48000;
+          "default.clock.quantum" = 64;
+          "default.clock.min-quantum" = 32;
+          "default.clock.max-quantum" = 128;
+        };
       };
     };
+    xserver.xkb = {
+      layout = "${xkb.layout}";
+      variant = "${xkb.variant}";
+    };
+
   };
 
   users.users."${username}" = {

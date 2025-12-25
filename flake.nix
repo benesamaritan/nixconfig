@@ -64,7 +64,7 @@
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit inputs username hashPasswd description hostname groups timezone defaultLocale extraLocale xkb shell;
+        inherit inputs hostname username hashPasswd description groups timezone defaultLocale extraLocale xkb shell;
       };
       modules = [
         ./configuration.nix
@@ -73,7 +73,7 @@
     homeConfigurations = {
       "${username}" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs username git; };
+        extraSpecialArgs = { inherit inputs hostname username git; };
         modules = [
           ./home.nix
         ];

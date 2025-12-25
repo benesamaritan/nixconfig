@@ -16,6 +16,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;  # Reduce swap usage for better gaming performance
+    "vm.max_map_count" = 2147483642;  # Required for memory-intensive games
+  };
 
   # Enabling experimental features
   nix = {
@@ -78,6 +82,14 @@
     pulse.enable = true;
     wireplumber.enable = true;
     jack.enable = false;
+    extraConfig.pipewire."92-low-latency" = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.quantum" = 64;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 128;
+      };
+    };
   };
 
   users.users."${username}" = {

@@ -6,7 +6,7 @@
     enable = true;
     keyboards = {
       default = {
-        configFile = ./../config-files/kanata/kanata.kbd;
+        configFile = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/kanata/kanata.kbd";
 
         # Or you could dump kanata.kbd into
         # config = ''

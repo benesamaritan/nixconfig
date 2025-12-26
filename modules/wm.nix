@@ -134,5 +134,7 @@ in
     slurp
     dgop
     xwayland-satellite
+    swaylock
+    fuzzel
   ];
 }

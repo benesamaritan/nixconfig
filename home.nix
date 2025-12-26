@@ -13,6 +13,7 @@ in
     ./apps/user-lv.nix
     ./apps/web-apps.nix
     ./apps/online-llm-cli.nix
+    ./modules/catppuccin-user.nix
   ];
 
   programs.home-manager.enable = true;
@@ -25,16 +26,16 @@ in
 
   xdg.configFile = {
     "alacritty"     = link "alacritty";
-    "atuin"         = link "atuin";
+    #"atuin"         = link "atuin";
     "tmux"          = link "tmux";
     "nvim"          = link "nvim";
-    "btop"          = link "btop";
+    #"btop"          = link "btop";
     "starship.toml" = link "starship.toml";
-    "cava"          = link "cava";
+    #"cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
-    "lazydocker"    = link "lazydocker";
-    "lazygit"       = link "lazygit";
+    #"lazydocker"    = link "lazydocker";
+    #"lazygit"       = link "lazygit";
   };
 
   home.sessionVariables = {

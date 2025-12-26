@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./modules/desktop.nix
       ./modules/wm.nix
+      ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
       ./modules/fonts.nix
       ./apps/kanata.nix
@@ -30,6 +31,9 @@
       experimental-features = [
       "nix-command"
       "flakes"
+      ];
+      trusted-users = [ 
+        "root" "${username}" 
       ];
       auto-optimise-store = true;
       use-xdg-base-directories = true;

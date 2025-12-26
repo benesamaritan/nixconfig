@@ -11,6 +11,7 @@ let
 in
 {
   home.packages = [
+    (makeWebApp "Gemini Chat" "https://gemini.google.com" "chat")
     (makeWebApp "Google Classroom" "https://classroom.google.com" "education-school")
     (makeWebApp "Google Drive" "https://drive.google.com" "folder-cloud")
     (makeWebApp "Github Classroom" "https://classroom.github.com" "vcs-git")

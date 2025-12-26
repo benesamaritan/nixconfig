@@ -133,5 +133,6 @@ in
     grim
     slurp
     dgop
+    xwayland-satellite
   ];
 }

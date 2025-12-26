@@ -31,6 +31,7 @@
   environment.systemPackages = with pkgs; [
     wineWowPackages.stable
     winetricks
+    protontricks
     dotnet-sdk
     mangohud
     lutris # be sure to disable lutris runtime

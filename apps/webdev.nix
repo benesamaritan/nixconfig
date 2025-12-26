@@ -68,6 +68,13 @@
     arguments = [ "--max-columns=150" "--max-columns-preview" ];
   };
 
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "catppuccin";
+    };
+  };
+
   programs.jujutsu = {
     enable = false;
     settings = {

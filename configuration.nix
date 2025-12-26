@@ -4,7 +4,8 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./modules/environment.nix
+      ./modules/desktop.nix
+      ./modules/wm.nix
       ./modules/virtualization.nix
       ./modules/fonts.nix
       ./apps/kanata.nix

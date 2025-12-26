@@ -10,20 +10,23 @@
     opencode.url = "github:AodhanHayter/opencode-flake";
     zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
     # niri.url = "github:YaLTeR/niri";
-    # dms = {
-    #   url = "github:AvengeMedia/DankMaterialShell/a7494971fd7c4fb823d4b77a7543d77225442ce4";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # dsearch = {
-    #   url = "github:AvengeMedia/danksearch";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dsearch = {
+      url = "github:AvengeMedia/danksearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # mango = {
     #   url = "github:DreamMaoMao/mango";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     # flake-parts.url = "github:hercules-ci/flake-parts";
-    # nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:
@@ -49,8 +52,8 @@
       "wheel"
       "podman"
       "libvirtd"
-      "input" #only if using kanata.nix on configuration.nix
-      "uinput" #only if using kanata.nix
+      "input" # only if using
+      "uinput" # kanata.nix on configuration.nix
     ];
     xkb = {
       layout = "us";

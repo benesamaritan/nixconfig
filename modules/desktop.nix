@@ -7,11 +7,19 @@
     desktopManager.cinnamon.enable = true;
   };
 
-  services.displayManager = {
-    defaultSession = "cinnamon-wayland";
-    autoLogin = {
-      enable = true;
-      user = "${username}";
+  programs.xwayland.enable = true;
+
+  services = {
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+      };
+      defaultSession = "cinnamon-wayland";
+      autoLogin = {
+        enable = false;
+        user = "${username}";
+      };
     };
   };
 

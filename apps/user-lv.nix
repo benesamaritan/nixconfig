@@ -34,11 +34,6 @@
       '';
   };
 
-  programs.tealdeer = {
-    enable = true;
-    settings.updates.auto_update = true;
-  };
-
   programs.git = {
     enable = true;
     settings = {
@@ -65,12 +60,5 @@
   programs.zoxide = {
     enable = true;
     enableFishIntegration = true;
-  };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "catppuccin";
-    };
   };
 }

@@ -6,7 +6,6 @@
     # USE
     # ONLY
     # ONE!
-
     ./desktop.nix   # <-- using cinnamon
     #./wm.nix       # <-- using niri & dms
   ];

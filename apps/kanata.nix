@@ -1,21 +1,16 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   hardware.uinput.enable = true;
+
+  environment.systemPackages = [ pkgs.kanata ];
+
   services.kanata = {
     enable = true;
     keyboards = {
       default = {
-        configFile = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/kanata/kanata.kbd";
-
-        # Or you could dump kanata.kbd into
-        # config = ''
-        #   (defsrc caps a s d f)
-        #   (defalias escctrl (tap-hold 100 100 esc lctl))
-        #   (deflayer base @escctrl a s d f)
-        # '';
+        configFile = /home/${username}/dotfiles/kanata/kanata.kbd;
       };
     };
   };
-  environment.systemPackages = [ pkgs.kanata ];
 }

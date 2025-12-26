@@ -33,7 +33,6 @@ in
     "cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
-    #"Kvantum"      = link "Kvantum";
     "lazydocker"    = link "lazydocker";
     "lazygit"       = link "lazygit";
   };

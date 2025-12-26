@@ -3,7 +3,6 @@
 {
   home.packages = with pkgs; [
     alacritty
-    jq
     duf
     dust
     tokei
@@ -35,8 +34,6 @@
       '';
   };
 
-  programs.fd.enable = true;
-
   programs.tealdeer = {
     enable = true;
     settings.updates.auto_update = true;
@@ -50,13 +47,6 @@
         email = "${git.email}";
       };
     init.defaultBranch = "main";
-    };
-  };
-
-  programs.gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
     };
   };
 
@@ -82,10 +72,5 @@
     config = {
       theme = "catppuccin";
     };
-  };
-
-  programs.ripgrep = {
-    enable = true;
-    arguments = [ "--max-columns=150" "--max-columns-preview" ];
   };
 }

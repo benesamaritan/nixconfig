@@ -85,9 +85,6 @@ in
       name = "Adwaita-dark";
       package = pkgs.gnome-themes-extra;
     };
-    iconTheme = {
-      name = "Adwaita";
-    };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };

@@ -9,8 +9,10 @@
   programs.gamescope.enable = true;
   programs.gamemode = {
     enable = true;
+    enableRenice = true; 
     settings = {
       general = {
+        softrealtime = "auto";
         renice = 10;
       };
       gpu = {

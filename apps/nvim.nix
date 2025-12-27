@@ -8,6 +8,14 @@
     vimAlias = true;
   };
 
+  programs.fd.enable = true;
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [ "--max-columns=150" "--max-columns-preview" ];
+  };
+
+
   home.packages = with pkgs; [
     wl-clipboard
 
@@ -18,12 +26,7 @@
     lazygit
     imagemagick
     ghostscript
-    lua
     luarocks
     tree-sitter
-    #nodejs
-    #python3
-    #go
-    #cargo
   ];
 }

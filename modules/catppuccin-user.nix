@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, lib, ... }:
 {
   imports = [ 
     inputs.catppuccin.homeModules.catppuccin 
@@ -27,5 +27,12 @@
     lazygit.enable = true;
     swaylock.enable = true;
     thunderbird.enable = true;
+    gtk.icon.enable = true;
   };
+
+  home.activation.installSteamSkin = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  if [ -d "$HOME/.local/share/Steam" ]; then
+     ${pkgs.adwsteamgtk}/bin/adwaita-steam-gtk -c catppuccin-mocha -i || true
+  fi
+'';
 }

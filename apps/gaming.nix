@@ -4,6 +4,9 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+    ];
   };
 
   programs.gamescope.enable = true;
@@ -37,6 +40,7 @@
     dotnet-sdk
     mangohud
     lutris # be sure to disable lutris runtime
+    heroic
     protonup-qt
   ];
 }

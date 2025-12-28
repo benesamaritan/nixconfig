@@ -1,15 +1,12 @@
-{ pkgs, git, ... }:
+{ pkgs, git, inputs, ... }:
 
 {
   home.packages = with pkgs; [
-    # -- Core Development --
     devbox
 
     # -- PHP Ecosystem --
     psysh
     phpactor
-    composer
-    wp-cli
 
     # -- Lua Ecosystem --
     lua-language-server
@@ -34,7 +31,7 @@
 
     # -- LSP & Formatter --
     nodePackages.vscode-langservers-extracted
-    nodePackages.tailwindcss-language-server
+    nodePackages."@tailwindcss/language-server"
     nodePackages.typescript-language-server
     nodePackages.prettier
     yaml-language-server
@@ -44,6 +41,7 @@
     # -- Web Utils --
     jq
     imagemagick
+    hurl
 
     # -- Tools
     #dbeaver-bin
@@ -52,46 +50,52 @@
     lazygit
     lazydocker
     podman-compose
+    process-compose
+    nodePackages.browser-sync
+    pkgs.gemini-cli
+    inputs.opencode.packages.${pkgs.system}.default
   ];
 
   programs.fd.enable = true;
-
-  programs.gh = {
-    enable = true;
-    settings = {
-      git_protocol = "ssh";
-    };
-  };
 
   programs.ripgrep = {
     enable = true;
     arguments = [ "--max-columns=150" "--max-columns-preview" ];
   };
 
-  programs.bat = {
+  programs.bat.enable = true;
+
+#   programs.jujutsu = {
+#    enable = false;
+#    settings = {
+#      user = {
+#        name = "${git.username}";
+#        email = "${git.email}";
+#      };
+#      ui = {
+#        editor = "nvim";
+#      };
+#    };
+#  };
+
+  programs.gh = {
     enable = true;
-    config = {
-      theme = "catppuccin";
-    };
-  };
-
-  programs.jujutsu = {
-    enable = false;
+    extensions = with pkgs; [ 
+      gh-copilot
+      gh-dash
+    ];
     settings = {
-      user = {
-        name = "${git.username}";
-        email = "${git.email}";
-      };
-      ui = {
-        editor = "nvim";
+      git_protocol = "ssh";
+      aliases = {
+        co = "copilot";
+        ce = "copilot explain";
+        cs = "copilot suggest";
       };
     };
   };
-
-  # -- Direnv Configuration --
+  
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
-    enableFishIntegration = true;
   };
 }

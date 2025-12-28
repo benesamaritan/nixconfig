@@ -12,8 +12,11 @@ in
     ./apps/nvim.nix
     ./apps/user-lv.nix
     ./apps/web-apps.nix
-    ./apps/online-llm-cli.nix
     ./modules/catppuccin-user.nix
+    ./apps/webdev.nix
+    ./apps/graphics.nix
+    ./apps/office.nix
+    ./apps/teaching.nix
   ];
 
   programs.home-manager.enable = true;

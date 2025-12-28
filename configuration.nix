@@ -4,12 +4,13 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./modules/desktop.nix
+      #./modules/desktop.nix
       ./modules/wm.nix
       ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
       ./modules/fonts.nix
       ./apps/kanata.nix
+      ./apps/kanshi.nix
       ./apps/system-lv.nix
       ./apps/gaming.nix
     ];
@@ -33,7 +34,8 @@
       "flakes"
       ];
       trusted-users = [ 
-        "root" "${username}" 
+        "root" 
+        "${username}" 
       ];
       auto-optimise-store = true;
       use-xdg-base-directories = true;

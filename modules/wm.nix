@@ -8,14 +8,17 @@ in
 
 {
   imports = [
-    #inputs.home-manager.nixosModules.default
+    inputs.home-manager.nixosModules.default
     #inputs.dms.nixosModules.default
     #inputs.dsearch.nixosModules.default
   ];
 
-  programs.niri.enable = true;
+  programs.niri ={
+    enable = true;
+    useNautilus = true;
+  };
   programs.xwayland.enable = true;
-  #services.displayManager.sddm.enable = false;
+  services.displayManager.sddm.enable = false;
 
   services.displayManager = {
     dms-greeter = {
@@ -27,10 +30,6 @@ in
       # ];
     quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
     package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
-    autoLogin = {
-      enable = false;
-      user = "${username}";
     };
   };
 
@@ -64,15 +63,6 @@ in
         enable = true;
         src = "${dmsPlugins}/DankBatteryAlerts";
       };
-      AppShortcut = {
-        enable = true;
-        src = pkgs.fetchFromGitHub {
-          owner = "oabragh";
-          repo = "AppShortcut";
-          rev = "373400a";
-          hash = "sha256-Yu3zRWkkgr5mC8pzNiRlHcCCb2lDZzkWWRJsMCAJfS4=";
-        };
-      };
       DankNixMonitor = {
         enable = true;
         src = pkgs.fetchFromGitHub {
@@ -94,20 +84,11 @@ in
     };
   };
 
-  programs.dsearch = {
-    enable = true;
-    systemd = {
-      enable = true;
-      target = "graphical-session.target";
-    };
-    package = inputs.dsearch.packages.${pkgs.stdenv.hostPlatform.system}.default;
-  };
-
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
-      xdg-desktop-portal-wlr
     ];
     config.common.default = "*";
   };
@@ -119,6 +100,10 @@ in
 #      # "Kvantum" = link "Kvantum";
 #    };
 #  };
+
+# Ensure these services are enabled in your SYSTEM config (configuration.nix), not Home Manager
+# services.gnome.gnome-keyring.enable = true;
+  services.gvfs.enable = true; # Required for Trash, USB mounting, and Online Accounts
 
   environment.systemPackages = with pkgs; [
     libsForQt5.qtstyleplugin-kvantum
@@ -132,9 +117,15 @@ in
     khal
     grim
     slurp
-    dgop
     xwayland-satellite
     swaylock
+    nautilus
+    libsecret
+    udiskie
+    file-roller
+    loupe
+    vlc
+    dgop
     fuzzel
   ];
 }

@@ -11,6 +11,7 @@
       ./modules/fonts.nix
       ./apps/kanata.nix
       ./apps/kanshi.nix
+      ./apps/wlr-randr.nix
       ./apps/system-lv.nix
       ./apps/gaming.nix
     ];

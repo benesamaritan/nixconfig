@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, username, ... }:
 
 {
   hardware.graphics = {
@@ -10,6 +10,7 @@
   };
 
   programs.gamescope.enable = true;
+
   programs.gamemode = {
     enable = true;
     enableRenice = true; 
@@ -25,12 +26,16 @@
     };
   };
 
+  users.users.${username}.extraGroups = [ "gamemode" ];
+
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
     remotePlay.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
     dedicatedServer.openFirewall = false;
+    protontricks.enable = true;
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
   };
 
   environment.systemPackages = with pkgs; [

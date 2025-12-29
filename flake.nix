@@ -41,8 +41,6 @@
     groups = [
       "networkmanager"
       "wheel"
-      "podman"
-      "libvirtd"
       "input" # only if using
       "uinput" # kanata.nix on configuration.nix
     ];

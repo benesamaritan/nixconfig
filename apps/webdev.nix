@@ -49,7 +49,6 @@
     act
     lazygit
     lazydocker
-    podman-compose
     process-compose
     nodePackages.browser-sync
     pkgs.gemini-cli

@@ -4,11 +4,13 @@
   imports =
     [
       ./hardware-configuration.nix
+      ./modules/fonts.nix
+
       #./modules/desktop.nix
       ./modules/wm.nix
       ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
-      ./modules/fonts.nix
+      ./apps/flatpak.nix
       ./apps/kanata.nix
       ./apps/kanshi.nix
       ./apps/wlr-randr.nix
@@ -51,8 +53,11 @@
   time.timeZone = "${timezone}";
 
   networking = {
-    wireless.enable = false;
-    networkmanager.enable = true;
+    #wireless.enable = false;
+    networkmanager = {
+      enable = true;
+      wifi.backend = "wpa_supplicant";
+    };
     hostName = "${hostname}";
   };
 

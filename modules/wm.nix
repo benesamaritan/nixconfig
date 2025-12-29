@@ -13,24 +13,16 @@ in
     #inputs.dsearch.nixosModules.default
   ];
 
-  programs.niri ={
-    enable = true;
-    useNautilus = true;
-  };
+  programs.niri.enable = true;
   programs.xwayland.enable = true;
   services.displayManager.sddm.enable = false;
 
-  services.displayManager = {
-    dms-greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/${username}";
-      # configFiles = [
-      #   "/home/${username}/.config/DankMaterialShell/settings.json"
-      # ];
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+    configHome = "/home/${username}";
     quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
     package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    };
   };
 
   programs.dms-shell = {
@@ -136,7 +128,8 @@ in
     grim
     slurp
     xwayland-satellite
-    nautilus
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
     libsecret
     udiskie
     file-roller

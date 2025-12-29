@@ -1,10 +1,8 @@
 { pkgs, lib, inputs, ... }:
 
 {
-  #Bagian flatpak dimanage sebagi module HM, jadi run hmsw untuk build
-
   imports = [
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+    inputs.nix-flatpak.nixosModules.nix-flatpak
   ];
 
   services.flatpak = {
@@ -18,8 +16,13 @@
       }
     ];
     packages = [
-      #"io.github.kolunmi.Bazaar"
+      "io.github.kolunmi.Bazaar"
       #"com.collaboraoffice.Office"
+    ];
+    overrides.global.Context.sockets = [
+      "wayland"
+      "x11"
+      "fallback-x11"
     ];
   };
 }

@@ -17,7 +17,6 @@ in
     ./apps/graphics.nix
     ./apps/office.nix
     ./apps/teaching.nix
-    ./apps/flatpak.nix
   ];
 
   programs.home-manager.enable = true;
@@ -35,6 +34,7 @@ in
     "starship.toml" = link "starship.toml";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
+    "niri"          = link "niri";
   };
 
   home.sessionVariables = {

@@ -6,15 +6,17 @@
   systemd.services.kanata = {
     description = "Kanata Keyboard Remapper";
     wantedBy = [ "multi-user.target" ];
-    
     serviceConfig = {
       ExecStart = "${pkgs.kanata}/bin/kanata -c /home/${username}/dotfiles/kanata/kanata.kbd";
       Restart = "always";
-      
       User = "root";
       Group = "root";
-      
       ProtectHome = false; 
     };
   };
+
+  users.users.${username}.extraGroups = [ 
+    "input" 
+    "uinput"
+  ];
 }

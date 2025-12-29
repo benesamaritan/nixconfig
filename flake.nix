@@ -22,7 +22,7 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   let
     username = "bye";
     description = "Bayu Saputro";
@@ -41,8 +41,6 @@
     groups = [
       "networkmanager"
       "wheel"
-      "input" # only if using
-      "uinput" # kanata.nix on configuration.nix
     ];
     xkb = {
       layout = "us";

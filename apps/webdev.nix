@@ -13,16 +13,16 @@
     stylua
 
     # -- Cloud & Infrastructure --
-    google-cloud-sdk
+    #google-cloud-sdk
 
     # -- JS / Node Ecosystem --
     #nodejs_20
     pnpm
 
     # -- Rust Ecosystem --
-    cargo
-    rustc
-    rust-analyzer
+    #cargo
+    #rustc
+    #rust-analyzer
 
     # -- API Development & Testing --
     bruno

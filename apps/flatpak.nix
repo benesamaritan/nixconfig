@@ -1,19 +1,25 @@
-{ pkgs, ... }:
+{ pkgs, lib, inputs, ... }:
 
 {
+  #Bagian flatpak dimanage sebagi module HM, jadi run hmsw untuk build
+
+  imports = [
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
+  ];
+
   services.flatpak = {
     enable = true;
-    remotes = [
+    uninstallUnmanaged = true;
+    update.onActivation = true;
+    remotes = lib.mkOptionDefault [
       {
-        name = "flathub";
-        location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+        name = "flathub-beta";
+        location = "https://flathub.org/beta-repo/flathub-beta.flatpakrepo";
       }
     ];
-
     packages = [
-      "com.helium.Helium"
+      #"io.github.kolunmi.Bazaar"
+      #"com.collaboraoffice.Office"
     ];
-    
-    update.onActivation = true;
   };
 }

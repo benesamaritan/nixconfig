@@ -12,12 +12,17 @@
     atuin
     starship
     wl-clipboard
-    nix-search-cli
+    manix
+    nh
+    disktui
+    woeusb-ng
+    mediawriter
     thunderbird
     vscodium
     inputs.zen-browser.packages.${pkgs.system}.beta
     anytype
     appimage-run # use which command to look up path to be put onto lutris or other tools
+    flatpak
   ];
 
   services.kdeconnect = {

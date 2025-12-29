@@ -8,15 +8,16 @@ in
 
 {
   imports = [
+    ./modules/catppuccin-user.nix
     ./apps/tmux.nix
     ./apps/nvim.nix
     ./apps/user-lv.nix
     ./apps/web-apps.nix
-    ./modules/catppuccin-user.nix
     ./apps/webdev.nix
     ./apps/graphics.nix
     ./apps/office.nix
     ./apps/teaching.nix
+    ./apps/flatpak.nix
   ];
 
   programs.home-manager.enable = true;
@@ -29,16 +30,11 @@ in
 
   xdg.configFile = {
     "alacritty"     = link "alacritty";
-    #"atuin"         = link "atuin";
     "tmux"          = link "tmux";
     "nvim"          = link "nvim";
-    #"btop"          = link "btop";
     "starship.toml" = link "starship.toml";
-    #"cava"          = link "cava";
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
-    #"lazydocker"    = link "lazydocker";
-    #"lazygit"       = link "lazygit";
   };
 
   home.sessionVariables = {
@@ -100,8 +96,8 @@ in
     enable = true;
     platformTheme.name = "gtk";
     style = {
-      name = "adwaita-dark";
-      package = pkgs.adwaita-qt;
+      name = "adwaita";
+      package = pkgs.adwaita-qt6;
     };
   };
 }

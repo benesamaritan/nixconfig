@@ -19,9 +19,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin.url = "github:catppuccin/nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-flatpak, ... }:
   let
     username = "bye";
     description = "Bayu Saputro";
@@ -30,9 +31,7 @@
     system = "x86_64-linux";
     pkgs = import nixpkgs {
       inherit system;
-      config = {
-        allowUnfree = true;
-      };
+      config.allowUnfree = true;
     };
     hostname = "sol";
     shell = "fish";
@@ -58,6 +57,7 @@
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       inherit system;
+      inherit pkgs;
       specialArgs = {
         inherit inputs hostname username hashPasswd description groups timezone defaultLocale extraLocale xkb shell;
       };

@@ -1,27 +1,40 @@
 { pkgs, inputs, username, git, ... }:
 
 {
+  programs.git = {
+    enable = true;
+    settings = {
+      user = {
+        name = "${git.user}";
+        email = "${git.email}";
+      };
+      init.defaultBranch = "main";
+    };
+  };
+
   home.packages = with pkgs; [
     alacritty
-    duf
-    dust
-    tokei
-    glow
-    btop
-    kanshi
-    atuin
     starship
-    wl-clipboard
+    thunderbird
+    inputs.zen-browser.packages.${pkgs.system}.beta
+    appimage-run # use which command to look up path to be put onto lutris or other tools
+
+    # CLI Tools
+    tealdeer                  # Man Pages in a nutshell
+    kbt                       # Keyboard tester
+    jrnl                      # Journal taking tool
+    silicon                   # Source code into picture
+    television                # TUI for fzf
+
+    # Nix CLI Tools
     manix
     nh
-    disktui
-    woeusb-ng
-    mediawriter
-    thunderbird
-    vscodium
-    inputs.zen-browser.packages.${pkgs.system}.beta
-    anytype
-    appimage-run # use which command to look up path to be put onto lutris or other tools
+
+    # Linux System CLI Tools
+    disktui       # TUI for disk utility
+    lazyjournal   # TUI for journalctl
+    systemd-manager-tui     # TUI for Sytemd related
+    navi          # CLI Cheatsheets
   ];
 
   services.kdeconnect = {
@@ -38,16 +51,7 @@
       '';
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "${git.user}";
-        email = "${git.email}";
-      };
-    init.defaultBranch = "main";
-    };
-  };
+  programs.atuin.enable = true;
 
   programs.fzf = {
     enable = true;

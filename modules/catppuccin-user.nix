@@ -18,13 +18,12 @@
     cava.enable = true;
     fish.enable = true;
     fzf.enable = true;
-    fuzzel.enable = true;
     eza.enable = true;
     dunst.enable = true;
     #chromium.enable = true;
     firefox.enable = true;
     mangohud.enable = true;
-    #obs.enable = true;
+    obs.enable = true;
     lazygit.enable = true;
     swaylock.enable = true;
     thunderbird.enable = true;

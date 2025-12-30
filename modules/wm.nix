@@ -123,6 +123,7 @@ in
     kdePackages.qt6ct
     pavucontrol
     wl-clipboard
+    wl-screenrec
     cliphist
     khal
     grim

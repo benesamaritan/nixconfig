@@ -19,15 +19,9 @@
     #nodejs_20
     pnpm
 
-    # -- Rust Ecosystem --
-    #cargo
-    #rustc
-    #rust-analyzer
-
     # -- API Development & Testing --
-    bruno
-    httpie
-    k6
+    bruno-cli         # CLI version of bruno api testing tool
+    k6                # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --
     nodePackages.vscode-langservers-extracted
@@ -44,15 +38,26 @@
     hurl
 
     # -- Tools
-    #dbeaver-bin
-    mycli
-    act
+    act               # Run GH Action locally
+    tldx              # Check domain avaibiliby from CLI
+    flawz             # CVEs look up
     lazygit
-    lazydocker
-    process-compose
+    lazysql
+    lazyssh
+    lazynpm
+    httpie
+    curlie
+    tokei             # Count lines of code
+    glow              # Render MD on terminal
+    zellij            # Tmux Alt.
+    process-compose   # Docker-Compose Alt. for non-container development
     nodePackages.browser-sync
-    pkgs.gemini-cli
     inputs.opencode.packages.${pkgs.system}.default
+    vscodium
+
+    # Purely for fun
+    smassh
+    typespeed
   ];
 
   programs.fd.enable = true;
@@ -80,16 +85,10 @@
   programs.gh = {
     enable = true;
     extensions = with pkgs; [ 
-      gh-copilot
       gh-dash
     ];
     settings = {
       git_protocol = "ssh";
-      aliases = {
-        co = "copilot";
-        ce = "copilot explain";
-        cs = "copilot suggest";
-      };
     };
   };
   

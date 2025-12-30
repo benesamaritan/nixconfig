@@ -9,7 +9,7 @@ in
 {
   imports = [
     ./modules/catppuccin-user.nix
-    ./apps/tmux.nix
+    #./apps/tmux.nix
     ./apps/nvim.nix
     ./apps/user-lv.nix
     ./apps/web-apps.nix
@@ -29,7 +29,7 @@ in
 
   xdg.configFile = {
     "alacritty"     = link "alacritty";
-    "tmux"          = link "tmux";
+    #"tmux"          = link "tmux";
     "nvim"          = link "nvim";
     "starship.toml" = link "starship.toml";
     "fastfetch"     = link "fastfetch";

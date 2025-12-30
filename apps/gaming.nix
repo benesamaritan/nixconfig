@@ -28,6 +28,8 @@
 
   users.users.${username}.extraGroups = [ "gamemode" ];
 
+  programs.gpu-screen-recorder.enable = true;
+
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;

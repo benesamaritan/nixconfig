@@ -52,6 +52,7 @@ in
     nftables
   ] ++ lib.optionals dockerEnabled [
     docker-compose
+    lazydocker
   ] ++ lib.optionals podmanEnabled [
     podman-compose
   ];

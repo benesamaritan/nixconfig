@@ -10,24 +10,24 @@
     flavor = "mocha";
     accent = "pink";
 
-    cache.enable = true;
-    cursors.enable = true;
-    atuin.enable = true;
-    bat.enable = true;
-    btop.enable = true;
-    cava.enable = true;
-    fish.enable = true;
-    fzf.enable = true;
-    eza.enable = true;
-    dunst.enable = true;
-    #chromium.enable = true;
-    firefox.enable = true;
-    mangohud.enable = true;
-    obs.enable = true;
-    lazygit.enable = true;
-    swaylock.enable = true;
-    thunderbird.enable = true;
-    gtk.icon.enable = true;
+    cache.enable        = true;
+    cursors.enable      = true;
+    atuin.enable        = true;
+    bat.enable          = true;
+    cava.enable         = true;
+    fish.enable         = true;
+    fzf.enable          = true;
+    eza.enable          = true;
+    chromium.enable     = true;
+    firefox.enable      = true;
+    mangohud.enable     = true;
+    obs.enable          = true;
+    lazygit.enable      = true;
+    swaylock.enable     = true;
+    swaylock.flavor     = "mocha";
+    thunderbird.enable  = true;
+    gtk.icon.enable     = true;
+    zellij.enable       = true;
   };
 
   home.activation.installSteamSkin = lib.hm.dag.entryAfter ["writeBoundary"] ''

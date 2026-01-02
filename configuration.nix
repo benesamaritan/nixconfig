@@ -5,11 +5,11 @@
     [
       ./hardware-configuration.nix
       ./modules/fonts.nix
-
       #./modules/desktop.nix
       ./modules/wm.nix
       ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
+      ./apps/webdev-system.nix
       ./apps/flatpak.nix
       ./apps/kanata.nix
       ./apps/kanshi.nix

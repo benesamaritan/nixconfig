@@ -60,6 +60,13 @@
     typespeed
   ];
 
+  programs.fish = {
+    interactiveShellInit = ''
+      # Initialize Devbox Global
+      devbox global shellenv --init-hook | source
+    '';
+  };
+
   programs.fd.enable = true;
 
   programs.ripgrep = {

@@ -18,6 +18,7 @@
     thunderbird
     inputs.zen-browser.packages.${pkgs.system}.beta
     appimage-run # use which command to look up path to be put onto lutris or other tools
+    easyeffects
 
     # CLI Tools
     tealdeer                  # Man Pages in a nutshell

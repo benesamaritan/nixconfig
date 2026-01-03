@@ -14,6 +14,7 @@
       ./apps/kanata.nix
       ./apps/kanshi.nix
       ./apps/wlr-randr.nix
+      ./apps/syncthing.nix
       ./apps/system-lv.nix
       ./apps/gaming.nix
     ];

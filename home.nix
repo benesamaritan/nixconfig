@@ -17,6 +17,7 @@ in
     ./apps/graphics.nix
     ./apps/office.nix
     ./apps/teaching.nix
+    ./apps/logseq.nix
   ];
 
   programs.home-manager.enable = true;

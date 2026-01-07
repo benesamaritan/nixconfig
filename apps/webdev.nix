@@ -20,7 +20,7 @@
     pnpm
 
     # -- API Development & Testing --
-    bruno-cli         # CLI version of bruno api testing tool
+    bruno             # API testing tool
     k6                # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --

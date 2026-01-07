@@ -2,29 +2,37 @@
 
 let
   pname = "logseq";
-  version = "0.10.9"; 
+  version = "0.10.9";
+  
   src = pkgs.fetchurl {
     url = "https://github.com/logseq/logseq/releases/download/${version}/Logseq-linux-x64-${version}.AppImage";
     hash = "sha256-XROuY2RlKnGvK1VNvzauHuLJiveXVKrIYPppoz8fCmc=";
   };
-  
-  appimageContents = pkgs.appimageTools.extract { inherit pname version src; };
+
+  appIcon = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/logseq/logseq/master/resources/icons/logseq.png";
+    hash = "sha256-LAS62Znvdbh0vRhbhMTfVgSGaF9aNsKAEiTvm2dkIAY=";
+  };
+
+  appimage = pkgs.appimageTools.wrapType2 {
+    inherit pname version src;
+    extraPkgs = pkgs: with pkgs; [ libsecret libappindicator-gtk3 ];
+  };
+
+  desktopItem = pkgs.makeDesktopItem {
+    name = "logseq";
+    desktopName = "Logseq";
+    exec = "${appimage}/bin/logseq %u";
+    icon = appIcon;
+    comment = "Privacy-first, open-source knowledge base";
+    categories = [ "Office" "Utility" ];
+    terminal = false;
+  };
+
 in
 {
   home.packages = [
-    (pkgs.appimageTools.wrapType2 {
-      inherit pname version src;
-      extraPkgs = pkgs: with pkgs; [ 
-        libsecret
-        libappindicator-gtk3 
-      ];
-      extraInstallCommands = ''
-        install -m 444 -D ${appimageContents}/Logseq.desktop $out/share/applications/Logseq.desktop
-        install -m 444 -D ${appimageContents}/Logseq.png \
-          $out/share/icons/hicolor/512x512/apps/Logseq.png
-        substituteInPlace $out/share/applications/Logseq.desktop \
-          --replace 'Exec=AppRun' 'Exec=${pname}'
-      '';
-    })
+    appimage
+    desktopItem
   ];
 }

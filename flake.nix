@@ -20,6 +20,7 @@
     };
     catppuccin.url = "github:catppuccin/nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    affinity-nix.url = "github:mrshmllow/affinity-nix";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

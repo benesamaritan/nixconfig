@@ -22,14 +22,13 @@
 
     # CLI Tools
     tealdeer                  # Man Pages in a nutshell
-    kbt                       # Keyboard tester
-    jrnl                      # Journal taking tool
-    silicon                   # Source code into picture
     television                # TUI for fzf
 
     # Nix CLI Tools
     manix
     nh
+    nix-tree
+    nix-output-monitor
 
     # Linux System CLI Tools
     disktui       # TUI for disk utility

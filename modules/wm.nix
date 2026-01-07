@@ -81,6 +81,7 @@ in
     wlr.enable = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-gnome
+      xdg-desktop-portal-gtk
     ];
     config.common.default = "*";
   };
@@ -90,7 +91,6 @@ in
     wantedBy = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
     after = [ "graphical-session.target" ];
-    
     serviceConfig = {
       ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
       Restart = "always";
@@ -99,45 +99,43 @@ in
   };
 
   services.upower.enable = true;
-
   services.logind.settings.Login = {
     HandleLidSwitch = "Hibernate";
     HandleLidExternalPower = "Lock";
     HandlePowerKey = "suspend";
   };
 
-#  home-manager.users."${username}" = {
-#    imports = [  ];
-#
-#    xdg.configFile = {
-#      # "Kvantum" = link "Kvantum";
-#    };
-#  };
+  services.geoclue2.enable = true;
 
-# Ensure these services are enabled in your SYSTEM config (configuration.nix), not Home Manager
 # services.gnome.gnome-keyring.enable = true;
   services.gvfs.enable = true; # Required for Trash, USB mounting, and Online Accounts
 
   environment.systemPackages = with pkgs; [
-    libsForQt5.qtstyleplugin-kvantum
-    kdePackages.qt6ct
+    xwayland-satellite
     pavucontrol
+    cliphist
     wl-clipboard
     wl-screenrec
-    cliphist
-    khal
     grim
     slurp
-    xwayland-satellite
-    kdePackages.dolphin
-    kdePackages.dolphin-plugins
     libsecret
+    pam
+    jemalloc
+    cmake
+    pkg-config
+    cli11
     udiskie
     file-roller
     loupe
     vlc
     fastfetch
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
+    kdePackages.kio-extras
+    inputs.wooz.packages.${pkgs.system}.default
   ];
+
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
   environment.sessionVariables = {
     XDG_CURRENT_DESKTOP = "niri";

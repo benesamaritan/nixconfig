@@ -28,6 +28,15 @@ in
     homeDirectory = "/home/${username}";
   };
 
+  services.gammastep = {
+    enable = true;
+    provider = "geoclue2";
+    # temperature = { day = 6500; night = 4500; };
+    settings = {
+      general.adjustment-method = "wayland";
+    };
+  };
+
   xdg.configFile = {
     "alacritty"     = link "alacritty";
     #"tmux"          = link "tmux";

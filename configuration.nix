@@ -5,6 +5,7 @@
     [
       ./hardware-configuration.nix
       ./modules/fonts.nix
+      ./modules/printing.nix
       #./modules/desktop.nix
       ./modules/wm.nix
       ./modules/catppuccin-system.nix
@@ -89,7 +90,6 @@
   security.rtkit.enable = true;
 
   services = {
-    printing.enable = true;
     libinput.enable = true;
     pulseaudio.enable = false;
     pipewire = {

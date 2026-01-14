@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   pname = "logseq";
@@ -34,5 +34,6 @@ in
   home.packages = [
     appimage
     desktopItem
+    #pkgs.logseq.override { electron_27 = pkgs.electron_34; }
   ];
 }

@@ -1,8 +1,20 @@
 { config, pkgs, username, ... }:
 
+let
+  retroarch-custom = pkgs.writeShellScriptBin "retroarch" ''
+    mkdir -p $HOME/.config/retroarch/{cores,info,assets,system,playlists}
+    exec ${pkgs.retroarch}/bin/retroarch \
+      --set video_driver=vulkan \
+      --set libretro_directory=$HOME/.config/retroarch/cores \
+      --set libretro_info_path=$HOME/.config/retroarch/info \
+      --set assets_directory=$HOME/.config/retroarch/assets \
+      --set system_directory=$HOME/.config/retroarch/system \
+      "$@"
+  '';
+in
+
 {
   hardware.graphics = {
-    enable = true;
     enable32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver
@@ -28,8 +40,6 @@
 
   users.users.${username}.extraGroups = [ "gamemode" ];
 
-  programs.gpu-screen-recorder.enable = true;
-
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
@@ -49,5 +59,22 @@
     lutris # be sure to disable lutris runtime
     heroic
     protonup-qt
+    (retroarch.withCores (cores: with libretro; [
+      #snes9x
+      #desmume
+      #bsnes
+      #genesis-plus-gx
+      #flycast
+      #dolphin
+      #mgba
+      #mupen64plus
+      parallel-n64
+      pcsx-rearmed
+      pcsx2
+      ppsspp
+      #sameboy
+      #beetle-gba
+      #same-cdi
+    ]))
   ];
 }

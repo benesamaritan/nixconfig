@@ -17,7 +17,7 @@
 
     # -- JS / Node Ecosystem --
     #nodejs_20
-    pnpm
+    #pnpm
 
     # -- API Development & Testing --
     bruno             # API testing tool
@@ -44,7 +44,7 @@
     lazygit
     lazysql
     lazyssh
-    lazynpm
+    #lazynpm
     httpie
     curlie
     tokei             # Count lines of code
@@ -62,8 +62,6 @@
 
   programs.fish = {
     interactiveShellInit = ''
-      # Initialize Devbox Global
-      devbox global shellenv --init-hook | source
     '';
   };
 

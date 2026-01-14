@@ -18,6 +18,8 @@
       ./apps/syncthing.nix
       ./apps/system-lv.nix
       ./apps/gaming.nix
+      ./apps/android-debug.nix
+      ./modules/swapfile.nix
     ];
 
   boot = {
@@ -64,6 +66,7 @@
   };
 
   hardware = {
+    graphics.enable = true;
     enableAllFirmware = true;
     cpu.intel.updateMicrocode = true;
     bluetooth = {

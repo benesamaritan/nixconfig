@@ -1,6 +1,10 @@
 { pkgs, inputs, username, git, ... }:
 
 {
+  imports = [
+      inputs.zen-browser.homeModules.twilight
+  ];
+
   programs.git = {
     enable = true;
     settings = {
@@ -12,11 +16,13 @@
     };
   };
 
+  programs.zen-browser.enable = true;
+
   home.packages = with pkgs; [
     alacritty
     starship
     thunderbird
-    inputs.zen-browser.packages.${pkgs.system}.beta
+    #inputs.zen-browser.packages.${pkgs.system}.beta
     appimage-run # use which command to look up path to be put onto lutris or other tools
     easyeffects
 

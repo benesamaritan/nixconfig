@@ -51,10 +51,11 @@ in
   };
 
   environment.systemPackages = with pkgs; [
-    wineWowPackages.stable
+    #wineWowPackages.stable
+    wineWow64Packages.wayland
+    dotnet-sdk
     winetricks
     protontricks
-    dotnet-sdk
     mangohud
     lutris # be sure to disable lutris runtime
     heroic

@@ -3,13 +3,18 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    opencode.url = "github:AodhanHayter/opencode-flake";
+    catppuccin.url = "github:catppuccin/nix";
+    # niri.url = "github:YaLTeR/niri";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    opencode.url = "github:AodhanHayter/opencode-flake";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake/beta";
-    # niri.url = "github:YaLTeR/niri";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,10 +23,17 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    catppuccin.url = "github:catppuccin/nix";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
-    wooz.url = "github:negrel/wooz";
+    nix-flatpak = {
+      url = "github:gmodena/nix-flatpak/?ref=latest";
+    };
+    affinity-nix = {
+      url = "github:mrshmllow/affinity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    wooz = {
+      url = "github:negrel/wooz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, ... }:

@@ -6,7 +6,7 @@
     gromit-mpx
     obs-studio
     find-cursor
-    rustdesk
+    #rustdesk
     lexy            # Learn X in Y minutes downloader
     asciinema       # Terminal recorder
     pom             # Pomodoro CLI

@@ -108,30 +108,37 @@ in
   services.geoclue2.enable = true;
 
 # services.gnome.gnome-keyring.enable = true;
-  services.gvfs.enable = true; # Required for Trash, USB mounting, and Online Accounts
+  services.gvfs.enable = true;
 
   environment.systemPackages = with pkgs; [
     xwayland-satellite
-    pavucontrol
     cliphist
     wl-clipboard
     wl-screenrec
-    grim
-    slurp
-    libsecret
-    pam
-    jemalloc
-    cmake
-    pkg-config
-    cli11
+    #pavucontrol
+    #grim
+    #slurp
+    #libsecret
+    #pam
+    #jemalloc
+    #cmake
+    #pkg-config
+    #cli11
     udiskie
+    #loupe
+    #vlc
+    haruna
     file-roller
-    loupe
-    vlc
-    fastfetch
-    kdePackages.dolphin
-    kdePackages.dolphin-plugins
-    kdePackages.kio-extras
+    nemo
+    nemo-fileroller
+    nemo-preview
+    nemo-qml-plugin-dbus
+    #fastfetch
+    #kdePackages.dolphin
+    #kdePackages.dolphin-plugins
+    #kdePackages.kio-extras
+    #qt6ct
+    #qt6ct-kde
     inputs.wooz.packages.${pkgs.system}.default
   ];
 
@@ -141,6 +148,7 @@ in
     XDG_CURRENT_DESKTOP = "niri";
     QT_QPA_PLATFORM = "wayland";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    #QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_QPA_PLATFORMTHEME = "gtk3";
     QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
   };

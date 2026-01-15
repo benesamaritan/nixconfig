@@ -52,7 +52,7 @@
     zellij            # Tmux Alt.
     process-compose   # Docker-Compose Alt. for non-container development
     nodePackages.browser-sync
-    inputs.opencode.packages.${pkgs.system}.default
+    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
     vscodium
 
     # Purely for fun

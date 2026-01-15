@@ -139,7 +139,7 @@ in
     #kdePackages.kio-extras
     #qt6ct
     #qt6ct-kde
-    inputs.wooz.packages.${pkgs.system}.default
+    inputs.wooz.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";

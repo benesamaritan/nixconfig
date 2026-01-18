@@ -238,11 +238,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1768707181,
-        "narHash": "sha256-GdwFfnwdUgABFpc4sAmX7GYx8eQs6cEjOPo6nBJ0YaI=",
+        "lastModified": 1768749864,
+        "narHash": "sha256-EKRMFBLBRCHrFZ5luX85RTnsN3b2q3FjZEi62vXwJBE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "83bcb17377f0242376a327e742e9404e9a528647",
+        "rev": "5148e08046dc8c74c66b8aee4d302a47d6931b56",
         "type": "github"
       },
       "original": {
@@ -425,22 +425,6 @@
         "type": "github"
       }
     },
-    "nixpkgs_9": {
-      "locked": {
-        "lastModified": 1756288264,
-        "narHash": "sha256-Om8adB1lfkU7D33VpR+/haZ2gI5r3Q+ZbIPzE5sYnwE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "ddd1826f294a0ee5fdc198ab72c8306a0ea73aa9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixpkgs-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "octotype": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -476,24 +460,6 @@
       "original": {
         "owner": "seapear",
         "repo": "AffinityOnLinux",
-        "type": "github"
-      }
-    },
-    "opencode": {
-      "inputs": {
-        "nixpkgs": "nixpkgs_9"
-      },
-      "locked": {
-        "lastModified": 1766754166,
-        "narHash": "sha256-anLh9N8KLqssOMd+xooagd/kLhoU4BChMfEToWmntCg=",
-        "owner": "AodhanHayter",
-        "repo": "opencode-flake",
-        "rev": "57574d4c2d550b24487cb810e2cfcb7c259b0357",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AodhanHayter",
-        "repo": "opencode-flake",
         "type": "github"
       }
     },
@@ -560,7 +526,6 @@
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_6",
         "octotype": "octotype",
-        "opencode": "opencode",
         "quickshell": "quickshell_2",
         "wooz": "wooz",
         "zen-browser": "zen-browser"

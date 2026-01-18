@@ -5,6 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     opencode.url = "github:AodhanHayter/opencode-flake";
     catppuccin.url = "github:catppuccin/nix";
+    octotype.url = "github:mahlquistj/octotype/main";
+    gittype.url = "github:unhappychoice/gittype";
     # niri.url = "github:YaLTeR/niri";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -23,9 +25,7 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-flatpak = {
-      url = "github:gmodena/nix-flatpak/?ref=latest";
-    };
+    #nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     affinity-nix = {
       url = "github:mrshmllow/affinity-nix";
       inputs.nixpkgs.follows = "nixpkgs";

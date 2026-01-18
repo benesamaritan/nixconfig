@@ -45,19 +45,22 @@
     lazysql
     lazyssh
     #lazynpm
-    httpie
-    curlie
+    #httpie
+    #curlie
     tokei             # Count lines of code
     glow              # Render MD on terminal
     zellij            # Tmux Alt.
-    process-compose   # Docker-Compose Alt. for non-container development
+    #process-compose   # Docker-Compose Alt. for non-container development
     nodePackages.browser-sync
-    inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default
+    opencode
     vscodium
 
     # Purely for fun
     smassh
     typespeed
+    ttyper
+    inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.fish = {

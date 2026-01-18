@@ -9,13 +9,11 @@ in
 {
   imports = [
     inputs.home-manager.nixosModules.default
-    #inputs.dms.nixosModules.default
-    #inputs.dsearch.nixosModules.default
   ];
 
   programs.niri.enable = true;
   programs.xwayland.enable = true;
-  services.displayManager.sddm.enable = false;
+  #services.displayManager.sddm.enable = false;
 
   services.displayManager.dms-greeter = {
     enable = true;
@@ -115,9 +113,9 @@ in
     cliphist
     wl-clipboard
     wl-screenrec
-    #pavucontrol
-    #grim
-    #slurp
+    pavucontrol
+    grim
+    slurp
     #libsecret
     #pam
     #jemalloc
@@ -126,14 +124,11 @@ in
     #cli11
     udiskie
     #loupe
-    #vlc
-    haruna
     file-roller
     nemo
     nemo-fileroller
     nemo-preview
     nemo-qml-plugin-dbus
-    #fastfetch
     #kdePackages.dolphin
     #kdePackages.dolphin-plugins
     #kdePackages.kio-extras

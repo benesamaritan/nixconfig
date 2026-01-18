@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.nix-flatpak.nixosModules.nix-flatpak
+    #inputs.nix-flatpak.nixosModules.nix-flatpak
   ];
 
   services.flatpak = {
@@ -19,10 +19,10 @@
       "io.github.kolunmi.Bazaar"
       #"com.collaboraoffice.Office"
     ];
-    overrides.global.Context.sockets = [
-      "wayland"
-      "x11"
-      "fallback-x11"
-    ];
+    # overrides.global.Context.sockets = [
+    #   "wayland"
+    #   "x11"
+    #   "fallback-x11"
+    # ];
   };
 }

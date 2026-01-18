@@ -2,7 +2,7 @@
 
 {
   programs.nano.enable = false;
-  services.xserver.excludePackages = [ pkgs.xterm ];
+  #services.xserver.excludePackages = [ pkgs.xterm ];
 
   environment.systemPackages = with pkgs; [
     gcc

@@ -11,14 +11,14 @@
       ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
       ./apps/webdev-system.nix
-      ./apps/flatpak.nix
+      #./apps/flatpak.nix
       ./apps/kanata.nix
       ./apps/kanshi.nix
-      ./apps/wlr-randr.nix
+      #./apps/wlr-randr.nix
       ./apps/syncthing.nix
       ./apps/system-lv.nix
       ./apps/gaming.nix
-      ./apps/android-debug.nix
+      #./apps/android-debug.nix
       ./modules/swapfile.nix
     ];
 
@@ -37,8 +37,8 @@
   nix = {
     settings = {
       experimental-features = [
-      "nix-command"
-      "flakes"
+        "nix-command"
+        "flakes"
       ];
       trusted-users = [ 
         "root" 

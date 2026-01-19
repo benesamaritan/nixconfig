@@ -2,7 +2,7 @@
 
 {
   imports = [
-      inputs.zen-browser.homeModules.twilight
+    inputs.zen-browser.homeModules.twilight
   ];
 
   programs.git = {
@@ -32,22 +32,25 @@
     hx-lsp
     wezterm
     zed-editor
+    gnome-feeds
+    liferea
+    kdePackages.alligator
+    kdePackages.akregator
 
     # CLI Tools
-    tealdeer                  # Man Pages in a nutshell
-    television                # TUI for fzf
+    tealdeer                # Man Pages in a nutshell
+    television              # TUI for fzf
+    disktui                 # Disk utility
+    lazyjournal             # Journalctl
+    systemd-manager-tui     # Systemd manager
+    navi                    # Cheatsheets
+    bulletty                # RSS Reader
 
     # Nix CLI Tools
     manix
     nh
     nix-tree
-    nix-output-monitor
-
-    # Linux System CLI Tools
-    disktui       # TUI for disk utility
-    lazyjournal   # TUI for journalctl
-    systemd-manager-tui     # TUI for Sytemd related
-    navi          # CLI Cheatsheets
+    #nix-output-monitor
   ];
 
   services.kdeconnect = {

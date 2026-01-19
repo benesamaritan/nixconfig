@@ -63,9 +63,11 @@
     inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-  programs.fish = {
-    interactiveShellInit = ''
-    '';
+  programs.bash = {
+    enable = true;
+    shellAliases = {
+      devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
+    };
   };
 
   programs.fd.enable = true;

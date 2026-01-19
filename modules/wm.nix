@@ -129,12 +129,14 @@ in
     nemo-fileroller
     nemo-preview
     nemo-qml-plugin-dbus
-    #kdePackages.dolphin
-    #kdePackages.dolphin-plugins
-    #kdePackages.kio-extras
-    #qt6ct
+    libsForQt5.qt5ct
+    kdePackages.qt6ct
     #qt6ct-kde
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
+    kdePackages.kio-extras
     inputs.wooz.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.nsticky.packages.${pkgs.stdenv.hostPlatform.system}.nsticky
   ];
 
   environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";

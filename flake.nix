@@ -8,6 +8,7 @@
     octotype.url = "github:mahlquistj/octotype/main";
     gittype.url = "github:unhappychoice/gittype";
     # niri.url = "github:YaLTeR/niri";
+    nsticky.url = "github:lonerOrz/nsticky";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

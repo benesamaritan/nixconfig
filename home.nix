@@ -45,6 +45,8 @@ in
     "fastfetch"     = link "fastfetch";
     "kanshi"        = link "kanshi";
     "niri"          = link "niri";
+    "wezterm"       = link "wezterm";
+    "helix"         = link "helix";
   };
 
   home.sessionVariables = {
@@ -62,6 +64,7 @@ in
   };
 
   home = {
+    shell.enableShellIntegration = true;
     sessionPath = [
       "$HOME/.local/share/bun/bin"
     ];

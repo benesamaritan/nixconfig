@@ -60,11 +60,18 @@
 
   programs.fish = {
     enable = true;
-      interactiveShellInit = ''
-        set fish_greeting
-        atuin init fish | source
-        starship init fish | source
-      '';
+    interactiveShellInit = ''
+      set fish_greeting
+      atuin init fish | source
+      starship init fish | source
+    '';
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      eval "$(starship init bash)"
+    '';
   };
 
   programs.atuin.enable = true;

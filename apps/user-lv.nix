@@ -38,7 +38,7 @@
   programs.zen-browser.enable = true;
 
   home.packages = with pkgs; [
-    alacritty
+    # alacritty
     starship
     thunderbird
     keepassxc
@@ -57,13 +57,13 @@
     easyeffects
     haruna
     # vlc
-    # fastfetch
+    fastfetch
     
     # CLI & TUI Tools
     tealdeer                # Man Pages in a nutshell
     television              # TUI for fzf
     disktui                 # Disk utility
-    ncdu
+    ncdu                    # Disk usage analyzer
     lazyjournal             # Journalctl
     systemd-manager-tui     # Systemd manager
     navi                    # Cheatsheets
@@ -86,22 +86,6 @@
     indicator = true;
   };
 
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-      atuin init fish | source
-      starship init fish | source
-    '';
-  };
-
-  programs.bash = {
-    enable = true;
-    initExtra = ''
-      eval "$(starship init bash)"
-    '';
-  };
-
   programs.atuin.enable = true;
 
   programs.fzf = {
@@ -120,4 +104,60 @@
     enable = true;
     enableFishIntegration = true;
   };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      eval "$(starship init bash)"
+    '';
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      set fish_greeting
+      atuin init fish | source
+      starship init fish | source
+    '';
+  };
+
+  systemd.user.services.keepassxc = {
+    Unit = {
+      Description = "KeePassXC Password Manager";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.keepassxc}/bin/keepassxc --minimized";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+  systemd.user.services.thunderbird = {
+    Unit = {
+      Description = "Thunderbird Email Client";
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.thunderbird}/bin/thunderbird";
+      Restart = "on-failure";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };   
+  systemd.user.services.easyeffects = {
+    Unit = {
+      Description = "EasyEffects Audio Processor";
+      After = [ "pipewire-pulse.service" ];
+      PartOf = [ "pipewire-pulse.service" ];
+    };
+    Service = {
+      ExecStart = "${pkgs.easyeffects}/bin/easyeffects --gapplication-service";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };   
 }

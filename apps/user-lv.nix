@@ -13,7 +13,9 @@
         email = "${git.email}";
       };
       init.defaultBranch = "main";
+      submodule.recurse = true;
     };
+    lfs.enable = true;
   };
 
   programs.ripgrep = {

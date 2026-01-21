@@ -44,6 +44,7 @@
     helix
     # hx-lsp
     zed-editor
+    lynx
     logseq
     trilium-desktop
     # gnome-feeds
@@ -60,6 +61,7 @@
     tealdeer                # Man Pages in a nutshell
     television              # TUI for fzf
     disktui                 # Disk utility
+    ncdu
     lazyjournal             # Journalctl
     systemd-manager-tui     # Systemd manager
     navi                    # Cheatsheets

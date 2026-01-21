@@ -18,18 +18,19 @@
   programs.dconf.enable = true;
 
   programs.kdeconnect.enable = true;
-  networking.firewall = {
-    enable = true;
-    allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
-    allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
-  };
+  # networking.firewall = {
+  #   enable = true;
+  #   allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+  #   allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+  # };
 
   services.trilium-server = {
     enable = true;
-    noAuthentication = true;
+    # noAuthentication = true;
     instanceName = "${hostname}";
   #   package = inputs.trilium-notes.packages.${stdenv.hostPlatform.system}.server;
-  #   port = 9099;
+    port = 25099;
     dataDir = "/var/lib/trilium-${hostname}";
   };
+  networking.firewall.allowedTCPPorts = [ 8080 25099 ];
 }

@@ -16,6 +16,7 @@
 
   # 2. (Optional) Open ports for web servers if you need external access
   # networking.firewall.allowedTCPPorts = [ 80 443 3000 8000 ];
+  # networking.firewall.allowedTCPPorts = [ 22 80 ];
 
   nixpkgs.overlays = [
     (final: prev: {

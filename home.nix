@@ -58,17 +58,20 @@ in
   };
 
   xdg.configFile = {
-    # "alacritty"     = link "alacritty";
-    # "tmux"          = link "tmux";
-    # "nvim"          = link "nvim";
-    "wezterm"       = link "wezterm";
-    "kanshi"        = link "kanshi";
-    "starship.toml" = link "starship.toml";
-    "fastfetch"     = link "fastfetch";
-    "niri"          = link "niri";
-    "helix"         = link "helix";
-    # xdg.configFile."mimeapps.list".force = true
-    #     force = true;
+    # "alacritty"         = link "alacritty";
+    # "tmux"              = link "tmux";
+    # "nvim"              = link "nvim";
+    "wezterm"             = link "wezterm";
+    "kanshi"              = link "kanshi";
+    "starship.toml"       = link "starship.toml";
+    "fastfetch"           = link "fastfetch";
+    "niri"                = link "niri";
+    "DankMaterialShell"   = link "DankMaterialShell";
+    "helix"               = link "helix";
+    # "mimeapps.list" = {
+    #   "mimeapps.list" = link "mimeapps.list";
+    #   force = true;
+    # };
   };
 
   dconf = {

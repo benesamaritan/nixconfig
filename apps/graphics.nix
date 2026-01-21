@@ -4,6 +4,6 @@
   home.packages = with pkgs; [
     inkscape
     gimp
-    inputs.affinity-nix.packages.x86_64-linux.v3
+    # inputs.affinity-nix.packages.x86_64-linux.v3
   ];
 }

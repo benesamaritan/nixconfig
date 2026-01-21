@@ -77,7 +77,7 @@ in
   dconf = {
     settings = {
       "org/gnome/desktop/interface" = {
-          gtk-theme = "Adwaita-dark";
+          gtk-theme = "Breeze-Dark";
           color-scheme = "prefer-dark";
       };
     };
@@ -86,23 +86,23 @@ in
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita-dark";
-      package = pkgs.gnome-themes-extra;
+      name = "Breeze-Dark";
+      package = pkgs.kdePackages.breeze-gtk;
     };
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = 1;
-    };
+    # gtk3.extraConfig = {
+    #   gtk-application-prefer-dark-theme = 1;
+    # };
+    # gtk4.extraConfig = {
+    #   gtk-application-prefer-dark-theme = 1;
+    # };
   };
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
+    platformTheme.name = "kde";
     style = {
-      name = "adwaita";
-      package = pkgs.adwaita-qt6;
+      name = "Breeze-Dark";
+      package = pkgs.kdePackages.breeze-gtk;
     };
   };
 }

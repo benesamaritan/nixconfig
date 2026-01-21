@@ -1,10 +1,4 @@
-{ config, pkgs, inputs, username, ... }:
-
-let
-  link = name: {
-    source = config.lib.file.mkOutOfStoreSymlink "/home/${username}/dotfiles/dotfiles/${name}";
-  };
-in
+{ pkgs, inputs, username, ... }:
 
 {
   imports = [
@@ -95,36 +89,40 @@ in
 
   services.geoclue2.enable = true;
 
-# services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
   services.gvfs.enable = true;
 
   environment.systemPackages = with pkgs; [
     xwayland-satellite
+    gnome-keyring
+    udiskie
     cliphist
     wl-clipboard
     wl-screenrec
     pavucontrol
     grim
     slurp
-    #libsecret
-    #pam
-    #jemalloc
-    #cmake
-    #pkg-config
-    #cli11
-    udiskie
-    #loupe
-    file-roller
-    nemo
-    nemo-fileroller
-    nemo-preview
-    nemo-qml-plugin-dbus
+    # libsecret
+    # pam
+    # jemalloc
+    # cmake
+    # pkg-config
+    # cli11
+    # loupe
+    # file-roller
+    # nemo
+    # nemo-fileroller
+    # nemo-preview
+    # nemo-qml-plugin-dbus
     libsForQt5.qt5ct
     kdePackages.qt6ct
-    #qt6ct-kde
+    # qt6ct-kde
     kdePackages.dolphin
     kdePackages.dolphin-plugins
+    kdePackages.kio
     kdePackages.kio-extras
+    kdePackages.kio-extras-kf5
+    kdePackages.ark
     inputs.wooz.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.nsticky.packages.${pkgs.stdenv.hostPlatform.system}.nsticky
   ];
@@ -135,20 +133,23 @@ in
     XDG_CURRENT_DESKTOP = "niri";
     QT_QPA_PLATFORM = "wayland";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    QT_QPA_PLATFORMTHEME = "qt6ct";
-    QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
-    # QT_QPA_PLATFORMTHEME = "gtk3";
-    # QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
+    # QT_QPA_PLATFORMTHEME = "qt6ct";
+    # QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
+    QT_QPA_PLATFORMTHEME = "gtk3";
+    QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
   };
 
   xdg.portal = {
     enable = true;
-    wlr.enable = true;
+    wlr.enable = false;
     extraPortals = with pkgs; [
+      kdePackages.xdg-desktop-portal-kde
+      # xdg-desktop-portal
+      # xdg-desktop-portal-luminous
+      # xdg-desktop-portal-wlr
       xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
     ];
-    config.common.default = "*";
+    # config.common.default = "*";
   };
-
 }

@@ -35,4 +35,8 @@
      ${pkgs.adwsteamgtk}/bin/adwaita-steam-gtk -c catppuccin-mocha -i || true
   fi
 '';
+
+  home.packages = [
+    pkgs.adwsteamgtk
+  ];
 }

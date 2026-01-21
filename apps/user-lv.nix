@@ -75,10 +75,10 @@
     changelogen             # Beautiful changelog
 
     # Nix CLI Tools
-    manix
-    nh
-    # nix-tree
-    # nix-output-monitor
+    manix               # search nix options
+    nh                  # search pkgs, alias (for nixos, home-manager, and garbage collect)
+    nix-tree            # dependencies tree on nix store
+    nix-output-monitor  # pipe build command to pretty nom output
   ];
 
   services.kdeconnect = {

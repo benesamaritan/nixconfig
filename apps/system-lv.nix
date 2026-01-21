@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, hostname, ... }:
+{ pkgs, hostname, ... }:
 
 {
   programs.nano.enable = false;

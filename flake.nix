@@ -3,20 +3,20 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # opencode.url = "github:AodhanHayter/opencode-flake";
-    catppuccin.url = "github:catppuccin/nix";
-    octotype.url = "github:mahlquistj/octotype/main";
-    gittype.url = "github:unhappychoice/gittype";
-    trilium-notes = {
-      url = "github:TriliumNext/Trilium";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    # niri.url = "github:YaLTeR/niri";
-    nsticky.url = "github:lonerOrz/nsticky";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # opencode.url = "github:AodhanHayter/opencode-flake";
+    catppuccin.url = "github:catppuccin/nix";
+    octotype.url = "github:mahlquistj/octotype/main";
+    gittype.url = "github:unhappychoice/gittype";
+    # trilium-notes = {
+    #   url = "github:TriliumNext/Trilium";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # niri.url = "github:YaLTeR/niri";
+    nsticky.url = "github:lonerOrz/nsticky";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,10 +31,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     #nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    affinity-nix = {
-      url = "github:mrshmllow/affinity-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # affinity-nix = {
+    #   url = "github:mrshmllow/affinity-nix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
     wooz = {
       url = "github:negrel/wooz";
       inputs.nixpkgs.follows = "nixpkgs";

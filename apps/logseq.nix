@@ -19,7 +19,7 @@ let
     extraPkgs = pkgs: with pkgs; [ libsecret libappindicator-gtk3 ];
   };
 
-  desktopItem = pkgs.makeDesktopItem {
+  logesqAppImage = pkgs.makeDesktopItem {
     name = "logseq";
     desktopName = "Logseq";
     exec = "${appimage}/bin/logseq %u";
@@ -30,10 +30,13 @@ let
   };
 
 in
+
 {
-  home.packages = [
-    appimage
-    desktopItem
-    #pkgs.logseq.override { electron_27 = pkgs.electron_34; }
+  home.packages = with pkgs; [
+    # appimage
+    # logseqAppImage
+    logseq
+    # trilium-desktop
+    # trilium-server
   ];
 }

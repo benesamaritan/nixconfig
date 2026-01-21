@@ -1,13 +1,16 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, hostname, ... }:
 
 {
   programs.nano.enable = false;
-  #services.xserver.excludePackages = [ pkgs.xterm ];
+  # services.xserver.excludePackages = [ pkgs.xterm ];
 
   environment.systemPackages = with pkgs; [
-    gcc
+    # gcc
     wget
     curl
+    nixd  # Nix LSP
+    nixdoc    # Generate Docs for Nix Func    
+    # inputs.trilium-notes.packages.${stdenv.hostPlatform.system}.desktop
   ];
 
   programs.fish.enable = true;
@@ -19,5 +22,14 @@
     enable = true;
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
     allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
+  };
+
+  services.trilium-server = {
+    enable = true;
+    noAuthentication = true;
+    instanceName = "${hostname}";
+  #   package = inputs.trilium-notes.packages.${stdenv.hostPlatform.system}.server;
+  #   port = 9099;
+    dataDir = "/var/lib/trilium-${hostname}";
   };
 }

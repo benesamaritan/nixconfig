@@ -11,7 +11,6 @@ let
         mkdir -p "${iconDir}"
         if [ ! -f "${iconFile}" ]; then
           ${pkgs.curl}/bin/curl -s "https://www.google.com/s2/favicons?domain=${domain}&sz=128" -o "${iconFile}"
-          # Touch directory to notify desktop environment of new file
           touch "${iconDir}"
         fi
         ${pkgs.chromium}/bin/chromium \
@@ -38,6 +37,7 @@ in
     (makeWebApp "Github Copilot Chat"     "https://github.com/copilot"      "github.com"           "github-suite")
 
     (makeWebApp "Zoom"             "https://app.zoom.us/wc/join"     "zoom.us"          "zoom")
+    (makeWebApp "Discord" "https://discord.com" "discord.com" "discord")
     (makeWebApp "Canva"            "https://www.canva.com"           "canva.com"        "canva")
     (makeWebApp "WhatsApp"         "https://web.whatsapp.com"        "whatsapp.com"     "whatsapp")
     (makeWebApp "Telegram"         "https://web.telegram.org"        "telegram.org"     "telegram")

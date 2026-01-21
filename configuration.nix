@@ -10,7 +10,7 @@
       ./modules/wm.nix
       ./modules/catppuccin-system.nix
       ./modules/virtualization.nix
-      ./apps/webdev-system.nix
+      ./apps/devenv.nix
       #./apps/flatpak.nix
       ./apps/kanata.nix
       ./apps/kanshi.nix

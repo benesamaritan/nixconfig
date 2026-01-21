@@ -3,10 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    #opencode.url = "github:AodhanHayter/opencode-flake";
+    # opencode.url = "github:AodhanHayter/opencode-flake";
     catppuccin.url = "github:catppuccin/nix";
     octotype.url = "github:mahlquistj/octotype/main";
     gittype.url = "github:unhappychoice/gittype";
+    trilium-notes = {
+      url = "github:TriliumNext/Trilium";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # niri.url = "github:YaLTeR/niri";
     nsticky.url = "github:lonerOrz/nsticky";
     home-manager = {

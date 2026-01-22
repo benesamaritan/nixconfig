@@ -26,7 +26,7 @@
     swaylock.enable     = true;
     swaylock.flavor     = "mocha";
     thunderbird.enable  = true;
-    gtk.icon.enable     = true;
+    # gtk.icon.enable     = true;
     zellij.enable       = true;
   };
 

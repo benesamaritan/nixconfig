@@ -63,6 +63,7 @@ in
     # "nvim"              = link "nvim";
     "wezterm"             = link "wezterm";
     "kanshi"              = link "kanshi";
+    "kanata"              = link "kanata";
     "starship.toml"       = link "starship.toml";
     "fastfetch"           = link "fastfetch";
     "niri"                = link "niri";
@@ -99,10 +100,10 @@ in
 
   qt = {
     enable = true;
-    platformTheme.name = "kde";
+    platformTheme.name = "qt5ct";
     style = {
-      name = "Breeze-Dark";
-      package = pkgs.kdePackages.breeze-gtk;
+      # name = "Breeze-Dark";
+      package = pkgs.kdePackages.breeze;
     };
   };
 }

@@ -46,20 +46,22 @@
     helix
     # hx-lsp
     zed-editor
-    lynx
     logseq
     trilium-desktop
     # gnome-feeds
-    # liferea
-    kdePackages.alligator
-    kdePackages.akregator
+    # kdePackages.alligator
+    # kdePackages.akregator
+    rssguard     # rss reader
     appimage-run # use which command to look up path to be put onto lutris or other tools
     easyeffects
     haruna
     # vlc
-    fastfetch
+    fastfetch    # unixporn SS masterace
     
     # CLI & TUI Tools
+    lynx                    # Web Browser for your terminal
+    yazi                    # File Manager for your terminal
+    yaziPlugins             # Plugins for pkg above
     tealdeer                # Man Pages in a nutshell
     television              # TUI for fzf
     disktui                 # Disk utility

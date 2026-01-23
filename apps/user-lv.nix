@@ -47,7 +47,7 @@
     # hx-lsp
     zed-editor
     logseq
-    trilium-desktop
+    # trilium-desktop
     # gnome-feeds
     # kdePackages.alligator
     # kdePackages.akregator

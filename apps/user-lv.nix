@@ -61,7 +61,7 @@
     # CLI & TUI Tools
     lynx                    # Web Browser for your terminal
     yazi                    # File Manager for your terminal
-    yaziPlugins             # Plugins for pkg above
+    # yaziPlugins             # Plugins for pkg above
     tealdeer                # Man Pages in a nutshell
     television              # TUI for fzf
     disktui                 # Disk utility

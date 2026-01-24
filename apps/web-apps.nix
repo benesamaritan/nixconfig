@@ -1,14 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 let
   makeWebApp = name: url: domain: profileID: useFirefoxPwa: manifestUrl:
   let
-    home = builtins.getEnv "HOME";
+    # home = builtins.getEnv "HOME";
     slug = pkgs.lib.strings.toLower (builtins.replaceStrings [ " " ] [ "-" ] name);
-    iconDir = "${home}/.local/share/icons/hicolor/128x128/apps";
+    iconDir = "/home/${username}/.local/share/icons/hicolor/128x128/apps";
     iconFile = "${iconDir}/${slug}.png";
-    chromiumProfileDir = "${home}/.config/chromium-webapps/${profileID}";
-    firefoxProfileDir = "${home}/.config/firefox-pwas/${profileID}";
+    chromiumProfileDir = "/home/${username}/.config/chromium-webapps/${profileID}";
+    firefoxProfileDir = "/home/${username}/.config/firefox-pwas/${profileID}";
     useFlag = builtins.toString useFirefoxPwa;
     mUrl = builtins.toString manifestUrl;
     launcher = pkgs.writeShellScript "launch-${slug}" ''

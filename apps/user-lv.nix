@@ -120,6 +120,9 @@
       set fish_greeting
       atuin init fish | source
       starship init fish | source
+      if set -q DEVBOX_SHELL_ENABLED
+        starship init fish | source
+      end
     '';
   };
 

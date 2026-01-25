@@ -86,19 +86,24 @@
     # process-compose   # Docker-Compose Alt. for non-container development
     # nodePackages.browser-sync
     # vscodium
-
-    # Purely for fun
-    # smassh
-    typespeed
-    ttyper
-    inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.bash = {
     enable = true;
     shellAliases = {
-      devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
+      # devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
+    };
+  };
+
+  programs.fish = {
+    enable = true;
+    interactiveShellInit = ''
+      if set -q DEVBOX_SHELL_ENABLED
+        starship init fish | source
+      end
+    '';
+    shellAliases = {
+      "devbox shell" = "env SHELL=bash devbox shell";
     };
   };
  

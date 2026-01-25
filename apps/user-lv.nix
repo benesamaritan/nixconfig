@@ -56,6 +56,12 @@
     commitlint              # Linter for git commit msg
     koji                    # Interactive CLI for conventional commit
     changelogen             # Beautiful changelog
+    inputs.gophertube.packages.${stdenv.hostPlatform.system}.default
+    # smassh
+    typespeed
+    ttyper
+    inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
 
     # Nix CLI Tools
     manix               # search nix options
@@ -77,9 +83,6 @@
       set fish_greeting
       atuin init fish | source
       starship init fish | source
-      if set -q DEVBOX_SHELL_ENABLED
-        starship init fish | source
-      end
     '';
   };
 

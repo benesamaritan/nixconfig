@@ -18,31 +18,12 @@
     lfs.enable = true;
   };
 
-  programs.ripgrep = {
-    enable = true;
-    arguments = [ "--max-columns=150" "--max-columns-preview" ];
-  };
-
-  programs.gh = {
-    enable = true;
-    extensions = with pkgs; [ 
-      gh-dash
-    ];
-    settings = {
-      git_protocol = "ssh";
-    };
-  };
-
-  programs.fd.enable = true;
-  programs.bat.enable = true;
-  programs.zen-browser.enable = true;
-
   home.packages = with pkgs; [
     # alacritty
+    wezterm
     starship
     thunderbird
     keepassxc
-    wezterm
     helix
     # hx-lsp
     zed-editor
@@ -52,11 +33,11 @@
     # kdePackages.alligator
     # kdePackages.akregator
     rssguard     # rss reader
+    fastfetch    # unixporn SS masterace
     appimage-run # use which command to look up path to be put onto lutris or other tools
     easyeffects
     haruna
     # vlc
-    fastfetch    # unixporn SS masterace
     
     # CLI & TUI Tools
     lynx                    # Web Browser for your terminal
@@ -83,30 +64,6 @@
     nix-output-monitor  # pipe build command to pretty nom output
   ];
 
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
-  };
-
-  programs.atuin.enable = true;
-
-  programs.fzf = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
-  programs.eza = {
-    enable = true;
-    enableFishIntegration = true;
-    icons = "auto";
-    git = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableFishIntegration = true;
-  };
-
   programs.bash = {
     enable = true;
     initExtra = ''
@@ -126,6 +83,48 @@
     '';
   };
 
+  programs.fd.enable = true;
+  programs.bat.enable = true;
+  programs.zen-browser.enable = true;
+  programs.atuin.enable = true;
+
+  programs.ripgrep = {
+    enable = true;
+    arguments = [ "--max-columns=150" "--max-columns-preview" ];
+  };
+
+  programs.gh = {
+    enable = true;
+    extensions = with pkgs; [ 
+      gh-dash
+    ];
+    settings = {
+      git_protocol = "ssh";
+    };
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.eza = {
+    enable = true;
+    enableFishIntegration = true;
+    icons = "auto";
+    git = true;
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
+
   systemd.user.services.keepassxc = {
     Unit = {
       Description = "KeePassXC Password Manager";
@@ -138,6 +137,7 @@
       WantedBy = [ "default.target" ];
     };
   };
+
   systemd.user.services.thunderbird = {
     Unit = {
       Description = "Thunderbird Email Client";
@@ -151,6 +151,7 @@
       WantedBy = [ "default.target" ];
     };
   };   
+
   systemd.user.services.easyeffects = {
     Unit = {
       Description = "EasyEffects Audio Processor";

@@ -1,12 +1,6 @@
 { pkgs, inputs, ... }:
 
 {
-
-  # imports = [
-  #   inputs.home-manager.nixosModules.default
-  # ];
-
-  # 1. The Dnsmasq setup for .test domains
   services.dnsmasq = {
     enable = true;
     settings = {
@@ -49,8 +43,8 @@
 
     # -- API Development & Testing --
     # bruno            # API testing tool
-    k6                 # Modern load testing tool in CLI.
     bruno-cli          # Bruno, but CLI
+    k6                 # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --
     fish-lsp    

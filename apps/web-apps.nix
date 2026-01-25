@@ -71,5 +71,7 @@ let
     (makeWebApp "Telegram"                "https://web.telegram.org/k"      "web.telegram.org"     "telegram"     1 "")
     (makeWebApp "Graphite"                "https://editor.graphite.art"     "graphite.art"         "graphite"     1 "")
     (makeWebApp "Figma"                   "https://www.figma.com"           "figma.com"            "figma"        1 "")
+    (makeWebApp "DevHub Web App" "https://app.devhubapp.com" "devhubapp.com" "github-suite" 0 "")
+    (makeWebApp "HTTPie Web UI" "https://httpie.io/app" "httpie.io" "httpie" 0 "")
   ];
 }

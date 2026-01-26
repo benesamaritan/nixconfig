@@ -25,10 +25,10 @@
 
   environment = {
     sessionVariables = {
-      XDG_CURRENT_DESKTOP = "niri";
       QT_QPA_PLATFORM = "wayland";
-      QT_QPA_PLATFORMTHEME = "gtk3";
-      QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
+      # QT_QPA_PLATFORMTHEME = "qt6ct";
+      # QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
+      XDG_CURRENT_DESKTOP = "niri";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
     etc."xdg/menus/applications.menu" = {
@@ -40,55 +40,35 @@
     enable = true;
     extraPortals = with pkgs; [
       # kdePackages.xdg-desktop-portal-kde
-      xdg-desktop-portal-gnome
       xdg-desktop-portal-gtk
+      xdg-desktop-portal-gnome
     ];
     config.common.default = "*";
     wlr.enable = false;
   };
 
-  # dconf = {
-  #   settings = {
-  #     "org/gnome/desktop/interface" = {
-  #         gtk-theme = "Breeze-Dark";
-  #         color-scheme = "prefer-dark";
-  #     };
-  #   };
-  # };
-
   programs.dconf = {
     enable = true;
-    profiles = {
-      ${username}.databases = [
-        {
-          settings = {
-            "org/gnome/desktop/interface" = {
-              gtk-theme = "Breeze-Dark";
-              color-scheme = "prefer-dark";
-            };
+    profiles.${username}.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            gtk-theme = "Breeze-Dark";
+            color-scheme = "prefer-dark";
           };
-        }
-      ];
-    };
+        };
+      }
+    ];
   };
-
-  # gtk = {
-  #   # enable = true;
-  #   theme = {
-  #     name = "Breeze-Dark";
-  #     package = pkgs.kdePackages.breeze-gtk;
-  #   };
-  #   gtk2.force = true;
-  # };
 
   gtk.iconCache.enable = true;
 
-  # qt = {
-  #   enable = true;
-  #   platformTheme = lib.mkDefault "gnome";
+  qt = {
+    enable = true;
+    platformTheme = lib.mkDefault "qt5ct";
   #   style = "adwaita-dark";
   #   # style = {
   #   #   package = pkgs.kdePackages.breeze;
   #   # };
-  # };
+  };
 }

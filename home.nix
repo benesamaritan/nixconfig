@@ -9,6 +9,7 @@ in
 {
   imports = [
     ./apps
+    ./services
   ];
 
   programs.home-manager.enable = true;
@@ -44,14 +45,9 @@ in
       CARGO_HOME = "$HOME/.local/share/cargo";
       BUN_INSTALL = "$HOME/.local/share/bun";
     };
-    # file = {
-    # };
   };
 
   xdg.configFile = {
-    # "alacritty"         = link "alacritty";
-    # "tmux"              = link "tmux";
-    # "nvim"              = link "nvim";
     "niri"                = link "niri";
     "DankMaterialShell"   = link "DankMaterialShell";
     "wezterm"             = link "wezterm";
@@ -60,40 +56,5 @@ in
     "helix"               = link "helix";
     "starship.toml"       = link "starship.toml";
     "fastfetch"           = link "fastfetch";
-    # "mimeapps.list" = {
-    #   source = [
-    #     "gtk-3.0" # force = true;
-    #     "gtk-4.0" # force = true;
-    #     # "gtk-4.0".force = true;
-    #   ];
-    #   force = true;
-    # };
-  };
-
-  dconf = {
-    settings = {
-      "org/gnome/desktop/interface" = {
-          gtk-theme = "Breeze-Dark";
-          color-scheme = "prefer-dark";
-      };
-    };
-  };
-
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Breeze-Dark";
-      package = pkgs.kdePackages.breeze-gtk;
-    };
-    gtk2.force = true;
-  };
-
-  qt = {
-    enable = true;
-    platformTheme.name = "qt6ct";
-    style = {
-      # name = "Breeze-Dark";
-      package = pkgs.kdePackages.breeze;
-    };
   };
 }

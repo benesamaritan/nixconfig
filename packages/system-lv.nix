@@ -1,4 +1,4 @@
-{ pkgs, hostname, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   programs.nano.enable = false;
@@ -15,6 +15,12 @@
     nixdoc    # Generate Docs for Nix Func    
     papirus-icon-theme
     inputs.trilium-notes.packages.x86_64-linux.desktop
+
+    # Nix CLI Tools
+    manix               # search nix options
+    nh                  # search pkgs, alias (for nixos, home-manager, and garbage collect)
+    nix-tree            # dependencies tree on nix store
+    nix-output-monitor  # pipe build command to pretty nom output
   ];
 
   # services.trilium-server = {

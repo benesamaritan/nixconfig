@@ -2,8 +2,9 @@
 
 {
 	imports = [
-		# ./../modules/catppuccin-user.nix
-		./user-lv.nix
+		./../modules/catppuccin-user.nix
+		./guis.nix
+		./clis.nix
 		./web-apps.nix
 		# ./office.nix
 		# ./graphics.nix

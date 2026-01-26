@@ -30,21 +30,26 @@
     octotype.url = "github:mahlquistj/octotype/main";
     gittype.url = "github:unhappychoice/gittype";
     gophertube = {
-      url = "github:benesamaritan/gophertube";
+      url = "github:KrishnaSSH/gophertube";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     trilium-notes = {
       url = "github:TriliumNext/Trilium/v0.101.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    #nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    # nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     # affinity-nix = {
     #   url = "github:mrshmllow/affinity-nix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+ }:
   let
     username = "bye";
     description = "Bayu Saputro";
@@ -74,10 +79,20 @@
     };
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-      inherit system;
-      inherit pkgs;
+      inherit system pkgs;
       specialArgs = {
-        inherit inputs hostname username hashPasswd description groups timezone defaultLocale extraLocale xkb shell;
+        inherit
+        inputs
+        hostname
+        username
+        hashPasswd
+        description
+        groups
+        timezone
+        defaultLocale
+        extraLocale
+        xkb
+        shell;
       };
       modules = [
         ./configuration.nix

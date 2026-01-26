@@ -194,15 +194,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1769364095,
+        "lastModified": 1769417221,
         "narHash": "sha256-o4LjTrpVFEZz89DtauRPAZtqIKa953vRmd8S4OPiigc=",
-        "owner": "benesamaritan",
+        "owner": "KrishnaSSH",
         "repo": "gophertube",
-        "rev": "7eb41e69806b2f0ca0792833480495a7a5c315f4",
+        "rev": "cdcb8cec32155827f853273db0a0dad1f3f11ddb",
         "type": "github"
       },
       "original": {
-        "owner": "benesamaritan",
+        "owner": "KrishnaSSH",
         "repo": "gophertube",
         "type": "github"
       }
@@ -214,11 +214,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1769392842,
-        "narHash": "sha256-qw7d9b51TV1sTk14dcQZ+17AzO5Ut8rfkdvcYO5UjVQ=",
+        "lastModified": 1769397130,
+        "narHash": "sha256-TTM4KV9IHwa181X7afBRbhLJIrgynpDjAXJFMUOWfyU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "e3dc31303276525b867328f75111a23f0aa3674a",
+        "rev": "c37679d37bdbecf11bbe3c5eb238d89ca4f60641",
         "type": "github"
       },
       "original": {
@@ -233,11 +233,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1769363347,
-        "narHash": "sha256-fqaPwglujRdIXArV6a/0SG4otGPlvFGqFJo5EOAKnX0=",
+        "lastModified": 1769397515,
+        "narHash": "sha256-VNfKIuHzNYPcaJxG+RxNgY4jK9CPf0nKovRDNFvdgAw=",
         "owner": "YaLTeR",
         "repo": "niri",
-        "rev": "5ddcf195dd6cb24cf67c24d4622ef0a4dca9ed12",
+        "rev": "a34ed51586a8a440899396a9746eb413f05045e1",
         "type": "github"
       },
       "original": {

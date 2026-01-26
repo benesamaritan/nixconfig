@@ -1,4 +1,4 @@
-{ config, pkgs, hostname, username, ... }:
+{ config, hostname, username, ... }:
 
 let
   link = name: {

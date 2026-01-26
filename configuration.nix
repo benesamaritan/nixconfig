@@ -1,26 +1,12 @@
-{ config, pkgs, username, description, hashPasswd, hostname, groups, timezone, defaultLocale, extraLocale, xkb, shell, ... }:
+{ pkgs, username, description, hashPasswd, hostname, groups, timezone, defaultLocale, extraLocale, xkb, shell, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./modules/fonts.nix
-      ./modules/printing.nix
-      #./modules/desktop.nix
-      ./modules/wm.nix
-      ./modules/catppuccin-system.nix
-      ./modules/virtualization.nix
-      ./apps/devenv.nix
-      #./apps/flatpak.nix
-      ./apps/kanata.nix
-      ./apps/kanshi.nix
-      #./apps/wlr-randr.nix
-      ./apps/syncthing.nix
-      ./apps/system-lv.nix
-      ./apps/gaming.nix
-      #./apps/android-debug.nix
-      ./modules/swapfile.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./modules
+    ./packages
+    # ./vars
+  ];
 
   boot = {
     loader = {
@@ -28,10 +14,6 @@
       efi.canTouchEfiVariables = true;
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    kernel.sysctl = {
-      "vm.swappiness" = 10;
-      "vm.max_map_count" = 2147483642;
-    };
   };
 
   nix = {
@@ -57,7 +39,7 @@
   time.timeZone = "${timezone}";
 
   networking = {
-    #wireless.enable = false;
+    # wireless.enable = false;
     networkmanager = {
       enable = true;
       wifi.backend = "wpa_supplicant";

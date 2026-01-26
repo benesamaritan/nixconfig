@@ -14,6 +14,13 @@ let
 in
 
 {
+  boot = {
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "vm.max_map_count" = 2147483642;
+    };
+  };
+
   hardware.graphics = {
     enable32Bit = true;
     extraPackages = with pkgs; [
@@ -22,7 +29,6 @@ in
   };
 
   programs.gamescope.enable = true;
-
   programs.gamemode = {
     enable = true;
     enableRenice = true; 
@@ -54,13 +60,13 @@ in
     #wineWowPackages.stable
     wineWow64Packages.wayland
     dotnet-sdk
-    winetricks
-    protontricks
-    mangohud
+    # winetricks
+    # protontricks
+    # mangohud
     lutris # be sure to disable lutris runtime
     heroic
     protonup-qt
-    (retroarch.withCores (cores: with libretro; [
+    # (retroarch.withCores (cores: with libretro; [
       #snes9x
       #desmume
       #bsnes
@@ -69,13 +75,13 @@ in
       #dolphin
       #mgba
       #mupen64plus
-      parallel-n64
-      pcsx-rearmed
-      pcsx2
-      ppsspp
+      # parallel-n64
+      # pcsx-rearmed
+      # pcsx2
+      # ppsspp
       #sameboy
       #beetle-gba
       #same-cdi
-    ]))
+    # ]))
   ];
 }

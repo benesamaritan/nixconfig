@@ -8,16 +8,7 @@ in
 
 {
   imports = [
-    ./modules/catppuccin-user.nix
-    #./apps/tmux.nix
-    # ./apps/nvim.nix
-    ./apps/user-lv.nix
-    ./apps/web-apps.nix
-    # ./apps/webdev.nix
-    ./apps/graphics.nix
-    ./apps/office.nix
-    ./apps/teaching.nix
-    # ./apps/logseq.nix
+    ./apps
   ];
 
   programs.home-manager.enable = true;
@@ -38,15 +29,13 @@ in
       ll = "eza -l --icons --git -a";
       lt = "eza --tree --level=2 --icons";
       gc = "git clone";
-      # osu = "env DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 appimage-run /home/${username}/Lutris/osu/osu.AppImage";
       ossw = "git add --all && sudo nixos-rebuild switch --flake .#${hostname}";
       hmsw = "git add --all && home-manager switch --flake .#${username}";
     };
     sessionVariables = {
-      # EDITOR = "nvim";
-      # VISUAL = "nvim";
-      # QT_QPA_PLATFORMTHEME = lib.mkForce "gtk3";
-      # TERMINAL = "alacritty";
+      EDITOR = "hx";
+      VISUAL = "hx";
+      TERMINAL = "wezterm";
       BROWSER = "zen";
       NIXOS_OZONE_WL = "1";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";

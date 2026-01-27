@@ -1,4 +1,17 @@
-{ pkgs, username, description, hashPasswd, hostname, groups, timezone, defaultLocale, extraLocale, xkb, shell, ... }:
+{
+  pkgs,
+  username,
+  description,
+  hashPasswd,
+  hostname,
+  groups,
+  timezone,
+  defaultLocale,
+  extraLocale,
+  xkb,
+  shell,
+  ...
+}:
 
 {
   imports = [

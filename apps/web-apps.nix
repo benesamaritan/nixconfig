@@ -57,21 +57,21 @@ let
 
   home.packages = [
     pkgs.firefoxpwa
-    (makeWebApp "Google Gemini Chat"      "https://gemini.google.com"       "google.com"           "google-suite" 0 "")
+    # (makeWebApp "Google Gemini Chat"      "https://gemini.google.com"       "google.com"           "google-suite" 0 "")
     (makeWebApp "Google Drive"            "https://drive.google.com"        "drive.google.com"     "google-suite" 0 "")
     (makeWebApp "Google Classroom"        "https://classroom.google.com"    "classroom.google.com" "google-suite" 0 "")
 
     (makeWebApp "Github Classroom"        "https://classroom.github.com"    "github.com"           "github-suite" 0 "")
-    (makeWebApp "Github Copilot Chat"     "https://github.com/copilot"      "github.com"           "github-suite" 0 "")
+    # (makeWebApp "Github Copilot Chat"     "https://github.com/copilot"      "github.com"           "github-suite" 0 "")
 
-    (makeWebApp "Zoom"                    "https://app.zoom.us/wc/join"     "zoom.us"              "zoom"         0 "")
-    (makeWebApp "Discord"                 "https://discord.com"             "discord.com"          "discord"      0 "")
-    (makeWebApp "Canva"                   "https://www.canva.com"           "canva.com"            "canva"        0 "")
-    (makeWebApp "WhatsApp"                "https://web.whatsapp.com"        "whatsapp.com"         "whatsapp"     0 "")
-    (makeWebApp "Telegram"                "https://web.telegram.org/k"      "web.telegram.org"     "telegram"     1 "https://web.telegram.org/k/manifest.json")
-    (makeWebApp "Graphite"                "https://editor.graphite.art"     "graphite.art"         "graphite"     0 "")
-    (makeWebApp "Figma"                   "https://www.figma.com"           "figma.com"            "figma"        0 "")
-    (makeWebApp "DevHub Web App" "https://app.devhubapp.com" "devhubapp.com" "github-suite" 0 "")
-    (makeWebApp "HTTPie Web UI" "https://httpie.io/app" "httpie.io" "httpie" 0 "")
+    # (makeWebApp "Zoom"                    "https://app.zoom.us/wc/join"     "zoom.us"              "zoom"         0 "")
+    # (makeWebApp "Discord"                 "https://discord.com"             "discord.com"          "discord"      0 "")
+    # (makeWebApp "Canva"                   "https://www.canva.com"           "canva.com"            "canva"        0 "")
+    # (makeWebApp "WhatsApp"                "https://web.whatsapp.com"        "whatsapp.com"         "whatsapp"     0 "")
+    # (makeWebApp "Telegram"                "https://web.telegram.org/k"      "web.telegram.org"     "telegram"     1 "https://web.telegram.org/k/manifest.json")
+    # (makeWebApp "Graphite"                "https://editor.graphite.art"     "graphite.art"         "graphite"     0 "")
+    # (makeWebApp "Figma"                   "https://www.figma.com"           "figma.com"            "figma"        0 "")
+    # (makeWebApp "DevHub Web App" "https://app.devhubapp.com" "devhubapp.com" "github-suite" 0 "")
+    # (makeWebApp "HTTPie Web UI" "https://httpie.io/app" "httpie.io" "httpie" 0 "")
   ];
 }

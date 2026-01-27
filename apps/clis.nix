@@ -1,4 +1,4 @@
-{ pkgs, git, inputs, ... }:
+{ pkgs, inputs, ... }:
 
 {
 	home.packages = with pkgs; [
@@ -11,10 +11,9 @@
     helix
     # helix-gpt
     # hx-lsp
-    opencode                # CLI Coding Agents
     lynx                    # Web Browser for your terminal
     yazi                    # File Manager for your terminal
-    fastfetch    # unixporn SS masterace
+    fastfetch               # unixporn SS masterace
 
     # Helper
     tealdeer                # Man Pages in a nutshell
@@ -29,11 +28,10 @@
     commitlint              # Linter for git commit msg
     koji                    # Interactive CLI for conventional commit
     changelogen             # Beautiful changelog
-    appimage-run # use which command to look up path to be put onto lutris or other tools
 
     # Fun Land
     # smassh
-    typespeed
+    # typespeed
     ttyper
     inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -58,19 +56,6 @@
       atuin init fish | source
       starship init fish | source
     '';
-  };
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "${git.user}";
-        email = "${git.email}";
-      };
-      init.defaultBranch = "main";
-      submodule.recurse = true;
-    };
-    lfs.enable = true;
   };
 
   programs.fd.enable = true;

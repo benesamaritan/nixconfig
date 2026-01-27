@@ -1,4 +1,4 @@
-{ config, hostname, username, ... }:
+{ config, hostname, username, git, ... }:
 
 let
   link = name: {
@@ -56,5 +56,16 @@ in
     "helix"               = link "helix";
     "starship.toml"       = link "starship.toml";
     "fastfetch"           = link "fastfetch";
+  };
+
+  programs.git = {
+    settings = {
+      user = {
+        name = "${git.user}";
+        email = "${git.email}";
+      };
+      init.defaultBranch = "main";
+      submodule.recurse = true;
+    };
   };
 }

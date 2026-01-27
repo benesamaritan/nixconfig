@@ -6,6 +6,14 @@
   programs.firefox.enable = true;
   programs.dconf.enable = true;
   programs.kdeconnect.enable = true;
+
+  programs.git = {
+    enable = true;
+    lfs = {
+      enable = true;
+      enablePureSSHTransfer = true;
+    };
+  };
   
   environment.systemPackages = with pkgs; [
     wget
@@ -20,8 +28,19 @@
     manix               # search nix options
     nh                  # search pkgs, alias (for nixos, home-manager, and garbage collect)
     nix-tree            # dependencies tree on nix store
-    nix-output-monitor  # pipe build command to pretty nom output
+    # nix-output-monitor  # pipe build command to pretty nom output | but this also used by default by nh, so
   ];
+
+	programs.appimage = {
+	  enable = true;
+	  binfmt = true;
+	  # package = pkgs.appimage-run.override {
+	  #   extraPkgs = with pkgs; [
+	  #     ffmpeg
+	  #     imagemagick
+	  #   ];
+	  # };
+	};
 
   # services.trilium-server = {
   #   enable = true;

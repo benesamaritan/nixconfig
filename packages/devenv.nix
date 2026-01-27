@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
   services.dnsmasq = {
@@ -74,14 +74,15 @@
     lazygit
     tokei             # Count lines of code
     glow              # Render MD on terminal
-    # opencode
+    publii            # Static Site CMS with GUI
+    opencode          # AI Agent on terminal
     # opencode-pinned
     # fd
     # lazysql
     # lazyssh
     # lazynpm
     # httpie
-    # curlie
+    curlie
     # zellij            # Tmux Alt.
     # process-compose   # Docker-Compose Alt. for non-container development
     # nodePackages.browser-sync

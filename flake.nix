@@ -85,6 +85,7 @@
         inputs
         hostname
         username
+        git
         hashPasswd
         description
         groups

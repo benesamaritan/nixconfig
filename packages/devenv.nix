@@ -76,13 +76,14 @@
     glow              # Render MD on terminal
     publii            # Static Site CMS with GUI
     opencode          # AI Agent on terminal
+    surge-cli         # CLI for the surge.sh CDN
+    curlie
+    # httpie
     # opencode-pinned
     # fd
     # lazysql
     # lazyssh
     # lazynpm
-    # httpie
-    curlie
     # zellij            # Tmux Alt.
     # process-compose   # Docker-Compose Alt. for non-container development
     # nodePackages.browser-sync

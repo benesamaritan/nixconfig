@@ -1,15 +1,17 @@
 {
-  config,
+  # config,
   pkgs,
+  config,
   username,
-  description,
-  hashPasswd,
   hostname,
-  groups,
   timezone,
   defaultLocale,
   extraLocale,
   xkb,
+  inputs,
+  description,
+  hashPasswd,
+  groups,
   shell,
   ...
 }:
@@ -19,6 +21,7 @@
     ./hardware-configuration.nix
     ./modules
     ./packages
+    inputs.agenix.nixosModules.default
     # ./vars
   ];
 

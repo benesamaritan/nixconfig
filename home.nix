@@ -41,7 +41,6 @@ in
       VISUAL = "hx";
       TERMINAL = "wezterm";
       BROWSER = "zen";
-      NIXOS_OZONE_WL = "1";
       MANPAGER = "sh -c 'col -bx | bat -l man -p'";
       MANROFFOPT = "-c";
       XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";

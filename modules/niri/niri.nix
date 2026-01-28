@@ -26,6 +26,7 @@
   environment = {
     sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
+      NIXOS_OZONE_WL = "1";
       # QT_QPA_PLATFORMTHEME = "qt6ct";
       # QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
       XDG_CURRENT_DESKTOP = "niri";

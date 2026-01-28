@@ -29,9 +29,12 @@ in
       ls = "eza --icons";
       ll = "eza -l --icons --git -a";
       lt = "eza --tree --level=2 --icons";
-      gc = "git clone";
-      ossw = "git add --all && sudo nixos-rebuild switch --flake .#${hostname}";
-      hmsw = "git add --all && home-manager switch --flake .#${username}";
+      add = "git add --all";
+      commit = "git commit -am";
+      clone = "git clone";
+      fetch = "git fetch";
+      pull = "git pull";
+      push = "git push";
     };
     sessionVariables = {
       EDITOR = "hx";

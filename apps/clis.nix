@@ -20,7 +20,10 @@
     television              # TUI for fzf
     disktui                 # Disk utility
     ncdu                    # Disk usage analyzer
+    lazygit           # GIT the Lazy Way
     lazyjournal             # Journalctl
+    lazycli                 # CLI into TUI
+    lazyworktree            # Terminal User Interface for efficient Git worktree management
     systemd-manager-tui     # Systemd manager
     navi                    # Cheatsheets
     # bulletty                # RSS Reader

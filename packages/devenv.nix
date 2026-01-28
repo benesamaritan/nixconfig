@@ -50,8 +50,8 @@
     fish-lsp    
     bash-language-server
     yaml-language-server
-    marksman    # Markdown LSP
-    taplo   # TOML, and Cross-Config LSP
+    marksman           # Markdown LSP
+    taplo              # TOML, and Cross-Config LSP
     systemd-lsp
     vscode-json-languageserver
     # nodePackages."vscode-langservers-extracted"
@@ -63,23 +63,22 @@
     # shfmt
 
     # -- Web Utils --
-    jq
+    # jq
     # imagemagick
     # hurl
 
     # -- Tools
-    act               # Run GH Action locally
-    tldx              # Check domain avaibiliby from CLI
-    flawz             # CVEs look up
-    lazygit
-    tokei             # Count lines of code
-    glow              # Render MD on terminal
-    publii            # Static Site CMS with GUI
-    opencode          # AI Agent on terminal
-    surge-cli         # CLI for the surge.sh CDN
+    act                 # Run GH Action locally
+    tldx                # Check domain avaibiliby from CLI
+    flawz               # CVEs look up
+    lazytrivy           # TUI vulnerability scanning using trivy
+    tokei               # Count lines of code
+    glow                # Render MD on terminal
+    publii              # Static Site CMS with GUI
+    opencode            # AI Agent on terminal
+    surge-cli           # CLI for the surge.sh CDN
     curlie
     # httpie
-    # opencode-pinned
     # fd
     # lazysql
     # lazyssh
@@ -89,6 +88,8 @@
     # nodePackages.browser-sync
     # vscodium
   ];
+
+  programs.git-worktree-switcher.enable = true;
 
   programs.bash = {
     enable = true;
@@ -116,7 +117,7 @@
     nix-direnv.enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
-    direnvrcExtra = "Good Luck\n";
+    direnvrcExtra = "Good Luck \n";
   };
 
  #  programs.jujutsu = {

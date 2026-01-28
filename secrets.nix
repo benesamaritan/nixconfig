@@ -1,13 +1,5 @@
 {
-  ...
-}:
-
-{
-  age = {
-    secrets.hashedPassword.file = ./secrets/hashedPassword.age;
-    identityPaths = [ "~/.ssh/id_rsa" ];
-  };
- "secrets/hashedPassword.age".publicKeys = [
+  "secrets/hashedPassword.age".publicKeys = [
     "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDDWt83AL0uVEE02j6BwJWl5z+bHonq52KOFxRLwkLwkt09WberTpDVP2CZjmkamE84xOq4ewgEDqXZqXIMqkhuA4awLlu6ocVs53qQcxqBupvIllbjW2t1TOEScYLGSJ3HMJKLmPgU5T9TqMFxVUGZbSr+rQQ35WCCafC/cZR5SXWMXZD6JZ9vbERVkeGuIDQcEhhlPgNwpzTDBoUOMcRMqU7rAPbkEm93D4MXEtaC2tcbEutqTSE8yYY2SIx4ugXV9G11Ha5Rs3hova3osJMtxcsu/yZZt+TSDsxBMEae6BCfjpPnvevsJAu/CvNBUfVVtRl0xSkw4D652m8RAqEUaQb2GJJcy5cc0vAVH5M/duJijugSEDCwi1HVcIarg7shpj1BofRKsVS8fzdeSwhXaetgaS2e6TEJcSzChPl8WW50xQMcwavvJc5lpUr1TKm8EMNd1f2h4ltcHre1T9DZSvqPgds8Upt2lcjR4YGzKLsJHAVhyc9DUrQqF5ofMnNJCukYIHT7BlZRn4Poz6dLkLn42UGd1Aq4ci6Yd7eJX2DsvZmdqgbHEIvgUBmuIPlwxnpOLbOD8/qK37HnLbrayK6Rn89+Cnaw1WXG3m5bP7hztW3pqStlR98woJJbm3oFiSR0uJD3I4vkLpGf5jCQSz9ALyI9IY4zj8KHXbujOQ== kerja@bccby.anonaddy.com"
   ];
 }

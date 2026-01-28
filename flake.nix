@@ -56,7 +56,7 @@
     lib = nixpkgs.lib;
     defaultVars = import ./vars/default.nix { inherit nixpkgs; };
     userVars = import ./vars/benesamaritan.nix { inherit nixpkgs; };
-    vars = lib.recursiveUpdate defaultVars userVars;
+    vars = defaultVars // userVars;
     username = vars.username;
     description = vars.description;
     hashPasswd = vars.hashPasswd;

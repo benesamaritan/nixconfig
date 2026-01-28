@@ -8,7 +8,7 @@
       ./catppuccin-system.nix
       ./virtualization.nix
       ./niri
-      #./desktop.nix
-      # ./wm.nix
+      # ./desktop.nix  # Commented: Alternative desktop, not currently used
+      # ./wm.nix  # Commented: Old WM config, replaced by niri
     ];
 }

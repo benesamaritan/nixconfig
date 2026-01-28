@@ -42,41 +42,38 @@
     #   url = "github:mrshmllow/affinity-nix";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = inputs@{
     self,
     nixpkgs,
     home-manager,
+    agenix,
     ...
- }:
+  }:
   let
-    username = "bye";
-    description = "Bayu Saputro";
-    hashPasswd = "$6$KyNQWAqeKj9uX3G6$zoWMV0vtTLO1cEbnUDKnFGSIy.MGPnoCDQ3mmZisqx2qrr.Ywyp3ajoLhni2OQTWZ4kKAVMNcKSuKzIWPmhx7.";
+    lib = nixpkgs.lib;
+    defaultVars = import ./vars/default.nix { inherit nixpkgs; };
+    userVars = import ./vars/benesamaritan.nix { inherit nixpkgs; };
+    vars = lib.recursiveUpdate defaultVars userVars;
+    username = vars.username;
+    description = vars.description;
+    hashPasswd = vars.hashPasswd;
     # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA..." ];
-    system = "x86_64-linux";
+    system = vars.system;
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
-    hostname = "sol";
-    shell = "fish";
-    timezone = "Asia/Jakarta";
-    defaultLocale = "en_US.UTF-8";
-    extraLocale = "id_ID.UTF-8";
-    groups = [
-      "networkmanager"
-      "wheel"
-    ];
-    xkb = {
-      layout = "us";
-      variant = "";
-    };
-    git = {
-      user = "benesamaritan";
-      email = "243715333+benesamaritan@users.noreply.github.com";
-    };
+    hostname = vars.hostname;
+    shell = vars.shell;
+    timezone = vars.timezone;
+    defaultLocale = vars.defaultLocale;
+    extraLocale = vars.extraLocale;
+    groups = vars.groups;
+    xkb = vars.xkb;
+    git = vars.git;
   in {
     nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
       inherit system pkgs;

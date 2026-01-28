@@ -117,7 +117,7 @@
     isNormalUser = true;
     description = "${description}";
     extraGroups = groups;
-    hashedPassword = hashPasswd;
+    hashedPasswordFile = config.age.secrets.hashedPassword.path;
     shell = pkgs."${shell}";
   };
 

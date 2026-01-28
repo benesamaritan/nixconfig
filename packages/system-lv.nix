@@ -28,6 +28,8 @@
     manix               # search nix options
     nh                  # search pkgs, alias (for nixos, home-manager, and garbage collect)
     nix-tree            # dependencies tree on nix store
+    inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # agenix-cli
     # nix-output-monitor  # pipe build command to pretty nom output | but this also used by default by nh, so
   ];
 

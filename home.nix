@@ -1,4 +1,4 @@
-{ config, hostname, username, git, ... }:
+{ config, username, git, ... }:
 
 let
   link = name: {
@@ -29,6 +29,7 @@ in
       ls = "eza --icons";
       ll = "eza -l --icons --git -a";
       lt = "eza --tree --level=2 --icons";
+      stats = "git status";
       add = "git add --all";
       commit = "git commit -am";
       clone = "git clone";

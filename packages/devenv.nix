@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 {
   services.dnsmasq = {
@@ -11,19 +11,6 @@
   # 2. (Optional) Open ports for web servers if you need external access
   # networking.firewall.allowedTCPPorts = [ 80 443 3000 8000 ];
   # networking.firewall.allowedTCPPorts = [ 22 80 ];
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      opencode-pinned = prev.opencode.overrideAttrs (_: {
-        src = prev.fetchFromGitHub {
-          owner = "anomalyco";
-          repo = "opencode";
-          rev = "v1.1.25";
-          hash = "sha256-+NjeC2jPJ2blFsk9rUajRwQR8Gy0nxT8ImgOwlQfblw=";
-        };
-      });
-    })
-  ];
 
   environment.systemPackages = with pkgs; [
     devbox
@@ -42,24 +29,24 @@
     # pnpm
 
     # -- API Development & Testing --
-    # bruno            # API testing tool
-    bruno-cli          # Bruno, but CLI
+    bruno            # API testing tool
+    # bruno-cli          # Bruno, but CLI
     k6                 # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --
-    fish-lsp    
-    bash-language-server
+    # fish-lsp    
+    # bash-language-server
     yaml-language-server
     marksman           # Markdown LSP
     taplo              # TOML, and Cross-Config LSP
-    systemd-lsp
+    # systemd-lsp
     vscode-json-languageserver
     # nodePackages."vscode-langservers-extracted"
     # nodePackages."@tailwindcss/language-server"
     # nodePackages.typescript-language-server
     # nodePackages.prettier
     lua-language-server
-    stylua
+    # stylua
     # shfmt
 
     # -- Web Utils --
@@ -72,6 +59,8 @@
     tldx                # Check domain avaibiliby from CLI
     flawz               # CVEs look up
     lazytrivy           # TUI vulnerability scanning using trivy
+    lazysql
+    dbeaver-bin
     tokei               # Count lines of code
     glow                # Render MD on terminal
     publii              # Static Site CMS with GUI
@@ -117,7 +106,10 @@
     nix-direnv.enable = true;
     enableBashIntegration = true;
     enableFishIntegration = true;
-    direnvrcExtra = "Good Luck \n";
+    direnvrcExtra = "\n
+      echo 'Good Luck ${username}'\n
+      echo 'Wish you all the best'
+    ";
   };
 
  #  programs.jujutsu = {

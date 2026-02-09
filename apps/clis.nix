@@ -31,18 +31,20 @@
     commitlint              # Linter for git commit msg
     koji                    # Interactive CLI for conventional commit
     changelogen             # Beautiful changelog
+    # gitbutler               # Git, but cooler (CLI's for interacting with git)
 
     # Fun Land
     # smassh
     # typespeed
     ttyper
-    inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # inputs.gittype.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
     pipes-rs                # Pipes Screensaver like on Classic Windows (Rust rewrite variant)
     cmatrix                 # Matrix-like Screensaver
     discordo                # Discord
 		# spotifycli
-    inputs.gophertube.packages.${stdenv.hostPlatform.system}.default
+    # inputs.gophertube.packages.${stdenv.hostPlatform.system}.default
+    gophertube
 	];
 
   programs.bash = {

@@ -28,9 +28,9 @@
       inputs.home-manager.follows = "home-manager";
     };
     catppuccin.url = "github:catppuccin/nix";
-    octotype.url = "github:mahlquistj/octotype/main";
-    gittype.url = "github:unhappychoice/gittype";
-    gophertube.url = "github:KrishnaSSH/gophertube";
+    # octotype.url = "github:mahlquistj/octotype/main";
+    # gittype.url = "github:unhappychoice/gittype";
+    # gophertube.url = "github:KrishnaSSH/gophertube";
     # trilium-notes = {
     #   url = "github:TriliumNext/Trilium/v0.101.0";
     #   inputs.nixpkgs.follows = "nixpkgs";

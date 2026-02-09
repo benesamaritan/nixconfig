@@ -18,7 +18,9 @@
     kdePackages.kio
     kdePackages.kio-extras
     kdePackages.kio-extras-kf5
+    unrar
     kdePackages.ark
+    peazip
     inputs.wooz.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.nsticky.packages.${pkgs.stdenv.hostPlatform.system}.nsticky
   ];

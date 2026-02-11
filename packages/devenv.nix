@@ -36,7 +36,7 @@
     # -- LSP & Formatter --
     # fish-lsp    
     # bash-language-server
-    yaml-language-server
+    # yaml-language-server
     marksman           # Markdown LSP
     taplo              # TOML, and Cross-Config LSP
     # systemd-lsp
@@ -65,17 +65,25 @@
     glow                # Render MD on terminal
     publii              # Static Site CMS with GUI
     opencode            # AI Agent on terminal
+    gemini-cli
+    # copilot-cli
     surge-cli           # CLI for the surge.sh CDN
     curlie
+    # lazycli                 # CLI into TUI
     # httpie
-    # fd
-    # lazysql
     # lazyssh
     # lazynpm
-    # zellij            # Tmux Alt.
-    # process-compose   # Docker-Compose Alt. for non-container development
     # nodePackages.browser-sync
     # vscodium
+
+    # GIT helper
+    lazygit
+    # gitbutler
+    # commit                  # Git Commit msg editor
+    # commitlint              # Linter for git commit msg
+    koji                    # Interactive CLI for conventional commit
+    changelogen             # Beautiful changelog
+    lazyworktree            # Terminal User Interface for efficient Git worktree management
   ];
 
   programs.git-worktree-switcher.enable = true;

@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
 	home.packages = with pkgs; [
@@ -20,18 +20,10 @@
     television              # TUI for fzf
     disktui                 # Disk utility
     ncdu                    # Disk usage analyzer
-    lazygit           # GIT the Lazy Way
     lazyjournal             # Journalctl
-    lazycli                 # CLI into TUI
-    lazyworktree            # Terminal User Interface for efficient Git worktree management
     systemd-manager-tui     # Systemd manager
     navi                    # Cheatsheets
     # bulletty                # RSS Reader
-    commit                  # Git Commit msg editor
-    commitlint              # Linter for git commit msg
-    koji                    # Interactive CLI for conventional commit
-    changelogen             # Beautiful changelog
-    # gitbutler               # Git, but cooler (CLI's for interacting with git)
 
     # Fun Land
     # smassh

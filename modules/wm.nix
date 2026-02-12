@@ -4,7 +4,10 @@
   imports = [
   ];
 
-  programs.niri.enable = true;
+  programs.niri = {
+    enable = true;
+    package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
+  };
   programs.xwayland.enable = true;
   #services.displayManager.sddm.enable = false;
 

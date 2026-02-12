@@ -66,7 +66,6 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ inputs.niri.overlays.default ];
         };
         specialArgs = { inherit inputs; } // vars;
         modules = [
@@ -88,7 +87,6 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
-          overlays = [ inputs.niri.overlays.default ];
         };
         extraSpecialArgs = { inherit inputs; } // vars;
         modules = [

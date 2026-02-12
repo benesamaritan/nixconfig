@@ -91,7 +91,7 @@
   programs.bash = {
     enable = true;
     shellAliases = {
-      devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
+      # devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
     };
   };
 
@@ -103,7 +103,7 @@
       end
     '';
     shellAliases = {
-      dse = "env SHELL=bash devbox shell"; # Devbox shell enter, using bash inside instead of fish
+      # dse = "env SHELL=bash devbox shell"; # Devbox shell enter, using bash inside instead of fish
     };
   };
  

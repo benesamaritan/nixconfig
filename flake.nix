@@ -52,48 +52,69 @@
 
   let
     lib = nixpkgs.lib;
+    system = "x86_64-linux";
+
+    # Helper function for NixOS system configuration
+    mkSystem = { hostname, username }: 
+      let
+        hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
+        userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
+        vars = hostVars // userVars;
+        system = vars.system or "x86_64-linux";
+      in lib.nixosSystem {
+        inherit system;
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        specialArgs = { inherit inputs; } // vars;
+        modules = [
+          ./hosts/${hostname}/configuration.nix
+        ];
+      };
+
+    # Helper function for Home Manager configuration
+    mkHome = { hostname, username }:
+      let
+        hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
+        userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
+        vars = hostVars // userVars;
+        system = vars.system or "x86_64-linux";
+      in home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = { inherit inputs; } // vars;
+        modules = [
+          ./users/${username}/home.nix
+        ];
+      };
   in
 
   {
+    nixosModules = {
+      default = import ./modules;
+      packages = import ./packages;
+    };
+
+    homeModules = {
+      default = import ./users/bye/home.nix;
+    };
+
     nixosConfigurations = {
-      # Main desktop configuration
-      sol = let
-        hostVars = import ./hosts/sol/vars.nix { inherit nixpkgs; };
-        userVars = import ./users/bye/vars.nix { inherit nixpkgs; };
-        vars = hostVars // userVars;
-      in lib.nixosSystem {
-        inherit (vars) system;
-        pkgs = import nixpkgs {
-          inherit (vars) system;
-          config.allowUnfree = true;
-        };
-        specialArgs = {
-          inherit inputs;
-        } // vars;
-        modules = [
-          ./hosts/sol/configuration.nix
-        ];
-      };
+      sol = mkSystem { hostname = "sol"; username = "bye"; };
     };
 
     homeConfigurations = {
-      # Main user configuration
-      bye = let
-        hostVars = import ./hosts/sol/vars.nix { inherit nixpkgs; };
-        userVars = import ./users/bye/vars.nix { inherit nixpkgs; };
-        vars = hostVars // userVars;
-      in home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit (vars) system;
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = {
-          inherit inputs;
-        } // vars;
-        modules = [
-          ./users/bye/home.nix
-        ];
-      };
+      bye = mkHome { hostname = "sol"; username = "bye"; };
+    };
+
+    # Optionally export packages if you want them to show up under 'packages'
+    packages.${system} = let
+      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
+    in {
+      # You could define specific package builds here if needed
     };
   };
 }

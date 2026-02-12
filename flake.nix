@@ -123,10 +123,59 @@
       "bye" = mkHome { hostname = "sol"; username = "bye"; };
     };
 
-    # Custom packages provided by this flake
+    # Custom packages / bundles provided by this flake
     packages.${system} = {
-      default = pkgs.hello;
-      hello = pkgs.hello;
+      # The full system derivation
+      system = self.nixosConfigurations.sol.config.system.build.toplevel;
+
+      # Bundled package categories for visibility/testing
+      gaming = pkgs.buildEnv {
+        name = "gaming-packages";
+        paths = [
+          pkgs.wineWow64Packages.wayland
+          pkgs.lutris
+          pkgs.heroic
+          pkgs.protonup-qt
+        ];
+      };
+
+      clis = pkgs.buildEnv {
+        name = "cli-packages";
+        paths = with pkgs; [
+          starship helix yazi fastfetch tealdeer television
+          disktui ncdu lazyjournal navi ttyper pipes-rs cmatrix
+          discordo gophertube atuin fd bat ripgrep gh fzf eza zoxide
+        ];
+      };
+
+      guis = pkgs.buildEnv {
+        name = "gui-packages";
+        paths = with pkgs; [
+          thunderbird keepassxc zed-editor logseq rssguard
+          easyeffects haruna quick-webapps
+        ];
+      };
+
+      office = pkgs.buildEnv {
+        name = "office-packages";
+        paths = with pkgs; [
+          libreoffice-fresh
+          hunspell
+          hunspellDicts.en_US
+          hunspellDicts.id_ID
+        ];
+      };
+
+      teaching = pkgs.buildEnv {
+        name = "teaching-packages";
+        paths = with pkgs; [
+          # Add teaching related packages here from apps/teaching.nix if available
+          obs-studio
+          zoom-us
+        ];
+      };
+
+      default = self.packages.${system}.clis;
     };
   };
 }

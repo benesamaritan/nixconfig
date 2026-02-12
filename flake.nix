@@ -47,69 +47,51 @@
     self,
     nixpkgs,
     home-manager,
-    agenix,
     ...
   }:
 
   let
     lib = nixpkgs.lib;
-    defaultVars = import ./vars/default.nix { inherit nixpkgs; };
-    userVars = import ./vars/benesamaritan.nix { inherit nixpkgs; };
-    vars = defaultVars // userVars;
-    system = vars.system;
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
-    hostname = vars.hostname;
-    timezone = vars.timezone;
-    defaultLocale = vars.defaultLocale;
-    extraLocale = vars.extraLocale;
-    xkb = vars.xkb;
-    username = vars.username;
-    description = vars.description;
-    hashPasswd = vars.hashPasswd;
-    # openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAA..." ];
-    shell = vars.shell;
-    groups = vars.groups;
-    git = vars.git;
   in
 
   {
-    nixosConfigurations.${hostname} = nixpkgs.lib.nixosSystem {
-      inherit system pkgs;
-      specialArgs = {
-        inherit
-        inputs
-        hostname
-        timezone
-        defaultLocale
-        extraLocale
-        xkb
-        username
-        shell
-        git
-        hashPasswd
-        description
-        groups;
-      };
-      modules = [
-        ./configuration.nix
-        inputs.agenix.nixosModules.default
-      ];
-    };
-    homeConfigurations = {
-      ${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit
-          inputs
-          hostname
-          username
-          git;
+    nixosConfigurations = {
+      # Main desktop configuration
+      sol = let
+        hostVars = import ./hosts/sol/vars.nix { inherit nixpkgs; };
+        userVars = import ./users/bye/vars.nix { inherit nixpkgs; };
+        vars = hostVars // userVars;
+      in lib.nixosSystem {
+        inherit (vars) system;
+        pkgs = import nixpkgs {
+          inherit (vars) system;
+          config.allowUnfree = true;
         };
+        specialArgs = {
+          inherit inputs;
+        } // vars;
         modules = [
-          ./home.nix
+          ./hosts/sol/configuration.nix
+        ];
+      };
+    };
+
+    homeConfigurations = {
+      # Main user configuration
+      bye = let
+        hostVars = import ./hosts/sol/vars.nix { inherit nixpkgs; };
+        userVars = import ./users/bye/vars.nix { inherit nixpkgs; };
+        vars = hostVars // userVars;
+      in home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit (vars) system;
+          config.allowUnfree = true;
+        };
+        extraSpecialArgs = {
+          inherit inputs;
+        } // vars;
+        modules = [
+          ./users/bye/home.nix
         ];
       };
     };

@@ -8,8 +8,8 @@ in
 
 {
   imports = [
-    ./apps
-    ./services
+    ../../apps
+    ../../services
   ];
 
   programs.home-manager.enable = true;

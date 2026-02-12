@@ -19,8 +19,8 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./modules
-    ./packages
+    ../../modules
+    ../../packages
     inputs.agenix.nixosModules.default
     # ./vars
   ];

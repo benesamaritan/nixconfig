@@ -11,12 +11,11 @@ This is a modular NixOS configuration using Nix flakes and home-manager in stand
 
 ## Directory Structure
 - `flake.nix`: Main flake definition with inputs and outputs.
-- `configuration.nix`: NixOS system configuration.
-- `home.nix`: Home-manager user configuration.
+- `hosts/`: Per-host configurations (e.g., `hosts/sol/configuration.nix`).
+- `users/`: Per-user Home Manager configurations (e.g., `users/bye/home.nix`).
 - `modules/`: System-level modules (e.g., fonts, printing, virtualization, niri WM).
 - `apps/`: User applications and tools (e.g., GUIs, CLIs, web apps).
-- `packages/`: System packages (e.g., gaming, syncthing, kanata).
-- `vars/`: User-specific variables (e.g., benesamaritan.nix for user configs).
+- `packages/`: System modules for packages (e.g., gaming, syncthing, kanata).
 - `flake.lock`: Locked flake dependencies.
 
 ## Installation and Setup

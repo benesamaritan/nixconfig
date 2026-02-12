@@ -53,6 +53,10 @@
   let
     lib = nixpkgs.lib;
     system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
 
     # Helper function for NixOS system configuration
     mkSystem = { hostname, username }: 
@@ -98,28 +102,31 @@
   in
 
   {
+    # NixOS modules provided by this flake
     nixosModules = {
-      default = import ./modules;
+      system = import ./modules;
       packages = import ./packages;
     };
 
-    homeModules = {
-      default = import ./users/bye/home.nix;
+    # Home Manager modules provided by this flake
+    homeManagerModules = {
+      user = import ./users/bye/home.nix;
     };
 
+    # NixOS system configurations
     nixosConfigurations = {
       sol = mkSystem { hostname = "sol"; username = "bye"; };
     };
 
+    # Home Manager configurations
     homeConfigurations = {
-      bye = mkHome { hostname = "sol"; username = "bye"; };
+      "bye" = mkHome { hostname = "sol"; username = "bye"; };
     };
 
-    # Optionally export packages if you want them to show up under 'packages'
-    packages.${system} = let
-      pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-    in {
-      # You could define specific package builds here if needed
+    # Custom packages provided by this flake
+    packages.${system} = {
+      default = pkgs.hello;
+      hello = pkgs.hello;
     };
   };
 }

@@ -45,7 +45,7 @@
   xdg.portal = {
     enable = true;
     extraPortals = with pkgs; [
-      # kdePackages.xdg-desktop-portal-kde
+      kdePackages.xdg-desktop-portal-kde
       xdg-desktop-portal-gtk
       xdg-desktop-portal-gnome
     ];

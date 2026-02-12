@@ -41,17 +41,10 @@
 
   programs.bash = {
     enable = true;
+    enableCompletion = true;
     initExtra = ''
+      eval "$(atuin init bash)"
       eval "$(starship init bash)"
-    '';
-  };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      set fish_greeting
-      atuin init fish | source
-      starship init fish | source
     '';
   };
 
@@ -76,18 +69,18 @@
 
   programs.fzf = {
     enable = true;
-    enableFishIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.eza = {
     enable = true;
-    enableFishIntegration = true;
+    enableBashIntegration = true;
     icons = "auto";
     git = true;
   };
 
   programs.zoxide = {
     enable = true;
-    enableFishIntegration = true;
+    enableBashIntegration = true;
   };
 }

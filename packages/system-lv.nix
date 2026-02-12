@@ -2,7 +2,6 @@
 
 {
   programs.nano.enable = false;
-  programs.fish.enable = true;
   programs.firefox.enable = true;
   programs.dconf.enable = true;
   programs.kdeconnect.enable = true;

@@ -34,7 +34,6 @@
     k6                 # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --
-    # fish-lsp    
     # bash-language-server
     # yaml-language-server
     marksman           # Markdown LSP
@@ -94,18 +93,6 @@
       # devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
     };
   };
-
-  programs.fish = {
-    enable = true;
-    interactiveShellInit = ''
-      if set -q DEVBOX_SHELL_ENABLED
-        starship init fish | source
-      end
-    '';
-    shellAliases = {
-      # dse = "env SHELL=bash devbox shell"; # Devbox shell enter, using bash inside instead of fish
-    };
-  };
  
   programs.direnv = {
     enable = true;
@@ -113,7 +100,6 @@
     loadInNixShell = true;
     nix-direnv.enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
     direnvrcExtra = "\n
       echo 'Good Luck ${username}'\n
       echo 'Wish you all the best'

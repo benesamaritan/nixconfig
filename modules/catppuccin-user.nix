@@ -15,7 +15,6 @@
     atuin.enable        = true;
     bat.enable          = true;
     cava.enable         = true;
-    fish.enable         = true;
     fzf.enable          = true;
     eza.enable          = true;
     chromium.enable     = true;
@@ -26,8 +25,7 @@
     swaylock.enable     = true;
     swaylock.flavor     = "mocha";
     thunderbird.enable  = true;
-    # gtk.icon.enable     = true;
-    zellij.enable       = true;
+    # zellij.enable       = true;
   };
 
   home.activation.installSteamSkin = lib.hm.dag.entryAfter ["writeBoundary"] ''

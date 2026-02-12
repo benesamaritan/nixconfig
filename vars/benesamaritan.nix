@@ -16,7 +16,7 @@ in
     "networkmanager"
     "wheel"
   ];
-  shell = "fish";
+  shell = "bash";
   git = {
     user = "benesamaritan";
     email = "243715333+benesamaritan@users.noreply.github.com";

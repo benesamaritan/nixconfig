@@ -1,9 +1,5 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, lib, ... }:
 {
-  imports = [ 
-    inputs.catppuccin.homeModules.catppuccin 
-  ];
-
   nix.package = pkgs.nix;
 
   catppuccin = {

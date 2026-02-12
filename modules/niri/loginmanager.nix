@@ -1,4 +1,4 @@
-{ pkgs, inputs, username, ... }:
+{ username, ... }:
 
 {
   services.displayManager.sddm.enable = false;
@@ -6,9 +6,5 @@
     enable = true;
     compositor.name = "niri";
     configHome = "/home/${username}";
-    quickshell = {
-      package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    };
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 }

@@ -2,7 +2,6 @@
 
 {
   imports = [
-    inputs.home-manager.nixosModules.default
   ];
 
   programs.niri.enable = true;
@@ -13,8 +12,6 @@
     enable = true;
     compositor.name = "niri";
     configHome = "/home/${username}";
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
   };
 
   programs.dms-shell = {
@@ -23,8 +20,6 @@
       enable = true;
       restartIfChanged = true;
     };
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
     enableVPN = false;
     enableSystemMonitoring = true;
     enableDynamicTheming = true;

@@ -1,10 +1,6 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {
-  imports = [
-    inputs.zen-browser.homeModules.twilight
-  ];
-
   home.packages = with pkgs; [
     thunderbird
     keepassxc

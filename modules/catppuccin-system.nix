@@ -1,9 +1,5 @@
-{ pkgs, inputs, ... }: 
+{ pkgs, ... }: 
 {
-  imports = [ 
-    inputs.catppuccin.nixosModules.catppuccin 
-  ];
-
   catppuccin = {
     enable = true;
     flavor = "mocha";

@@ -21,7 +21,6 @@
     ./hardware-configuration.nix
     ../../modules
     ../../packages
-    inputs.agenix.nixosModules.default
     # ./vars
   ];
 

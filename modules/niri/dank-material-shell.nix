@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 {	
   programs.dms-shell = {
@@ -7,8 +7,6 @@
       enable = true;
       restartIfChanged = true;
     };
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
     enableVPN = false;
     enableSystemMonitoring = true;
     enableDynamicTheming = true;

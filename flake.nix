@@ -69,6 +69,10 @@
         };
         specialArgs = { inherit inputs; } // vars;
         modules = [
+          inputs.agenix.nixosModules.default
+          inputs.niri.nixosModules.niri
+          inputs.catppuccin.nixosModules.catppuccin
+          inputs.dms.nixosModules.default
           ./hosts/${hostname}/configuration.nix
         ];
       };
@@ -87,6 +91,9 @@
         };
         extraSpecialArgs = { inherit inputs; } // vars;
         modules = [
+          inputs.catppuccin.homeModules.catppuccin
+          inputs.niri.homeModules.niri
+          inputs.zen-browser.homeModules.twilight
           ./users/${username}/home.nix
         ];
       };

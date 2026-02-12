@@ -66,11 +66,11 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [ inputs.niri.overlays.default ];
         };
         specialArgs = { inherit inputs; } // vars;
         modules = [
           inputs.agenix.nixosModules.default
-          inputs.niri.nixosModules.niri
           inputs.catppuccin.nixosModules.catppuccin
           inputs.dms.nixosModules.default
           ./hosts/${hostname}/configuration.nix
@@ -88,11 +88,11 @@
         pkgs = import nixpkgs {
           inherit system;
           config.allowUnfree = true;
+          overlays = [ inputs.niri.overlays.default ];
         };
         extraSpecialArgs = { inherit inputs; } // vars;
         modules = [
           inputs.catppuccin.homeModules.catppuccin
-          inputs.niri.homeModules.niri
           inputs.zen-browser.homeModules.twilight
           ./users/${username}/home.nix
         ];

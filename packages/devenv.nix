@@ -89,8 +89,12 @@
 
   programs.bash = {
     enable = true;
+    completion.enable = true;
+    enableLsColors = true;
+    blesh.enable = true;
+    undistractMe.enable = true;
     shellAliases = {
-      # devbox = "devbox shell --shell /run/current-system/sw/bin/bash";
+
     };
   };
  

@@ -31,7 +31,7 @@
     # -- API Development & Testing --
     bruno            # API testing tool
     # bruno-cli          # Bruno, but CLI
-    k6                 # Modern load testing tool in CLI.
+    # k6                 # Modern load testing tool in CLI.
 
     # -- LSP & Formatter --
     # bash-language-server
@@ -54,10 +54,10 @@
     # hurl
 
     # -- Tools
-    act                 # Run GH Action locally
-    tldx                # Check domain avaibiliby from CLI
-    flawz               # CVEs look up
-    lazytrivy           # TUI vulnerability scanning using trivy
+    # act                 # Run GH Action locally
+    # tldx                # Check domain avaibiliby from CLI
+    # flawz               # CVEs look up
+    # lazytrivy           # TUI vulnerability scanning using trivy
     lazysql
     dbeaver-bin
     tokei               # Count lines of code
@@ -81,7 +81,7 @@
     # commit                  # Git Commit msg editor
     # commitlint              # Linter for git commit msg
     koji                    # Interactive CLI for conventional commit
-    changelogen             # Beautiful changelog
+    # changelogen             # Beautiful changelog
     lazyworktree            # Terminal User Interface for efficient Git worktree management
   ];
 
@@ -93,9 +93,7 @@
     enableLsColors = true;
     blesh.enable = true;
     undistractMe.enable = true;
-    shellAliases = {
-
-    };
+    # shellAliases = {};
   };
  
   programs.direnv = {

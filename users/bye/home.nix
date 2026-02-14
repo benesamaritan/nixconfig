@@ -23,19 +23,26 @@ in
       "$HOME/.local/share/bun/bin"
     ];
     shellAliases = {
-      ".." = "cd ..";
-      cd = "z";
-      cat = "bat";
-      ls = "eza --icons";
-      ll = "eza -l --icons --git -a";
-      lt = "eza --tree --level=2 --icons";
-      stats = "git status";
-      add = "git add --all";
-      commit = "git commit -am";
-      clone = "git clone";
-      fetch = "git fetch";
-      pull = "git pull";
-      push = "git push";
+      ".."       = "cd ..";
+      cd         = "z";
+      cat        = "bat";
+      ls         = "eza --icons";
+      ll         = "eza -l --icons --git -a";
+      lt         = "eza --tree --level=2 --icons";
+      cls        = "clear";
+      stat       = "git status";
+      add        = "git add --all";
+      commit     = "git commit -am";
+      clone      = "git clone";
+      fetch      = "git fetch";
+      pull       = "git pull";
+      push       = "git push";
+      pushnew    = "git push --set-upstream";
+      checkout   = "git checkout";
+      newbranch  = "git checkout -b";
+      list       = "git branch -l";
+      remoteadd  = "git remote add";
+      remoteget  = "git remote get-url";
     };
     sessionVariables = {
       EDITOR = "hx";

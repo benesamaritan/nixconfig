@@ -12,10 +12,13 @@
     # helix-gpt
     # hx-lsp
     lynx                    # Web Browser for your terminal
+    browsh                  # Web Browser for terminal (using headless firefox)
+    bitwarden-cli
     yazi                    # File Manager for your terminal
     fastfetch               # unixporn SS masterace
 
     # Helper
+    bitwarden-desktop
     tealdeer                # Man Pages in a nutshell
     television              # TUI for fzf
     disktui                 # Disk utility
@@ -33,7 +36,7 @@
     # inputs.octotype.packages.${pkgs.stdenv.hostPlatform.system}.default
     pipes-rs                # Pipes Screensaver like on Classic Windows (Rust rewrite variant)
     cmatrix                 # Matrix-like Screensaver
-    discordo                # Discord
+    # discordo                # Discord
 		# spotifycli
     # inputs.gophertube.packages.${stdenv.hostPlatform.system}.default
     gophertube

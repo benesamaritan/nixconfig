@@ -8,6 +8,7 @@
 
   programs.git = {
     enable = true;
+    config.init.defaultBranch = "main";
     lfs = {
       enable = true;
       enablePureSSHTransfer = true;

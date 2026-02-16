@@ -61,7 +61,6 @@
     enableLsColors = true;
     blesh.enable = true;
     undistractMe.enable = true;
-    # shellAliases = {};
   };
 
   programs.autojump.enable = true;

@@ -18,16 +18,19 @@
     wget
     curl
     aria2
-    nixd      # Nix LSP
-    nixdoc    # Generate Docs for Nix Func    
+    nixd                         # Nix LSP
+    nixfmt
+    nix-bash-completions
+    nix-health
     papirus-icon-theme
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
     # agenix-cli
 
     # Nix CLI Tools
-    manix               # search nix options
-    nh                  # search pkgs, alias (for nixos, home-manager, and garbage collect)
-    nix-tree            # dependencies tree on nix store
+    manix                    # search nix options
+    nh                       # search pkgs, alias (for nixos, home-manager, and garbage collect)
+    nix-tree                 # dependencies tree on nix store
+    nixdoc                   # look up Nix func    
   ];
 
 	programs.appimage = {
@@ -37,7 +40,6 @@
 
   networking.firewall = {
     enable = true;
-    # allowedTCPPorts = [ 37840 ];                                 # For Trilium-desktop sync
     allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];      # This and
     allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];      # |-this is for kdeconnect remote input
   };

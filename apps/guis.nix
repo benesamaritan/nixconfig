@@ -4,7 +4,6 @@
   home.packages = with pkgs; [
     thunderbird
     keepassxc
-    zed-editor
     logseq
     trilium-desktop
     # gnome-feeds

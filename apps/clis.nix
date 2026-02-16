@@ -18,15 +18,17 @@
     fastfetch               # unixporn SS masterace
 
     # Helper
-    bitwarden-desktop
-    tealdeer                # Man Pages in a nutshell
-    television              # TUI for fzf
-    disktui                 # Disk utility
-    ncdu                    # Disk usage analyzer
-    lazyjournal             # Journalctl
-    systemd-manager-tui     # Systemd manager
-    navi                    # Cheatsheets
-    # bulletty                # RSS Reader
+    marksman                     # Markdown LSP
+    taplo                        # TOML, and Cross-Config LSP
+    lua-language-server
+    tealdeer                     # Man Pages in a nutshell
+    television                   # TUI for fzf
+    disktui                      # Disk utility
+    ncdu                         # Disk usage analyzer
+    lazyjournal                  # Journalctl
+    systemd-manager-tui          # Systemd manager
+    navi                         # Cheatsheets
+    # bulletty                   # RSS Reader
 
     # Fun Land
     # smassh

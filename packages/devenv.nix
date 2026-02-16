@@ -8,81 +8,49 @@
     };
   };
 
-  # 2. (Optional) Open ports for web servers if you need external access
-  # networking.firewall.allowedTCPPorts = [ 80 443 3000 8000 ];
-  # networking.firewall.allowedTCPPorts = [ 22 80 ];
-
   environment.systemPackages = with pkgs; [
     devbox
-
-    # -- PHP Ecosystem --
-    # psysh
-    # phpactor
-    intelephense
-
-    # -- Cloud & Infrastructure --
-    # google-cloud-sdk
-    # koyeb-cli
-
-    # -- JS / Node Ecosystem --
-    # nodejs_20
-    # pnpm
+    devenv
 
     # -- API Development & Testing --
-    bruno            # API testing tool
-    # bruno-cli          # Bruno, but CLI
-    # k6                 # Modern load testing tool in CLI.
+    bruno                    # API testing tool
+    # bruno-cli              # Bruno, but CLI
+    # k6                     # Modern load testing tool in CLI.
 
-    # -- LSP & Formatter --
-    # bash-language-server
-    # yaml-language-server
-    marksman           # Markdown LSP
-    taplo              # TOML, and Cross-Config LSP
-    # systemd-lsp
-    vscode-json-languageserver
-    # nodePackages."vscode-langservers-extracted"
-    # nodePackages."@tailwindcss/language-server"
-    # nodePackages.typescript-language-server
-    # nodePackages.prettier
-    lua-language-server
-    # stylua
-    # shfmt
-
-    # -- Web Utils --
-    # jq
+    jq
     # imagemagick
     # hurl
 
     # -- Tools
-    # act                 # Run GH Action locally
-    # tldx                # Check domain avaibiliby from CLI
-    # flawz               # CVEs look up
-    # lazytrivy           # TUI vulnerability scanning using trivy
+    # act                    # Run GH Action locally
+    # tldx                   # Check domain avaibiliby from CLI
+    # flawz                  # CVEs look up
+    # lazytrivy              # TUI vulnerability scanning using trivy
+    zed-editor
     lazysql
     dbeaver-bin
-    tokei               # Count lines of code
-    glow                # Render MD on terminal
-    publii              # Static Site CMS with GUI
-    opencode            # AI Agent on terminal
-    gemini-cli
-    # copilot-cli
-    surge-cli           # CLI for the surge.sh CDN
+    tokei                    # Count LoC
+    glow                     # Render MD on terminal
+    publii                   # Static Site CMS with GUI
+    h                        # Faster shell navigation of projects
+    surge-cli                # CLI for the surge.sh CDN
     curlie
-    # lazycli                 # CLI into TUI
+    # lazycli                # CLI into TUI
     # httpie
     # lazyssh
     # lazynpm
-    # nodePackages.browser-sync
-    # vscodium
+
+    # AI CLI Tools
+    opencode                 # AI Agent on terminal
+    gemini-cli
+    # copilot-cli
 
     # GIT helper
     lazygit
     # gitbutler
-    # commit                  # Git Commit msg editor
-    # commitlint              # Linter for git commit msg
-    koji                    # Interactive CLI for conventional commit
-    # changelogen             # Beautiful changelog
-    lazyworktree            # Terminal User Interface for efficient Git worktree management
+    koji                     # Interactive CLI for conventional commit
+    lazyworktree             # Terminal User Interface for efficient Git worktree management
+    hub                      # Command-line wrapper for git that makes you better at GitHub
   ];
 
   programs.git-worktree-switcher.enable = true;
@@ -95,6 +63,8 @@
     undistractMe.enable = true;
     # shellAliases = {};
   };
+
+  programs.autojump.enable = true;
  
   programs.direnv = {
     enable = true;
@@ -107,17 +77,4 @@
       echo 'Wish you all the best'
     ";
   };
-
- #  programs.jujutsu = {
- #   enable = false;
- #   settings = {
- #     user = {
- #       name = "${git.username}";
- #       email = "${git.email}";
- #     };
- #     ui = {
- #       editor = "nvim";
- #     };
- #   };
- # };
 }

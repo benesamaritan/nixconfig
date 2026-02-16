@@ -74,8 +74,18 @@ in
         name = "${git.user}";
         email = "${git.email}";
       };
-      init.defaultBranch = "main";
       submodule.recurse = true;
     };
+    ignores = [
+      ".env"
+      ".DS_Store"
+      ".devbox/"
+      "node_modules/"
+      "vendor/"
+      "*.log"
+      "*.swp"
+      "*.aux"
+      "*.out"
+    ];
   };
 }

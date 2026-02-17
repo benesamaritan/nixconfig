@@ -50,7 +50,7 @@
     initExtra = ''
       eval "$(atuin init bash)"
       eval "$(starship init bash)"
-      eval "$(h --setup [code-root])"
+      eval "$(h --setup ~/repo)"
       eval "$(hub alias -s)"
     '';
   };

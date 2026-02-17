@@ -62,8 +62,6 @@
     blesh.enable = true;
     undistractMe.enable = true;
   };
-
-  programs.autojump.enable = true;
  
   programs.direnv = {
     enable = true;

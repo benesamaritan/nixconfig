@@ -2,7 +2,7 @@
 
 let
   link = name: {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/code/github.com/benesamaritan/dotfiles/${name}";
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repo/github.com/benesamaritan/dotfiles/${name}";
   };
 in
 

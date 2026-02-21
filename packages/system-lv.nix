@@ -16,6 +16,13 @@
   };
   
   environment.systemPackages = with pkgs; [
+    # Nix
+    manix                    # search nix options
+    nh                       # search pkgs, alias (for nixos, home-manager, and garbage collect)
+    nix-tree                 # dependencies tree on nix store
+    nixdoc                   # look up Nix func    
+
+    # Tools
     wget
     curl
     aria2
@@ -25,14 +32,13 @@
     nix-health
     papirus-icon-theme
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    # agenix-cli
-
-    # Nix CLI Tools
-    manix                    # search nix options
-    nh                       # search pkgs, alias (for nixos, home-manager, and garbage collect)
-    nix-tree                 # dependencies tree on nix store
-    nixdoc                   # look up Nix func    
+    gparted-full
   ];
+
+  programs.partition-manager.enable = true;
+  programs.command-not-found.enable = true;
+  programs.gnupg.agent.enable = true;
+  security.polkit.enable = true;
 
 	programs.appimage = {
 	  enable = true;

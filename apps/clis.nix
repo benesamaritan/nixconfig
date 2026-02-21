@@ -51,7 +51,7 @@
       eval "$(atuin init bash)"
       eval "$(starship init bash)"
       eval "$(h --setup ~/repo)"
-      eval "$(hub alias -s)"
+      eval "$(devbox global shellenv --init-hook)"
     '';
   };
 

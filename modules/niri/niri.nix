@@ -5,6 +5,7 @@
     enable = true;
     package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri;
   };
+
   programs.xwayland.enable = true;
 
   environment.systemPackages = with pkgs; [

@@ -3,18 +3,11 @@
 {
   home.packages = with pkgs; [
     thunderbird
-    keepassxc
     logseq
     trilium-desktop
-    # gnome-feeds
-    # kdePackages.alligator
-    # kdePackages.akregator
-    rssguard     # rss reader
+    # rssguard     # rss reader
     easyeffects
     haruna
-    quick-webapps
-    # vlc    
+    # quick-webapps
   ];
-
-  programs.zen-browser.enable = true;
 }

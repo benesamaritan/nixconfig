@@ -21,6 +21,10 @@
       url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dms-plugin-registry = {
+      url = "github:AvengeMedia/dms-plugin-registry";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     wooz.url = "github:negrel/wooz";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";

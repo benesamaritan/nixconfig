@@ -1,6 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {	
+  imports = [
+    inputs.dms-plugin-registry.modules.default
+  ];
+
   programs.dms-shell = {
     enable = true;
     systemd = {
@@ -11,30 +15,28 @@
     enableSystemMonitoring = true;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
+    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
-    plugins =
-    let
-      dmsPlugins = pkgs.fetchFromGitHub {
-        owner = "AvengeMedia";
-        repo = "dms-plugins";
-        rev = "8fa7c52";
-        hash = "sha256-0RXRgUXXoX+C0q+drsShjx2rCTdmqFzOCR/1rGB/W2E=";
-      };
-    in
-    {
-      DankPomodoro = {
-        enable = true;
-        src = "${dmsPlugins}/DankPomodoro";
-      };
-      DankNiriWindows = {
-        enable = true;
-        src = pkgs.fetchFromGitHub {
-          owner = "rochacbruno";
-          repo = "DankNiriWindows";
-          rev = "b845277";
-          hash = "sha256-rdZAnkRyfycI2a2wjSiepQwRI49zKbwoRzpz1+c6ZJA=";
-        };
-      };
+    plugins = {
+      dankPomodoroTimer.enable = true;
+      dankKDEConnect.enable = true;
+      niriWindows.enable = true;
+      calculator.enable = true;
+      prayerTimes.enable = true;
+      sshConnections.enable = true;
+      dockerManager.enable = true;
+      nixMonitor.enable = true;
+      niriScreenshot.enable = true;
+      webSearch.enable = true;
+      commandRunner.enable = true;
+      dankBitwarden.enable = true;
+      animeCalendar.enable = true;
+      dankBatteryAlerts.enable = true;
+      dankLauncherKeys.enable = true;
+      dankClight.enable = true;
+      dankNotepadModule.enable = true;
+      displayMirror.enable = true;
     };
   };
 
@@ -47,6 +49,14 @@
       ExecStart = "${pkgs.wl-clipboard}/bin/wl-paste --watch ${pkgs.cliphist}/bin/cliphist store";
       Restart = "always";
       RestartSec = "3s";
+    };
+  };
+
+  programs.dsearch = {
+    enable = true;
+    systemd = {
+      enable = true;
+      target = "graphical-session.target";
     };
   };
 

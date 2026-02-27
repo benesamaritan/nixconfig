@@ -45,6 +45,11 @@
       auto-optimise-store = true;
       use-xdg-base-directories = true;
     };
+
+    extraOptions = ''
+      !include ${config.age.secrets.github-token.path}
+    '';
+
     gc = {
       automatic = true;
       dates = "weekly";
@@ -120,7 +125,7 @@
     isNormalUser = true;
     description = "${description}";
     extraGroups = groups;
-    hashedPasswordFile = config.age.secrets.hashedPassword.path;
+    hashedPasswordFile = config.age.secrets.master.path;
     shell = pkgs."${shell}";
   };
 

@@ -6,18 +6,18 @@
     indicator = true;
   };
 
-  systemd.user.services.keepassxc = {
-    Unit = {
-      Description = "KeePassXC Password Manager";
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.keepassxc}/bin/keepassxc --minimized";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-  };
+  # systemd.user.services.keepassxc = {
+  #   Unit = {
+  #     Description = "KeePassXC Password Manager";
+  #     After = [ "graphical-session.target" ];
+  #   };
+  #   Service = {
+  #     ExecStart = "${pkgs.keepassxc}/bin/keepassxc --minimized";
+  #   };
+  #   Install = {
+  #     WantedBy = [ "default.target" ];
+  #   };
+  # };
 
   systemd.user.services.thunderbird = {
     Unit = {

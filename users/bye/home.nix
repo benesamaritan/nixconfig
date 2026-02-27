@@ -10,12 +10,13 @@ in
   imports = [
     ../../apps
     ../../services
+    ../../profiles/dev
   ];
 
   programs.home-manager.enable = true;
 
   home = {
-    stateVersion = "24.05";
+    stateVersion = "25.11";
     username = "${username}";
     homeDirectory = "/home/${username}";
     shell.enableShellIntegration = true;

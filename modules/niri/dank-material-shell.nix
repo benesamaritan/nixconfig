@@ -1,8 +1,10 @@
 { pkgs, inputs, ... }:
 
 {	
-  imports = [
-    inputs.dms-plugin-registry.modules.default
+  imports = with inputs; [
+    dms.nixosModules.default
+    dms-plugin-registry.modules.default
+    nix-monitor.nixosModules.default
   ];
 
   programs.dms-shell = {
@@ -12,10 +14,10 @@
       restartIfChanged = true;
     };
     enableVPN = false;
+    enableCalendarEvents = false;
     enableSystemMonitoring = true;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
-    package = inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default;
     quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
 
     plugins = {
@@ -25,19 +27,39 @@
       calculator.enable = true;
       prayerTimes.enable = true;
       sshConnections.enable = true;
-      dockerManager.enable = true;
-      nixMonitor.enable = true;
-      niriScreenshot.enable = true;
       webSearch.enable = true;
       commandRunner.enable = true;
       dankBitwarden.enable = true;
-      animeCalendar.enable = true;
       dankBatteryAlerts.enable = true;
       dankLauncherKeys.enable = true;
-      dankClight.enable = true;
       dankNotepadModule.enable = true;
-      displayMirror.enable = true;
+      niriScreenshot.enable = false;
+      dockerManager.enable = false;
+      animeCalendar.enable = false;
+      displayMirror.enable = false;
+      dankClight.enable = false;
+      nixMonitor.enable = false;
     };
+  };
+
+  programs.nix-monitor = {
+    enable = false;
+    rebuildCommand = [ 
+      "bash" "-c" 
+      "cd ~/repo/github.com/benesamaritan/nixconfig && 
+       sudo nixos-rebuild switch --flake .#sol 2>&1 && 
+       home-manager switch --flake .#bye 2>&1"
+    ];
+    gcCommand = [ 
+      "bash" "-c" 
+      "sudo nix-collect-garbage -d 2>&1" 
+    ];
+    nixpkgsChannel = "nixos-25.11";  
+    updateInterval = 600;
+    remoteRevisionCommand = [
+      "${pkgs.bash}/bin/bash" "-l" "-c"
+      "${pkgs.curl}/bin/curl -s https://api.github.com/repos/NixOS/nixpkgs/git/ref/heads/nixos-unstable 2>/dev/null | ${pkgs.jq}/bin/jq -r '.object.sha' 2>/dev/null | cut -c 1-7 || echo 'N/A'"
+    ];
   };
 
   systemd.user.services.cliphist = {

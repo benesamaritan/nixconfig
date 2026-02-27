@@ -5,23 +5,8 @@
   catppuccin = {
     flavor = "mocha";
     accent = "pink";
-
-    cache.enable        = true;
-    cursors.enable      = true;
-    atuin.enable        = true;
-    bat.enable          = true;
-    cava.enable         = true;
-    fzf.enable          = true;
-    eza.enable          = true;
-    chromium.enable     = true;
-    firefox.enable      = true;
-    mangohud.enable     = true;
-    obs.enable          = true;
-    lazygit.enable      = true;
-    swaylock.enable     = true;
-    swaylock.flavor     = "mocha";
-    thunderbird.enable  = true;
-    # zellij.enable       = true;
+    enable = true;
+    gtk.icon.enable = false;
   };
 
   home.activation.installSteamSkin = lib.hm.dag.entryAfter ["writeBoundary"] ''

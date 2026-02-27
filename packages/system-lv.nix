@@ -15,6 +15,7 @@
     };
   };
   
+  environment.pathsToLink = [ "/share/bash-completion" ];
   environment.systemPackages = with pkgs; [
     # Nix
     manix                    # search nix options

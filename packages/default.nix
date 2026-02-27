@@ -2,10 +2,9 @@
 
 {
 	imports = [		
-      ./devenv.nix
-      #./flatpak.nix
+      # ./devenv.nix
       ./kanata.nix
-      ./kanshi.nix
+      # ./kanshi.nix
       #./wlr-randr.nix
       ./syncthing.nix
       ./system-lv.nix

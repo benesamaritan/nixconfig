@@ -13,7 +13,6 @@
     # hx-lsp
     lynx                    # Web Browser for your terminal
     browsh                  # Web Browser for terminal (using headless firefox)
-    bitwarden-cli
     yazi                    # File Manager for your terminal
     fastfetch               # unixporn SS masterace
 
@@ -50,8 +49,6 @@
     initExtra = ''
       eval "$(atuin init bash)"
       eval "$(starship init bash)"
-      eval "$(h --setup ~/repo)"
-      eval "$(devbox global shellenv --init-hook)"
     '';
   };
 

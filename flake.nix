@@ -3,16 +3,21 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    agenix.url = "github:ryantm/agenix";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    agenix.url = "github:ryantm/agenix";
+    devenv.url = "github:cachix/devenv";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    systems.url = "github:nix-systems/default";
+
     niri = {
       url = "github:niri-wm/niri";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nsticky.url = "github:lonerOrz/nsticky";
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,14 +30,22 @@
       url = "github:AvengeMedia/dms-plugin-registry";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-monitor.url = "github:antonjah/nix-monitor";
+    nsticky.url = "github:lonerOrz/nsticky";
+
     wooz.url = "github:negrel/wooz";
+    catppuccin.url = "github:catppuccin/nix";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    catppuccin.url = "github:catppuccin/nix";
   };
+
+    nixConfig = {
+      extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
+      extra-substituters = "https://devenv.cachix.org";
+    };
 
   outputs =
   inputs@{
@@ -44,13 +57,7 @@
 
   let
     lib = nixpkgs.lib;
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
 
-    # Helper function for NixOS system configuration
     mkSystem = { hostname, username }: 
       let
         hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
@@ -65,14 +72,12 @@
         };
         specialArgs = { inherit inputs; } // vars;
         modules = [
+          ./hosts/${hostname}/configuration.nix
           inputs.agenix.nixosModules.default
           inputs.catppuccin.nixosModules.catppuccin
-          inputs.dms.nixosModules.default
-          ./hosts/${hostname}/configuration.nix
         ];
       };
 
-    # Helper function for Home Manager configuration
     mkHome = { hostname, username }:
       let
         hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
@@ -86,88 +91,116 @@
         };
         extraSpecialArgs = { inherit inputs; } // vars;
         modules = [
+          ./users/${username}/home.nix
           inputs.catppuccin.homeModules.catppuccin
           inputs.zen-browser.homeModules.twilight
-          ./users/${username}/home.nix
+          # inputs.devenv.homeManagerModules.devenv
+          # inputs.treefmt-nix.homeManagerModules.treefmt
         ];
       };
   in
 
   {
-    # NixOS modules provided by this flake
     nixosModules = {
       system = import ./modules;
       packages = import ./packages;
     };
 
-    # Home Manager modules provided by this flake
     homeManagerModules = {
       user = import ./users/bye/home.nix;
     };
 
-    # NixOS system configurations
     nixosConfigurations = {
       sol = mkSystem { hostname = "sol"; username = "bye"; };
     };
 
-    # Home Manager configurations
     homeConfigurations = {
       "bye" = mkHome { hostname = "sol"; username = "bye"; };
     };
 
-    # Custom packages / bundles provided by this flake
-    packages.${system} = {
-      # The full system derivation
-      system = self.nixosConfigurations.sol.config.system.build.toplevel;
-
-      # Bundled package categories for visibility/testing
-      gaming = pkgs.buildEnv {
-        name = "gaming-packages";
-        paths = [
-          pkgs.wineWow64Packages.wayland
-          pkgs.lutris
-          pkgs.heroic
-          pkgs.protonup-qt
+    devenvModules = {
+      base = { pkgs, ... }: {
+        packages = with pkgs; [
+          jq
+          k6
+          curlie
+          tokei
+          glow
         ];
       };
 
-      clis = pkgs.buildEnv {
-        name = "cli-packages";
-        paths = with pkgs; [
-          starship helix yazi fastfetch tealdeer television
-          disktui ncdu lazyjournal navi ttyper pipes-rs cmatrix
-          discordo gophertube atuin fd bat ripgrep gh fzf eza zoxide
+      nix = { pkgs, ... }: {
+        languages.nix.enable = true;
+        packages = with pkgs; [
+          nixd
+          statix
+          deadnix
+        ];
+        git-hooks.hooks.nixpkgs-fmt.enable = true;
+      };
+
+      go = { pkgs, ... }: {
+        languages.go.enable = true;
+        packages = with pkgs; [
+          gopls
+          golangci-lint
+        ];
+        git-hooks.hooks.gofmt.enable = true;
+      };
+
+      php = { pkgs, ... }: {
+        languages.php.enable = true;
+        packages = with pkgs; [
+          phpactor
+          php83Packages.php-cs-fixer
         ];
       };
 
-      guis = pkgs.buildEnv {
-        name = "gui-packages";
-        paths = with pkgs; [
-          thunderbird keepassxc zed-editor logseq rssguard
-          easyeffects haruna quick-webapps
+      js = { pkgs, ... }: {
+        languages = {
+          javascript = {
+            enable = true;
+            package = pkgs.nodejs-slim_22;
+            npm.enable = false; 
+            bun.enable = true;
+          };
+          typescript.enable = true;
+        };
+        packages = with pkgs; [
+          nodePackages.npm 
+          typescript-language-server
+          tailwindcss-language-server
+          vscode-langservers-extracted
         ];
       };
 
-      office = pkgs.buildEnv {
-        name = "office-packages";
-        paths = with pkgs; [
-          libreoffice-fresh
-          hunspell
-          hunspellDicts.en_US
-          hunspellDicts.id_ID
-        ];
+      default = { ... }: {
+        imports = with self.devenvModules; [ base nix go php js ];
       };
-
-      teaching = pkgs.buildEnv {
-        name = "teaching-packages";
-        paths = with pkgs; [
-          # Add teaching related packages here from apps/teaching.nix if available
-          obs-studio
-          zoom-us
-        ];
-      };
-
-      default = self.packages.${system}.clis;
     };
+
+    devShells.x86_64-linux.default = 
+      let
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      in inputs.devenv.lib.mkShell {
+        inherit pkgs inputs;
+        modules = [
+          self.devenvModules.default
+          ({ lib, ... }: {
+            devenv.root = let
+              root = ./.;
+            in if lib.hasPrefix "/nix/store" (toString root) then "/tmp" else toString root;
+
+            git-hooks.enable = true;
+
+            enterShell = ''
+              echo "Welcome to development environment, good luck!"
+            '';
+          })
+        ];
+      };
   };
 }

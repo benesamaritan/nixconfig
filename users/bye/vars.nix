@@ -1,13 +1,4 @@
-{
-  # nixpkgs ? null,
-  # config,
-  # pkgs,
-  ...
-}:
-
-let
-
-in
+{...}:
 
 {
   username = "bye";

@@ -25,7 +25,6 @@
 
   environment.pathsToLink = [ "/share/bash-completion" ];
   programs.partition-manager.enable = true;
-  programs.command-not-found.enable = true;
   programs.gnupg.agent.enable = true;
   security.polkit.enable = true;
 

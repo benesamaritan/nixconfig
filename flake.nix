@@ -13,6 +13,10 @@
     devenv.url = "github:cachix/devenv";
     treefmt-nix.url = "github:numtide/treefmt-nix";
     systems.url = "github:nix-systems/default";
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     niri = {
       url = "github:niri-wm/niri";
@@ -83,10 +87,12 @@
             inherit inputs;
           }
           // vars;
-          modules = [
+          modules = with inputs; [
             ./hosts/${hostname}/configuration.nix
-            inputs.agenix.nixosModules.default
-            inputs.catppuccin.nixosModules.catppuccin
+            agenix.nixosModules.default
+            catppuccin.nixosModules.catppuccin
+            nix-index-database.nixosModules.default
+            # { programs.nix-index-database.comma.enable = true; }
           ];
         };
 
@@ -107,12 +113,10 @@
             inherit inputs;
           }
           // vars;
-          modules = [
+          modules = with inputs;[
             ./users/${username}/home.nix
-            inputs.catppuccin.homeModules.catppuccin
-            inputs.zen-browser.homeModules.twilight
-            # inputs.devenv.homeManagerModules.devenv
-            # inputs.treefmt-nix.homeManagerModules.treefmt
+            catppuccin.homeModules.catppuccin
+            zen-browser.homeModules.twilight
           ];
         };
     in

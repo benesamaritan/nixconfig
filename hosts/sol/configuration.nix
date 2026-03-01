@@ -88,27 +88,10 @@
     };
   };
 
-  security.rtkit.enable = true;
-
   services = {
     libinput.enable = true;
     pulseaudio.enable = false;
-    pipewire = {
-      enable = true;
-      pulse.enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      wireplumber.enable = true;
-      jack.enable = false;
-      extraConfig.pipewire."92-low-latency" = {
-        "context.properties" = {
-          "default.clock.rate" = 48000;
-          "default.clock.quantum" = 64;
-          "default.clock.min-quantum" = 32;
-          "default.clock.max-quantum" = 128;
-        };
-      };
-    };
+    pipewire.enable = true;
     xserver.xkb = {
       layout = "${xkb.layout}";
       variant = "${xkb.variant}";

@@ -1,23 +1,22 @@
-{ config, pkgs, username, ... }:
-
-let
-  retroarch-custom = pkgs.writeShellScriptBin "retroarch" ''
-    mkdir -p $HOME/.config/retroarch/{cores,info,assets,system,playlists}
-    exec ${pkgs.retroarch}/bin/retroarch \
-      --set video_driver=vulkan \
-      --set libretro_directory=$HOME/.config/retroarch/cores \
-      --set libretro_info_path=$HOME/.config/retroarch/info \
-      --set assets_directory=$HOME/.config/retroarch/assets \
-      --set system_directory=$HOME/.config/retroarch/system \
-      "$@"
-  '';
-in
+{
+  lib,
+  pkgs,
+  username,
+  inputs,
+  ...
+}:
 
 {
+  imports = [
+    inputs.nix-gaming.nixosModules.wine
+    inputs.nix-gaming.nixosModules.platformOptimizations
+    inputs.nix-gaming.nixosModules.pipewireLowLatency
+  ];
+
   boot = {
     kernel.sysctl = {
-      "vm.swappiness" = 10;
-      "vm.max_map_count" = 2147483642;
+      "vm.swappiness" = lib.mkDefault 10;
+      "vm.max_map_count" = lib.mkDefault 2147483642;
     };
   };
 
@@ -31,7 +30,7 @@ in
   programs.gamescope.enable = true;
   programs.gamemode = {
     enable = true;
-    enableRenice = true; 
+    enableRenice = true;
     settings = {
       general = {
         softrealtime = "auto";
@@ -54,34 +53,48 @@ in
     dedicatedServer.openFirewall = false;
     protontricks.enable = true;
     extraCompatPackages = [ pkgs.proton-ge-bin ];
+    platformOptimizations.enable = true;
   };
 
+  services.pipewire = {
+    enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    wireplumber.enable = true;
+    jack.enable = false;
+    lowLatency = {
+      enable = true;
+      quantum = 64;
+      rate = 48000;
+    };
+  };
+  security.rtkit.enable = true;
+
   environment.systemPackages = with pkgs; [
-    #wineWowPackages.stable
-    wineWow64Packages.wayland
     dotnet-sdk
-    # winetricks
-    # protontricks
-    # mangohud
+    winetricks
+    protontricks
+    # mangohud          # failed to build meson and source 1st march 2026
     lutris # be sure to disable lutris runtime
     heroic
     protonup-qt
+    inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-lazer-bin
     # (retroarch.withCores (cores: with libretro; [
-      #snes9x
-      #desmume
-      #bsnes
-      #genesis-plus-gx
-      #flycast
-      #dolphin
-      #mgba
-      #mupen64plus
-      # parallel-n64
-      # pcsx-rearmed
-      # pcsx2
-      # ppsspp
-      #sameboy
-      #beetle-gba
-      #same-cdi
+    #   parallel-n64
+    #   pcsx-rearmed
+    #   # pcsx2
+    #   ppsspp
+    #   snes9x
+    #   desmume
+    #   # bsnes
+    #   # genesis-plus-gx
+    #   # flycast
+    #   # dolphin
+    #   # mgba
+    #   # sameboy
+    #   # beetle-gba
+    #   # same-cdi
     # ]))
   ];
 }

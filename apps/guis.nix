@@ -10,7 +10,6 @@
     mangayomi
     # rssguard     # rss reader
     easyeffects
-    haruna
     # quick-webapps
   ];
 }

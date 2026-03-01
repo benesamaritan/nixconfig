@@ -1,24 +1,27 @@
-{ lib, pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 let
   files = builtins.attrNames (builtins.readDir ./.);
   imports' = builtins.filter (
-    f: f != "default.nix" && 
-    lib.hasSuffix ".nix" f && 
-    f != "go.nix" && 
-    f != "js.nix" && 
-    f != "php.nix" && 
-    f != "nix.nix"
-  )files;
+    f:
+    f != "default.nix"
+    && lib.hasSuffix ".nix" f
+    && f != "go.nix"
+    && f != "js.nix"
+    && f != "php.nix"
+    && f != "nix.nix"
+  ) files;
 in
 
 {
   imports = map (f: ./. + "/${f}") imports';
 
   home.packages = with pkgs; [
-    inputs.devenv.packages.${pkgs.stdenv.hostPlatform.system}.default
-    # inputs.treefmt-nix.packages.${pkgs.stdenv.hostPlatform.system}.default
-    cachix
     (blesh.overrideAttrs {
       version = "nightly-20251019+2f564e6";
       src = fetchzip {
@@ -27,21 +30,31 @@ in
       };
     })
   ];
-
-  programs.bash = {
-    enable = true;
-    enableCompletion = true;
-    initExtra = ''
-      source "$(blesh-share)/ble.sh"
-      eval "$(h --setup ~/repo)"
-      eval "$(devbox global shellenv --init-hook)"
-    '';
+  home.sessionPath = [
+    "$HOME/.local/share/bun/bin"
+  ];
+  home.shellAliases = {
+    x = "hx .";
+    yz = "yazi";
+    lzg = "lazygit";
+    lzd = "lazydocker";
+    lzs = "lazysql";
+    lzn = "lazynpm";
+    lzw = "lazyworktree";
+    lzj = "lazyjournal";
+    gem = "gemini";
+    oc = "opencode";
+    dp = "dolphin .";
+    dx = "devbox";
+    dv = "devenv";
   };
-
-  programs.direnv = {
-    enable = true;
-    silent = true;
-    nix-direnv.enable = true;
-    enableBashIntegration = true;
+  home.sessionVariables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+    MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+    MANROFFOPT = "-c";
+    XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";
+    CARGO_HOME = "$HOME/.local/share/cargo";
+    BUN_INSTALL = "$HOME/.local/share/bun";
   };
 }

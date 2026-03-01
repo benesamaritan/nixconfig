@@ -1,4 +1,9 @@
-{ config, username, git, ... }:
+{
+  config,
+  username,
+  git,
+  ...
+}:
 
 let
   link = name: {
@@ -16,57 +21,49 @@ in
   programs.home-manager.enable = true;
 
   home = {
-    stateVersion = "25.11";
+    stateVersion = "25.05";
     username = "${username}";
     homeDirectory = "/home/${username}";
     shell.enableShellIntegration = true;
-    sessionPath = [
-      "$HOME/.local/share/bun/bin"
-    ];
     shellAliases = {
-      ".."       = "cd ..";
-      cd         = "z";
-      cat        = "bat";
-      ls         = "eza --icons";
-      ll         = "eza -l --icons --git -a";
-      lt         = "eza --tree --level=2 --icons";
-      cls        = "clear";
-      stat       = "git status";
-      add        = "git add --all";
-      commit     = "git commit -am";
-      clone      = "git clone";
-      fetch      = "git fetch";
-      pull       = "git pull";
-      push       = "git push";
-      pushnew    = "git push --set-upstream";
-      checkout   = "git checkout";
-      newbranch  = "git checkout -b";
-      list       = "git branch -l";
-      remoteadd  = "git remote add";
-      remoteget  = "git remote get-url";
+      ".." = "cd ..";
+      cd = "z";
+      cat = "bat";
+      ls = "eza --icons";
+      ll = "eza -l --icons --git -a";
+      lt = "eza --tree --level=2 --icons";
+      cls = "clear";
+      g = "git";
+      gi = "git init";
+      gs = "git status";
+      ga = "git add .";
+      gc = "git commit -m";
+      gp = "git push --set-upstream";
+      gf = "git fetch && git pull --rebase";
+      gcl = "git clone";
+      gb = "git branch";
+      gco = "git checkout";
+      gu = "git submodule update --init --recursive";
+      ff = "fastfetch";
+      ns = "nh search";
+      nos = "nh os switch .";
+      nhs = "nh home switch .";
     };
     sessionVariables = {
-      EDITOR = "hx";
-      VISUAL = "hx";
       TERMINAL = "wezterm";
       BROWSER = "zen";
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
-      MANROFFOPT = "-c";
-      XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";
-      CARGO_HOME = "$HOME/.local/share/cargo";
-      BUN_INSTALL = "$HOME/.local/share/bun";
     };
   };
 
   xdg.configFile = {
-    "niri"                = link "niri";
-    "DankMaterialShell"   = link "DankMaterialShell";
-    "wezterm"             = link "wezterm";
-    "kanshi"              = link "kanshi";
-    "kanata"              = link "kanata";
-    "helix"               = link "helix";
-    "starship.toml"       = link "starship.toml";
-    "fastfetch"           = link "fastfetch";
+    "niri" = link "niri";
+    "DankMaterialShell" = link "DankMaterialShell";
+    "wezterm" = link "wezterm";
+    "kanshi" = link "kanshi";
+    "kanata" = link "kanata";
+    "helix" = link "helix";
+    "starship.toml" = link "starship.toml";
+    "fastfetch" = link "fastfetch";
   };
 
   programs.git = {

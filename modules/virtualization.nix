@@ -1,4 +1,10 @@
-{ config, pkgs, lib, username, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  username,
+  ...
+}:
 
 let
   dockerEnabled = config.virtualisation.docker.enable;
@@ -14,21 +20,16 @@ in
 
     podman = {
       enable = false;
-      dockerCompat = true; 
+      dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
       autoPrune.enable = true; # Cleanup unused images weekly
     };
 
     libvirtd = {
       enable = true;
-      package = pkgs.libvirt;
       qemu = {
-        package = pkgs.qemu;
-        swtpm = {
-          enable = false;
-          package = pkgs.swtpm;
-        };
-        runAsRoot = false; 
+        swtpm.enable = false;
+        runAsRoot = false;
       };
       onBoot = "ignore";
       onShutdown = "shutdown";
@@ -36,28 +37,33 @@ in
     spiceUSBRedirection.enable = true;
   };
 
-  boot.kernelModules = lib.optionals (dockerEnabled || podmanEnabled) [ 
-    "iptable_nat" 
+  boot.kernelModules = lib.optionals (dockerEnabled || podmanEnabled) [
+    "iptable_nat"
     "tun"
   ];
 
   services.spice-vdagentd.enable = true;
   programs.virt-manager.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    freerdp
-  ] ++ lib.optionals (dockerEnabled || podmanEnabled) [
-    winboat
-    iptables
-    nftables
-  ] ++ lib.optionals dockerEnabled [
-    docker-compose
-    lazydocker
-  ] ++ lib.optionals podmanEnabled [
-    podman-compose
-  ];
-  
-  users.users.${username}.extraGroups = 
+  environment.systemPackages =
+    with pkgs;
+    [
+      freerdp
+    ]
+    ++ lib.optionals (dockerEnabled || podmanEnabled) [
+      winboat
+      iptables
+      nftables
+    ]
+    ++ lib.optionals dockerEnabled [
+      docker-compose
+      lazydocker
+    ]
+    ++ lib.optionals podmanEnabled [
+      podman-compose
+    ];
+
+  users.users.${username}.extraGroups =
     lib.optionals dockerEnabled [ "docker" ]
     ++ lib.optionals podmanEnabled [ "podman" ]
     ++ lib.optionals libvirtdEnabled [ "libvirtd" ];

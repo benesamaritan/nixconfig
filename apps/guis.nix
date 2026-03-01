@@ -7,7 +7,7 @@
     trilium-desktop
     bitwarden-desktop
     komikku
-    oneanime
+    mangayomi
     # rssguard     # rss reader
     easyeffects
     haruna

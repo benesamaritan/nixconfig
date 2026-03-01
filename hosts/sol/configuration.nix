@@ -1,5 +1,4 @@
 {
-  # config,
   pkgs,
   config,
   username,
@@ -8,9 +7,7 @@
   defaultLocale,
   extraLocale,
   xkb,
-  inputs,
   description,
-  hashPasswd,
   groups,
   shell,
   ...
@@ -21,7 +18,6 @@
     ./hardware-configuration.nix
     ../../modules
     ../../packages
-    # ./vars
   ];
 
   boot = {
@@ -38,9 +34,9 @@
         "nix-command"
         "flakes"
       ];
-      trusted-users = [ 
-        "root" 
-        "${username}" 
+      trusted-users = [
+        "root"
+        "${username}"
       ];
       auto-optimise-store = true;
       use-xdg-base-directories = true;
@@ -60,7 +56,6 @@
   time.timeZone = "${timezone}";
 
   networking = {
-    # wireless.enable = false;
     networkmanager = {
       enable = true;
       wifi.backend = "wpa_supplicant";
@@ -127,6 +122,11 @@
     extraGroups = groups;
     hashedPasswordFile = config.age.secrets.master.path;
     shell = pkgs."${shell}";
+  };
+
+  programs.git = {
+    enable = true;
+    config.init.defaultBranch = "main";
   };
 
   system.stateVersion = "25.05";

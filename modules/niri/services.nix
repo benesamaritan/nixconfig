@@ -1,6 +1,15 @@
-{ ... }:
+{
+  username,
+  ...
+}:
 
-{	
+{
+  services.displayManager.sddm.enable = false;
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "niri";
+    configHome = "/home/${username}";
+  };
   services.upower.enable = true;
   services.logind.settings.Login = {
     HandleLidSwitch = "Hibernate";

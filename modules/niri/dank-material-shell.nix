@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 
-{	
+{
   imports = with inputs; [
     dms.nixosModules.default
     dms-plugin-registry.modules.default
@@ -44,20 +44,24 @@
 
   programs.nix-monitor = {
     enable = false;
-    rebuildCommand = [ 
-      "bash" "-c" 
+    rebuildCommand = [
+      "bash"
+      "-c"
       "cd ~/repo/github.com/benesamaritan/nixconfig && 
        sudo nixos-rebuild switch --flake .#sol 2>&1 && 
        home-manager switch --flake .#bye 2>&1"
     ];
-    gcCommand = [ 
-      "bash" "-c" 
-      "sudo nix-collect-garbage -d 2>&1" 
+    gcCommand = [
+      "bash"
+      "-c"
+      "sudo nix-collect-garbage -d 2>&1"
     ];
-    nixpkgsChannel = "nixos-25.11";  
+    nixpkgsChannel = "nixos-25.11";
     updateInterval = 600;
     remoteRevisionCommand = [
-      "${pkgs.bash}/bin/bash" "-l" "-c"
+      "${pkgs.bash}/bin/bash"
+      "-l"
+      "-c"
       "${pkgs.curl}/bin/curl -s https://api.github.com/repos/NixOS/nixpkgs/git/ref/heads/nixos-unstable 2>/dev/null | ${pkgs.jq}/bin/jq -r '.object.sha' 2>/dev/null | cut -c 1-7 || echo 'N/A'"
     ];
   };

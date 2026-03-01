@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-{	
+{
   services.kdeconnect = {
     enable = true;
     indicator = true;
@@ -31,7 +31,7 @@
     Install = {
       WantedBy = [ "default.target" ];
     };
-  };   
+  };
 
   systemd.user.services.easyeffects = {
     Unit = {
@@ -46,5 +46,5 @@
     Install = {
       WantedBy = [ "default.target" ];
     };
-  };   
+  };
 }

@@ -40,167 +40,214 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+    nix-gaming.url = "github:fufexan/nix-gaming";
   };
 
-    nixConfig = {
-      extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-      extra-substituters = "https://devenv.cachix.org";
-    };
+  nixConfig = {
+    substituters = [
+      "https://devenv.cachix.org"
+      "https://nix-gaming.cachix.org"
+    ];
+    trusted-public-keys = [
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+    ];
+  };
 
   outputs =
-  inputs@{
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }:
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
 
-  let
-    lib = nixpkgs.lib;
+    let
+      lib = nixpkgs.lib;
 
-    mkSystem = { hostname, username }: 
-      let
-        hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
-        userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
-        vars = hostVars // userVars;
-        system = vars.system or "x86_64-linux";
-      in lib.nixosSystem {
-        inherit system;
-        pkgs = import nixpkgs {
+      mkSystem =
+        { hostname, username }:
+        let
+          hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
+          userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
+          vars = hostVars // userVars;
+          system = vars.system or "x86_64-linux";
+        in
+        lib.nixosSystem {
           inherit system;
-          config.allowUnfree = true;
-        };
-        specialArgs = { inherit inputs; } // vars;
-        modules = [
-          ./hosts/${hostname}/configuration.nix
-          inputs.agenix.nixosModules.default
-          inputs.catppuccin.nixosModules.catppuccin
-        ];
-      };
-
-    mkHome = { hostname, username }:
-      let
-        hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
-        userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
-        vars = hostVars // userVars;
-        system = vars.system or "x86_64-linux";
-      in home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-        extraSpecialArgs = { inherit inputs; } // vars;
-        modules = [
-          ./users/${username}/home.nix
-          inputs.catppuccin.homeModules.catppuccin
-          inputs.zen-browser.homeModules.twilight
-          # inputs.devenv.homeManagerModules.devenv
-          # inputs.treefmt-nix.homeManagerModules.treefmt
-        ];
-      };
-  in
-
-  {
-    nixosModules = {
-      system = import ./modules;
-      packages = import ./packages;
-    };
-
-    homeManagerModules = {
-      user = import ./users/bye/home.nix;
-    };
-
-    nixosConfigurations = {
-      sol = mkSystem { hostname = "sol"; username = "bye"; };
-    };
-
-    homeConfigurations = {
-      "bye" = mkHome { hostname = "sol"; username = "bye"; };
-    };
-
-    devenvModules = {
-      base = { pkgs, ... }: {
-        packages = with pkgs; [
-          jq
-          k6
-          curlie
-          tokei
-          glow
-        ];
-      };
-
-      nix = { pkgs, ... }: {
-        languages.nix.enable = true;
-        packages = with pkgs; [
-          nixd
-          statix
-          deadnix
-        ];
-        git-hooks.hooks.nixpkgs-fmt.enable = true;
-      };
-
-      go = { pkgs, ... }: {
-        languages.go.enable = true;
-        packages = with pkgs; [
-          gopls
-          golangci-lint
-        ];
-        git-hooks.hooks.gofmt.enable = true;
-      };
-
-      php = { pkgs, ... }: {
-        languages.php.enable = true;
-        packages = with pkgs; [
-          phpactor
-          php83Packages.php-cs-fixer
-        ];
-      };
-
-      js = { pkgs, ... }: {
-        languages = {
-          javascript = {
-            enable = true;
-            package = pkgs.nodejs-slim_22;
-            npm.enable = false; 
-            bun.enable = true;
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
           };
-          typescript.enable = true;
+          specialArgs = {
+            inherit inputs;
+          }
+          // vars;
+          modules = [
+            ./hosts/${hostname}/configuration.nix
+            inputs.agenix.nixosModules.default
+            inputs.catppuccin.nixosModules.catppuccin
+          ];
         };
-        packages = with pkgs; [
-          nodePackages.npm 
-          typescript-language-server
-          tailwindcss-language-server
-          vscode-langservers-extracted
-        ];
+
+      mkHome =
+        { hostname, username }:
+        let
+          hostVars = import ./hosts/${hostname}/vars.nix { inherit nixpkgs; };
+          userVars = import ./users/${username}/vars.nix { inherit nixpkgs; };
+          vars = hostVars // userVars;
+          system = vars.system or "x86_64-linux";
+        in
+        home-manager.lib.homeManagerConfiguration {
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          extraSpecialArgs = {
+            inherit inputs;
+          }
+          // vars;
+          modules = [
+            ./users/${username}/home.nix
+            inputs.catppuccin.homeModules.catppuccin
+            inputs.zen-browser.homeModules.twilight
+            # inputs.devenv.homeManagerModules.devenv
+            # inputs.treefmt-nix.homeManagerModules.treefmt
+          ];
+        };
+    in
+
+    {
+      nixosModules = {
+        system = import ./modules;
+        packages = import ./packages;
       };
 
-      default = { ... }: {
-        imports = with self.devenvModules; [ base nix go php js ];
+      homeManagerModules = {
+        user = import ./users/bye/home.nix;
       };
+
+      nixosConfigurations = {
+        sol = mkSystem {
+          hostname = "sol";
+          username = "bye";
+        };
+      };
+
+      homeConfigurations = {
+        "bye" = mkHome {
+          hostname = "sol";
+          username = "bye";
+        };
+      };
+
+      devenvModules = {
+        base =
+          { pkgs, ... }:
+          {
+            packages = with pkgs; [
+              jq
+              k6
+              curlie
+              tokei
+              glow
+            ];
+          };
+
+        nix =
+          { pkgs, ... }:
+          {
+            languages.nix.enable = true;
+            packages = with pkgs; [
+              nixd
+              statix
+              deadnix
+            ];
+            git-hooks.hooks.nixpkgs-fmt.enable = true;
+          };
+
+        go =
+          { pkgs, ... }:
+          {
+            languages.go.enable = true;
+            packages = with pkgs; [
+              gopls
+              golangci-lint
+            ];
+            git-hooks.hooks.gofmt.enable = true;
+          };
+
+        php =
+          { pkgs, ... }:
+          {
+            languages.php.enable = true;
+            packages = with pkgs; [
+              phpactor
+              php83Packages.php-cs-fixer
+            ];
+          };
+
+        js =
+          { pkgs, ... }:
+          {
+            languages = {
+              javascript = {
+                enable = true;
+                package = pkgs.nodejs-slim_22;
+                npm.enable = false;
+                bun.enable = true;
+              };
+              typescript.enable = true;
+            };
+            packages = with pkgs; [
+              nodePackages.npm
+              typescript-language-server
+              tailwindcss-language-server
+              vscode-langservers-extracted
+            ];
+          };
+
+        default =
+          { ... }:
+          {
+            imports = with self.devenvModules; [
+              base
+              nix
+              go
+              php
+              js
+            ];
+          };
+      };
+
+      devShells.x86_64-linux.default =
+        let
+          pkgs = import nixpkgs {
+            system = "x86_64-linux";
+            config.allowUnfree = true;
+          };
+        in
+        inputs.devenv.lib.mkShell {
+          inherit pkgs inputs;
+          modules = [
+            self.devenvModules.default
+            (
+              { lib, ... }:
+              {
+                devenv.root =
+                  let
+                    root = ./.;
+                  in
+                  if lib.hasPrefix "/nix/store" (toString root) then "/tmp" else toString root;
+
+                git-hooks.enable = true;
+
+                enterShell = ''
+                  echo "Welcome to development environment, good luck!"
+                '';
+              }
+            )
+          ];
+        };
     };
-
-    devShells.x86_64-linux.default = 
-      let
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config.allowUnfree = true;
-        };
-      in inputs.devenv.lib.mkShell {
-        inherit pkgs inputs;
-        modules = [
-          self.devenvModules.default
-          ({ lib, ... }: {
-            devenv.root = let
-              root = ./.;
-            in if lib.hasPrefix "/nix/store" (toString root) then "/tmp" else toString root;
-
-            git-hooks.enable = true;
-
-            enterShell = ''
-              echo "Welcome to development environment, good luck!"
-            '';
-          })
-        ];
-      };
-  };
 }

@@ -1,11 +1,20 @@
-{ pkgs, lib, ... }:
 {
-  nix.package = pkgs.nix;
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+
+{
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
   catppuccin = {
+    enable = true;
     flavor = "mocha";
     accent = "pink";
-    enable = true;
+    enableReleaseCheck = true;
+    cache.enable = true;
+    cursors.enable = true;
     gtk.icon.enable = false;
   };
 

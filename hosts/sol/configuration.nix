@@ -17,7 +17,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules
-    ../../packages
   ];
 
   boot = {
@@ -40,6 +39,7 @@
       ];
       auto-optimise-store = true;
       use-xdg-base-directories = true;
+      keep-derivations = true;
     };
 
     extraOptions = ''
@@ -65,6 +65,7 @@
 
   hardware = {
     graphics.enable = true;
+
     enableAllFirmware = true;
     cpu.intel.updateMicrocode = true;
     bluetooth = {
@@ -91,6 +92,8 @@
   services = {
     libinput.enable = true;
     pulseaudio.enable = false;
+
+
     pipewire.enable = true;
     xserver.xkb = {
       layout = "${xkb.layout}";

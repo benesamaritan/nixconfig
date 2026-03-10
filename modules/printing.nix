@@ -1,12 +1,12 @@
 {
-  pkgs,
   ...
 }:
 
 {
+  services.printing.enable = false;
+
   services.samba = {
-    enable = true;
-    package = pkgs.sambaFull;
+    enable = false;
     openFirewall = true;
     settings = {
       global = {
@@ -17,7 +17,7 @@
       "printers" = {
         "comment" = "All Printers";
         "path" = "/var/spool/samba";
-        "public" = "yes";
+        "public" = "no";
         "browseable" = "yes";
         "guest ok" = "yes";
         "writable" = "no";
@@ -26,8 +26,6 @@
       };
     };
   };
-
-  services.printing.enable = true;
 
   systemd.tmpfiles.rules = [
     "d /var/spool/samba 1777 root root -"

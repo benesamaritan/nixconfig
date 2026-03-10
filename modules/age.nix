@@ -1,7 +1,15 @@
-{ ... }:
+{
+  config,
+  inputs,
+  ...
+}:
 
 {
-  age = {
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
+
+  config.age = {
     secrets.master.file = ./../secrets/master.age;
     secrets.github-token.file = ./../secrets/github-token.age;
     identityPaths = [

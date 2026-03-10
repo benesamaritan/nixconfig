@@ -3,7 +3,6 @@
 {
   programs.firefox.enable = true;
   programs.dconf.enable = true;
-  programs.kdeconnect.enable = true;
   environment.systemPackages = with pkgs; [
     # Nix
     manix # search nix options
@@ -24,24 +23,9 @@
   ];
 
   environment.pathsToLink = [ "/share/bash-completion" ];
-  programs.partition-manager.enable = true;
-  programs.gnupg.agent.enable = true;
-  security.polkit.enable = true;
 
   programs.appimage = {
     enable = true;
     binfmt = true;
-  };
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    }]; # This and
-    allowedUDPPortRanges = [{
-      from = 1714;
-      to = 1764;
-    }]; # |-this is for kdeconnect remote input
   };
 }

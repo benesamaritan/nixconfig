@@ -1,4 +1,10 @@
-{ lib, pkgs, inputs, username, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  username,
+  ...
+}:
 
 {
   programs.niri = {
@@ -10,20 +16,18 @@
 
   environment.systemPackages = with pkgs; [
     xwayland-satellite
-    gnome-keyring
-    udiskie
-    wl-clipboard
-    wl-screenrec
-    pavucontrol
-    grim
-    slurp
+    # gnome-keyring
+    # udiskie
+    # wl-clipboard
+    # wl-screenrec
+    # pavucontrol
+    # grim
+    # slurp
     kdePackages.dolphin
-    kdePackages.dolphin-plugins
-    kdePackages.kio
-    kdePackages.kio-extras
-    kdePackages.kio-extras-kf5
     kdePackages.ark
-    p7zip
+    qimgv
+    haruna
+    # p7zip
     zip
     unzip
     rar
@@ -32,12 +36,16 @@
     inputs.nsticky.packages.${pkgs.stdenv.hostPlatform.system}.nsticky
   ];
 
+  programs.partition-manager.enable = true;
+  programs.gnupg.agent.enable = true;
+  security.polkit.enable = true;
+
   environment = {
     sessionVariables = {
       QT_QPA_PLATFORM = "wayland";
       NIXOS_OZONE_WL = "1";
-      # QT_QPA_PLATFORMTHEME = "qt6ct";
-      # QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
+      QT_QPA_PLATFORMTHEME = "gtk3";
+      QT_QPA_PLATFORMTHEME_QT6 = "gtk3";
       XDG_CURRENT_DESKTOP = "niri";
       ELECTRON_OZONE_PLATFORM_HINT = "auto";
     };
@@ -48,37 +56,30 @@
 
   xdg.portal = {
     enable = true;
+    wlr.enable = true;
     extraPortals = with pkgs; [
-      kdePackages.xdg-desktop-portal-kde
+      xdg-desktop-portal
+      xdg-desktop-portal-termfilechooser
       # xdg-desktop-portal-gtk
       # xdg-desktop-portal-gnome
     ];
     config.common.default = "*";
-    wlr.enable = false;
   };
 
   programs.dconf = {
     enable = true;
-    profiles.${username}.databases = [
-      {
-        settings = {
-          "org/gnome/desktop/interface" = {
-            gtk-theme = "Breeze-Dark";
-            color-scheme = "prefer-dark";
-          };
+    profiles.${username}.databases = [{
+      settings = {
+        "org/gnome/desktop/interface" = {
+          gtk-theme = "Breeze-Dark";
+          color-scheme = "prefer-dark";
         };
-      }
-    ];
+      };
+    }];
   };
-
-  gtk.iconCache.enable = true;
 
   qt = {
     enable = true;
-    platformTheme = lib.mkDefault "qt5ct";
-  #   style = "adwaita-dark";
-  #   # style = {
-  #   #   package = pkgs.kdePackages.breeze;
-  #   # };
+    style = "breeze";
   };
 }

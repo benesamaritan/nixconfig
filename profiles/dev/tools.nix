@@ -6,29 +6,31 @@
 {
   home.packages = with pkgs; [
     bruno                    # API testing tool
-    # bruno-cli              # Bruno, but CLI
-    lazygit
     koji                     # Interactive CLI for conventional commit
-    lazyworktree             # TUI for Git worktree management
     tokei                    # Count LoC
     glow                     # Render MD on terminal
-    zed-editor
-    lazysql
     dbeaver-bin
+    helix
+    zed-editor
+
     marksman                 # Markdown LSP
     taplo                    # TOML, and Cross-Config LSP
     lua-language-server
-    tealdeer                 # Man Pages in a nutshell
-    television               # TUI for fzf
-    disktui                  # Disk utility
-    ncdu                     # Disk usage analyzer
+
+    yazi                     # File Manager for terminal
+    lazygit
+    lazysql
+    lazyworktree             # TUI for Git worktree management
     lazyjournal              # Journalctl TUI
     systemd-manager-tui      # Systemd manager
-    navi                     # Cheatsheets
-    ttyper
-    starship
-    helix
-    yazi                     # File Manager for terminal
+
+    (blesh.overrideAttrs {
+      version = "nightly-20251019+2f564e6";
+      src = fetchzip {
+        url = "https://github.com/akinomyoga/ble.sh/releases/download/nightly/ble-nightly-20251019+2f564e6.tar.xz";
+        sha256 = "sha256-fpNorzJcKs1vVhaYKgRz5vcs6jsEvdxe3N4F2L81Rc0=";
+      };
+    })
   ];
 
   programs.bash = {

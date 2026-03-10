@@ -13,9 +13,10 @@ in
 
 {
   imports = [
-    ../../apps
     ../../services
+    ../../profiles/personal
     ../../profiles/dev
+    ../../profiles/work
   ];
 
   programs.home-manager.enable = true;
@@ -27,23 +28,7 @@ in
     shell.enableShellIntegration = true;
     shellAliases = {
       ".." = "cd ..";
-      cd = "z";
-      cat = "bat";
-      ls = "eza --icons";
-      ll = "eza -l --icons --git -a";
-      lt = "eza --tree --level=2 --icons";
       cls = "clear";
-      g = "git";
-      gi = "git init";
-      gs = "git status";
-      ga = "git add .";
-      gc = "git commit -m";
-      gp = "git push --set-upstream";
-      gf = "git fetch && git pull --rebase";
-      gcl = "git clone";
-      gb = "git branch";
-      gco = "git checkout";
-      gu = "git submodule update --init --recursive";
       ff = "fastfetch";
       ns = "nh search";
       nos = "nh os switch .";

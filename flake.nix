@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stable.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -12,7 +13,6 @@
     agenix.url = "github:ryantm/agenix";
     devenv.url = "github:cachix/devenv";
     treefmt-nix.url = "github:numtide/treefmt-nix";
-    systems.url = "github:nix-systems/default";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,17 +51,19 @@
     substituters = [
       "https://devenv.cachix.org"
       "https://nix-gaming.cachix.org"
+      "https://catppuccin.cachix.org"
     ];
     trusted-public-keys = [
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+      "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
     ];
   };
 
-  outputs =
-    inputs@{
+  outputs = inputs@{
       self,
       nixpkgs,
+      stable,
       home-manager,
       ...
     }:
@@ -85,14 +87,15 @@
           };
           specialArgs = {
             inherit inputs;
+            stable = import stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
           }
           // vars;
           modules = with inputs; [
             ./hosts/${hostname}/configuration.nix
-            agenix.nixosModules.default
-            catppuccin.nixosModules.catppuccin
             nix-index-database.nixosModules.default
-            # { programs.nix-index-database.comma.enable = true; }
           ];
         };
 
@@ -109,24 +112,21 @@
             inherit system;
             config.allowUnfree = true;
           };
-          extraSpecialArgs = {
+          specialArgs = {
             inherit inputs;
+            stable = import stable {
+              inherit system;
+              config.allowUnfree = true;
+            };
           }
           // vars;
-          modules = with inputs;[
+          modules = [
             ./users/${username}/home.nix
-            catppuccin.homeModules.catppuccin
-            zen-browser.homeModules.twilight
           ];
         };
     in
 
     {
-      nixosModules = {
-        system = import ./modules;
-        packages = import ./packages;
-      };
-
       homeManagerModules = {
         user = import ./users/bye/home.nix;
       };
@@ -187,7 +187,11 @@
             languages.php.enable = true;
             packages = with pkgs; [
               phpactor
-              php83Packages.php-cs-fixer
+              intelephense
+              phpstan
+              phpunit
+              phpdocumentor
+              php85Packages.php-cs-fixer
             ];
           };
 

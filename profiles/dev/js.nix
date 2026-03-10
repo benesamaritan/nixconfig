@@ -1,5 +1,0 @@
-{ pkgs, ... }:
-
-{
-  # Isolated to devshell
-}

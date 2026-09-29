@@ -20,7 +20,27 @@
     aria2
     papirus-icon-theme
     inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.default
+    zip
+    unzip
+    rar
+    unrar
+
+    vscodium
+    chromium
   ];
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi #optional AMD hardware acceleration
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
+
 
   environment.pathsToLink = [ "/share/bash-completion" ];
 

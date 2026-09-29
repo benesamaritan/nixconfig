@@ -1,27 +1,16 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 
 {
   home.packages = with pkgs; [
-    inputs.devenv.packages.${pkgs.stdenv.hostPlatform.system}.default
-    cachix
-    devbox
+    # cachix
     opencode                 # AI Agent on terminal
-    gemini-cli
-    # copilot-cli
     hub                      # GitHub CLI wrapper
     publii                   # Static Site CMS
     surge-cli                # Surge.sh CDN CLI
   ];
-
-  programs.bash = {
-    initExtra = ''
-      eval "$(devbox global shellenv --init-hook)"
-    '';
-  };
 
   programs.gh = {
     enable = true;
@@ -30,6 +19,18 @@
     ];
     settings = {
       git_protocol = "ssh";
+    };
+  };
+
+  programs.antigravity-cli = {
+    enable = true;
+    settings = {
+      context.fileName = [
+        "AGENTS.md" 
+        "CONTEXT.md" 
+        "GEMINI.md" 
+        "CLAUDE.md"
+      ];
     };
   };
 }

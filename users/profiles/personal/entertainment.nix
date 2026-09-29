@@ -5,10 +5,10 @@
 
 {
   home.packages = with pkgs; [
-    easyeffects
+    losange
     komikku
     mangayomi
-    # discordo
-    # spotifycli
+    discordo
+    spotifycli
   ];
 }

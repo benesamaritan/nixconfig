@@ -4,10 +4,11 @@
 
 {
   imports = [
+    ./fonts.nix
     ./tools.nix
-    ./zen-browser.nix
+    ./browsers.nix
     ./productivity.nix
-    ./entertainment.nix
+    # ./entertainment.nix
     ./catppuccin.nix
   ];
 }

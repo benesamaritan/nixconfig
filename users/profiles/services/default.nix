@@ -4,6 +4,6 @@
 
 {
   imports = [
-    ./users.services.nix
+    ./services.user.nix
   ];
 }

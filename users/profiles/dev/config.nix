@@ -41,8 +41,6 @@
     dv = "devenv";
   };
   home.sessionVariables = {
-    EDITOR = "hx";
-    VISUAL = "hx";
     MANPAGER = "sh -c 'col -bx | bat -l man -p'";
     MANROFFOPT = "-c";
     XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";

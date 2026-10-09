@@ -23,6 +23,28 @@ Build without activating:
 home-manager build --flake .#benesamaritan
 ```
 
+## New machine setup
+
+The system username is set once in `flake.nix` (`username`, default `benesamaritan`).
+
+```sh
+# 1. Fresh OS install, then install Determinate Nix. The installer already
+#    adds you to trusted-users in /etc/nix/nix.custom.conf — verify, don't edit.
+# 2. Install git, restore ~/.ssh/ backup (chmod 700 ~/.ssh, 600 on private
+#    keys). Critical for first switch: ~/.ssh/id_age (agenix decrypt).
+# 3. Clone both repos to their exact paths (dotfiles must exist before switching):
+git clone git@github.com:benesamaritan/nixconfig.git ~/repositories/github/benesamaritan/nixconfig
+git clone git@github.com:benesamaritan/dotfiles.git ~/repositories/github/benesamaritan/dotfiles
+# 4. First switch from the repo root (accept the flake-config prompt; it is
+#    recorded in ~/.local/share/nix/trusted-settings.json):
+cd ~/repositories/github/benesamaritan/nixconfig
+nix run home-manager/master -- init --switch .#benesamaritan
+```
+
+Post-switch: `ssh-add ~/.ssh/github`, import the GPG key
+(`gpg --import`), upload any new pubkeys to GitHub. The GitHub token comes
+along inside the repo via agenix — nothing extra to restore.
+
 ## Directory structure
 
 - `flake.nix` — inputs and the `homeConfigurations."benesamaritan"` output.
@@ -31,7 +53,9 @@ home-manager build --flake .#benesamaritan
   - `dev/` — shell config, CLI tools, editors (helix, vscode, zed).
   - `personal/` — fonts, CLI tools, browsers (zen, helium), productivity, theming.
   - `work/` — work-specific tools (import currently commented out).
-- `services/` — Home Manager user services (ssh-agent, gpg-agent, kdeconnect).
+- `services/` — user services (`services.user.nix`) and declarative Flatpaks
+  (`flatpak.nix`: `services.flatpak` via the `nix-flatpak` flake, flathub
+  remote, weekly auto-updates; add Flathub app IDs to `packages`).
 - `secrets.nix` + `secrets/` — agenix recipients and encrypted secrets, wired
   into Home Manager via `users/<name>/age.nix` (decrypts with `~/.ssh/id_age`).
   After changing recipients, re-encrypt from the repo root with
@@ -50,6 +74,17 @@ Catppuccin (mocha, pink accent) is applied through the `catppuccin` flake.
   cannot set `trusted-users`, and the HM `nix.package` default is unused here).
 - The `nixConfig` substituters in `flake.nix` are honored only after being
   accepted into `~/.local/share/nix/trusted-settings.json`.
+
+## Graphics and Flatpak
+
+- GPU acceleration uses `targets.genericLinux.gpu.enable` (Intel/AMD Mesa
+  needs no extra config; Nvidia proprietary needs an exact driver
+  version + hash). It symlinks `/run/opengl-driver` via a one-time
+  `sudo …non-nixos-gpu-setup` run — activation re-prints the command on every
+  switch until the link matches, so it cannot be silently missed. Never enable
+  `nixGL` alongside it (unsupported mix).
+- Flatpak apps bring their own Mesa/drivers in the runtime and talk directly
+  to `/dev/dri`, so they need neither `gpu.enable` nor nixGL.
 
 ## Notes
 

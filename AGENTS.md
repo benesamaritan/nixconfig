@@ -65,7 +65,18 @@ nix flake lock                                # after adding/changing flake inpu
 - `programs.nix-index` (bash integration) + `nix-index-database.comma` provide
   `command-not-found` via the prebuilt `nix-index-database` DB. Never add
   `nix-index` to `home.packages` (conflicts with the DB wrapper).
-- GUI apps on non-NixOS go through nixGL (`targets.genericLinux.nixGL`).
+- GPU on non-NixOS via `targets.genericLinux.gpu.enable` (replicates the
+  NixOS `/run/opengl-driver` link; needs a one-time `sudo` setup run that
+  activation re-announces until done). Never mix with nixGL (unsupported).
+  Flatpak apps need neither — runtimes ship their own drivers.
+- Prefer `programs.<name>.enable` over bare `home.packages` when a Home
+  Manager module exists and is collision-safe (config files are only written
+  when `settings` is set); otherwise keep `pkgs.<name>` with a category
+  comment. Never add `nix-index` to `home.packages` (conflicts with the DB
+  wrapper).
+- Flatpaks via the `nix-flatpak` flake (`services.flatpak` in
+  `services/flatpak.nix`, flathub remote, weekly auto-updates). Keep
+  `uninstallUnmanaged = false` so hand-installed flatpaks survive.
 - Catppuccin (mocha, pink) theming via the `catppuccin` flake's home module.
 - Dotfiles (wezterm, helix, starship, …) live in a separate `dotfiles` repo and
   are linked with `config.lib.file.mkOutOfStoreSymlink` in `home.nix`.

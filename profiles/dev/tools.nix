@@ -67,5 +67,6 @@
       enable = true;
       enableBashIntegration = true;
     };
+    nix-index-database.comma.enable = true;
   };
 }

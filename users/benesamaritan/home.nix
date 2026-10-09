@@ -14,8 +14,9 @@ in
 
 {
   imports = [
+    inputs.nix-index-database.homeModules.default
     ../../profiles/personal
-     ../../profiles/dev
+    ../../profiles/dev
     # ../../profiles/work
     ../../services
   ];

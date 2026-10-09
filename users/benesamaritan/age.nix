@@ -16,6 +16,12 @@
       # at every activation and login (agenix user service).
       path = "${config.home.homeDirectory}/.config/agenix/github-token";
     };
+    # Raw API key for the 9router opencode provider, referenced from
+    # programs.opencode.settings via {file:…} so it never lands in the store.
+    secrets.nine-router-key = {
+      file = ../../secrets/opencode-9router-key.age;
+      path = "${config.home.homeDirectory}/.config/agenix/opencode-9router-key";
+    };
   };
 
   # The token file must stay out of the nix store, so reference the decrypted

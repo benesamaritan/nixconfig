@@ -13,4 +13,5 @@ in
 {
   "secrets/master.age".publicKeys = allKeys;
   "secrets/github-token.age".publicKeys = allKeys;
+  "secrets/opencode-9router-key.age".publicKeys = allKeys;
 }

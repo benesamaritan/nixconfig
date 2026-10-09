@@ -172,6 +172,14 @@
       enable = true;
       defaultEditor = true;
       enableMcpIntegration = true;
+      # OpenCode as an in-editor ACP agent. Same binary and config as the
+      # terminal (opencode.json, skills dir), so MCP/skills parity is
+      # automatic. Start via the Agent Panel / new-thread menu.
+      userSettings.agent_servers.OpenCode = {
+        command = lib.getExe pkgs.opencode;
+        args = [ "acp" ];
+        type = "custom";
+      };
       extensions = [
         "catppuccin-blur"
         "catppuccin-icons"

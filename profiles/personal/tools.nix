@@ -15,10 +15,16 @@
     disktui                     # Disk utility
     ncdu                        # Disk usage analyzer
 
-    # Desktop apps (no Home Manager modules)
+    # Desktop apps (no Home Manager modules; source priority:
+    # nixpkgs > flake > flatpark > flathub > bun > npm — see AGENTS.md)
     qbittorrent
     kanata
     protonup-qt
+    inkscape
+    kdePackages.kdenlive
+    google-chrome
+    zoom-us
+    rustdesk
     # bottles-unwrapped
     # lutris-unwrapped
   ];

@@ -11,29 +11,37 @@
     glow                     # Render MD on terminal
     # dbeaver
 
+    # Language servers (no Home Manager modules)
     marksman                 # Markdown LSP
     taplo                    # TOML, and Cross-Config LSP
     lua-language-server
 
-    yazi                     # File Manager for terminal
-    lazygit
-    lazysql
-
-    # Nix
+    # Nix tools (no Home Manager modules)
     manix                     # search nix options
     nix-tree                  # dependencies tree on nix store
     nix-bash-completions
     nix-health
-    nil
+    nil                       # Nix LSP
 
-    # Tools
+    # Downloads and archives
     wget
     curl
     aria2
-    papirus-icon-theme
     unzip
     unrar
+
+    # Theming assets
+    papirus-icon-theme
   ];
+
+  programs = {
+    yazi = {
+      enable = true;         # File Manager for terminal
+      shellWrapperName = "y";
+    };
+    lazygit.enable = true;
+    lazysql.enable = true;
+  };
 
   programs.bash = {
     enable = true;

@@ -5,9 +5,10 @@
 
 {
   home.packages = with pkgs; [
-    opencode                 # AI Agent on terminal
-    hub                      # GitHub CLI wrapper
+    hub                      # GitHub CLI wrapper (no Home Manager module)
   ];
+
+  programs.opencode.enable = true; # AI Agent on terminal
 
   programs.gh = {
     enable = false;

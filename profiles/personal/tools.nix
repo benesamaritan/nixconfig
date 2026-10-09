@@ -5,12 +5,17 @@
 
 {
   home.packages = with pkgs; [
+    # Terminal toys (no Home Manager modules)
     pipes-rs                    # Pipes Screensaver like on Classic Windows (Rust rewrite variant)
     cmatrix                     # Matrix-like Screensaver
+    ttyper
+    navi                        # Cheatsheets
+
+    # Disk utilities
     disktui                     # Disk utility
     ncdu                        # Disk usage analyzer
-    navi                        # Cheatsheets
-    ttyper
+
+    # Desktop apps (no Home Manager modules)
     qbittorrent
     kanata
     protonup-qt

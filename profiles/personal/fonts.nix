@@ -13,7 +13,6 @@
     nerd-fonts.meslo-lg
     nerd-fonts.iosevka
     nerd-fonts.iosevka-term-slab
-    nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
   ];
 }

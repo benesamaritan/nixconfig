@@ -36,7 +36,6 @@
 
   programs.helium = {
     enable = true;
-#     package = config.lib.nixGL.wrap pkgs.helium;
     flags = [
       "--ozone-platform-hint=auto"
       "--start-maximized"

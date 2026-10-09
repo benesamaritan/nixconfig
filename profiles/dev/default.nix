@@ -8,5 +8,6 @@
     ./tools.nix
     ./platforms.nix
     ./editors.nix
+    ./mcp.nix
   ];
 }

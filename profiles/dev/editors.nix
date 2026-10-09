@@ -5,19 +5,6 @@
 }:
 
 {
-  programs.mcp = {
-    enable = true;
-    servers = {
-      filesystem = {
-        command = "npx";
-        args = [
-          "-y"
-          "@modelcontextprotocol/server-filesystem"
-          "${config.home.homeDirectory}/repositories"
-        ];
-      };
-    };
-  };
   programs = {
     helix.enable = true;
     vscodium.enable = true;

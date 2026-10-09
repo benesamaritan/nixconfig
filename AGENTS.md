@@ -48,10 +48,15 @@ nix flake lock                                # after adding/changing flake inpu
   `trusted-users`.
 - Flake-level `nixConfig` substituters in `flake.nix` only take effect once
   accepted into `~/.local/share/nix/trusted-settings.json`.
-- Git commits in this repo are GPG-signed (`commit.gpgSign = true` in the user
-  config). Never commit unless explicitly asked; if asked to commit in an
-  environment without the key, use `git -c commit.gpgSign=false` inline (do not
-  change git config).
+- Git commits/tags are GPG-signed (`signing.key = "3C703A64157458C1"`,
+  `signByDefault`, `tag.gpgsign`; pubkey uploaded to GitHub). The commit email
+  must match a GitHub account email or the badge shows Unverified. Never commit
+  unless explicitly asked; if asked to commit in an environment without the
+  key, use `git -c commit.gpgSign=false` inline (do not change git config).
+- GitHub SSH uses `~/.ssh/github`, pinned via `~/.ssh/config`
+  (`IdentityFile` + `IdentitiesOnly`). gpg-agent (pinentry-qt) handles GPG
+  passphrases; plain `ssh-agent` handles SSH keys — keep them separate
+  (`gpg-agent.enableSshSupport = false`).
 
 ## Conventions
 

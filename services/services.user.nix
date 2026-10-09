@@ -4,9 +4,10 @@
   services.ssh-agent.enable = true;
 
   services.gpg-agent = {
-    enable = false;
+    enable = true;
+    pinentry.package = pkgs.pinentry-qt;
     enableBashIntegration = true;
-    enableSshSupport = true;
+    enableSshSupport = false;
   };
   
   services.kdeconnect = {

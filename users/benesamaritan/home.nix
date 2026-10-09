@@ -87,7 +87,10 @@ in
       submodule.recurse = true;
       commit.gpgSign = true;
     };
-    signing.signByDefault = true;
+    signing = {
+      key = "3C703A64157458C1";
+      signByDefault = true;
+    };
     ignores = [
       ".env"
       ".DS_Store"

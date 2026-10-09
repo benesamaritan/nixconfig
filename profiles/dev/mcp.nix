@@ -21,6 +21,17 @@
       sequential-thinking.command = lib.getExe pkgs.mcp-server-sequential-thinking;
       # Current time and timezone conversion (uses system timezone).
       time.command = lib.getExe pkgs.mcp-server-time;
+      # Library docs lookup (works keyless; add an API key later if needed).
+      context7.command = lib.getExe pkgs.context7-mcp;
+      # GitHub repos, issues and PRs. Needs a token: passed via an
+      # agenix-decrypted file so the secret never enters the store.
+      # Consumers that understand {file:…} (opencode) get a substitution
+      # token; the rest get a wrapper that reads it at startup.
+      github = {
+        command = lib.getExe pkgs.github-mcp-server;
+        args = [ "stdio" ];
+        env.GITHUB_PERSONAL_ACCESS_TOKEN.file = config.age.secrets.github-mcp-token.path;
+      };
       # Git history/diff/blame. Scoped to one repo; repeat --repository
       # per repo or point it at a parent checkout as needed.
       # git = {

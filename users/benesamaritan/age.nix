@@ -22,6 +22,12 @@
       file = ../../secrets/opencode-9router-key.age;
       path = "${config.home.homeDirectory}/.config/agenix/opencode-9router-key";
     };
+    # Raw GitHub token for the github MCP server (the github-token secret
+    # above wraps it in nix.conf syntax, which the server cannot parse).
+    secrets.github-mcp-token = {
+      file = ../../secrets/github-mcp-token.age;
+      path = "${config.home.homeDirectory}/.config/agenix/github-mcp-token";
+    };
   };
 
   # The token file must stay out of the nix store, so reference the decrypted

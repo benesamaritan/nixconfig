@@ -6,6 +6,22 @@
 
 {
   programs = {
+    # VSCodium reads MCP from a dedicated mcp.json (not settings.json).
+    # enableMcpIntegration merges the shared declaration into it; secret
+    # file-refs are wrapped so the token is read at startup, never stored.
+    # Needs an AI agent extension (e.g. Copilot Chat) to do anything with them.
+    vscodium = {
+      enable = true;
+      profiles.default = {
+        enableMcpIntegration = true;
+        extensions = pkgs.nix4vscode.forOpenVsx [
+          # Pairs with opencode CLI 1.x. Uses the same opencode.json + skills
+          # dir, so MCP/skills parity is automatic. If it cannot find the
+          # binary, point the extension at the nix store path explicitly.
+          "sst-dev.opencode-v2"
+        ];
+      };
+    };
     helix = {
       enable = true;
       # Editor behavior migrated from the (now inactive) dotfiles/helix
@@ -152,7 +168,6 @@
         ];
       };
     };
-    vscodium.enable = true;
     zed-editor = {
       enable = true;
       defaultEditor = true;

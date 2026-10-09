@@ -4,7 +4,6 @@
 
 {
   home.sessionPath = [
-    # ADD path for GO, NPM, Docker, vscode (+oss), gemini, eclipse, winboat, railway, etc
     "$HOME/.cache/X11/xcompose"
     "$HOME/.local/share/cargo"
     "$HOME/.local/share/bun/bin"

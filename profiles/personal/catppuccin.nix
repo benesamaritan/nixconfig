@@ -19,4 +19,5 @@
       accent = "pink";
     };
   };
+  home.pointerCursor.enable = true;
 }

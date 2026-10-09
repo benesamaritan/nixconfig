@@ -1,12 +1,11 @@
 {
   pkgs,
-  inputs,
   ...
 }:
 
 {
   home.packages = with pkgs; [
-    # bruno                    # API testing tool
+    # bruno                  # API testing tool
     koji                     # Interactive CLI for conventional commit
     tokei                    # Count LoC
     glow                     # Render MD on terminal
@@ -25,6 +24,7 @@
     nix-tree                  # dependencies tree on nix store
     nix-bash-completions
     nix-health
+    nil
 
     # Tools
     wget
@@ -55,7 +55,6 @@
     devenv = {
       enable = true;
       enableBashIntegration = true;
-      package = inputs.devenv.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
 
@@ -67,7 +66,6 @@
     nix-index = {
       enable = true;
       enableBashIntegration = true;
-      package = inputs.nix-index-database.packages.${pkgs.stdenv.hostPlatform.system}.default;
     };
   };
 }

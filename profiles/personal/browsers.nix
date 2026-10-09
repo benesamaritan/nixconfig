@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   ...
@@ -35,8 +36,8 @@
 
   programs.helium = {
     enable = true;
+#     package = config.lib.nixGL.wrap pkgs.helium;
     flags = [
-      "--disable-gpu"
       "--ozone-platform-hint=auto"
       "--start-maximized"
     ];
@@ -46,7 +47,9 @@
       "PasswordManagerEnabled" = false;
       "DefaultSearchProviderEnabled" = true;
       "ExtensionInstallForcelist" = [
-        "cjpalhdlnbpafiamejdnhcphjbkeiagm"
+        "mkgjnlllemldgamnbcgemcecicgmeaid"            # Chrome Webvine
+        "cjpalhdlnbpafiamejdnhcphjbkeiagm"            # Ublock Origin
+        "kghbmcgihmefcbjlfiafjcigdcbmecbf"            # heylogin
       ];
     };
   };

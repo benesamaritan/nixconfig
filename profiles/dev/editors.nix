@@ -13,7 +13,7 @@
         args = [
           "-y"
           "@modelcontextprotocol/server-filesystem"
-          "/home/benesamaritan/repositories"
+          "${config.home.homeDirectory}/repositories"
         ];
       };
     };

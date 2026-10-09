@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  username,
   ...
 }:
 
@@ -30,8 +31,8 @@ in
 
   home = {
     stateVersion = "25.05";
-    username = "benesamaritan";
-    homeDirectory = "/home/benesamaritan";
+    username = username;
+    homeDirectory = "/home/${username}";
     shell.enableShellIntegration = true;
     shellAliases = {
       ".." = "cd ..";

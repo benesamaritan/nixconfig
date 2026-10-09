@@ -49,19 +49,25 @@
       self,
       nixpkgs,
       home-manager,
-      nixgl,
       ...
-    }: {
-    homeConfigurations."benesamaritan" = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-        overlays = [];
+    }:
+    let
+      # Single source of truth for the system user. Home Manager modules
+      # receive it via extraSpecialArgs (see home.nix). The git identity and
+      # GitHub paths stay hardcoded — those identify the person, not the machine.
+      username = "benesamaritan";
+    in
+    {
+      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+          overlays = [];
+        };
+        extraSpecialArgs = { inherit inputs username; };
+        modules = [
+          ./users/${username}/home.nix
+        ];
       };
-      extraSpecialArgs = { inherit inputs; };
-      modules = [
-        ./users/benesamaritan/home.nix
-      ];
     };
-  };
 }

@@ -74,12 +74,32 @@ nix flake lock                                # after adding/changing flake inpu
   when `settings` is set); otherwise keep `pkgs.<name>` with a category
   comment. Never add `nix-index` to `home.packages` (conflicts with the DB
   wrapper).
+- Never pass a derivation where an option takes `either attrs path`
+  (e.g. `programs.*.skills`): the type checker descends into derivations as
+  attrsets and chokes on stdenv's internal `__ignoreNulls`. Generate a plain
+  attrset of paths instead (see `profiles/dev/skills.nix`: `readDir` +
+  `mapAttrs'`).
 - Flatpaks via the `nix-flatpak` flake (`services.flatpak` in
   `services/flatpak.nix`, flathub remote, weekly auto-updates). Keep
   `uninstallUnmanaged = false` so hand-installed flatpaks survive.
+- App source priority, highest first: nixpkgs (or a flake input) > flatpark
+  remote > flathub > bun > npm. npm globals have no nixpkgs equivalent worth
+  packaging — install with a user prefix (`npm config set prefix
+  ~/.npm-global`) instead of `buildNpmPackage`, unless reproducibility
+  across machines is needed.
+- LSP/formatter strategy: server binaries live once in `home.packages`
+  (`profiles/dev/tools.nix`); Helix consumes them via `programs.helix`
+  (`languages` with nix-pinned `lib.getExe` commands, `auto-format = true`).
+  Where the LSP formats natively (intelephense, tsserver, gopls, taplo,
+  astro) no formatter entry is needed; otherwise wire one explicitly
+  (nixfmt, stylua, prettier). No universal LSP module exists — zed/vscodium
+  wiring stays per-editor and is currently deferred.
 - Catppuccin (mocha, pink) theming via the `catppuccin` flake's home module.
-- Dotfiles (wezterm, helix, starship, …) live in a separate `dotfiles` repo and
-  are linked with `config.lib.file.mkOutOfStoreSymlink` in `home.nix`.
+- Dotfiles (wezterm, kanata, starship, …) live in a separate `dotfiles` repo
+  and are linked with `config.lib.file.mkOutOfStoreSymlink` in `home.nix`.
+  Helix is the exception: fully managed in nix via `programs.helix`
+  (`settings` + `languages` with nix-pinned LSP binaries), so never re-add a
+  `helix` out-of-store link (it fights the HM-owned `~/.config/helix`).
 - Unused flake input `affinity-nix` is kept intentionally (with its substituter).
 - `legacy-nixos` branch preserves the old NixOS config (`hosts/`, `modules/`).
   Never reintroduce NixOS modules onto `main` without asking.

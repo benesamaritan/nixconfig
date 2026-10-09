@@ -15,6 +15,8 @@ in
 {
   imports = [
     inputs.nix-index-database.homeModules.default
+    inputs.agenix.homeManagerModules.default
+    ./age.nix
     ../../profiles/personal
     ../../profiles/dev
     # ../../profiles/work
@@ -45,19 +47,9 @@ in
     preferXdgDirectories = true;
   };
 
-  nix = {
-    package = pkgs.nix;
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [
-        "root"
-        "benesamaritan"
-      ];
-    };
-  };
+  # No nix.settings here: Determinate Nix owns /etc/nix/nix.conf (flakes enabled
+  # by default, trusted-users in nix.custom.conf). A user-level nix.conf cannot
+  # set trusted-users. The GitHub token is injected via ./age.nix instead.
 
   targets.genericLinux = {
     enable = true;

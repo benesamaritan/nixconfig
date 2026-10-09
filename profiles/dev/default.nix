@@ -9,5 +9,6 @@
     ./platforms.nix
     ./editors.nix
     ./mcp.nix
+    ./skills.nix
   ];
 }

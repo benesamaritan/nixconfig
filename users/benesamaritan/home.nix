@@ -17,6 +17,7 @@ in
   imports = [
     inputs.nix-index-database.homeModules.default
     inputs.agenix.homeManagerModules.default
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ./age.nix
     ../../profiles/personal
     ../../profiles/dev

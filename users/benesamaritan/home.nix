@@ -66,10 +66,17 @@ in
 
   xdg = {
     enable = true;
-    configFile = lib.mkDefault {
+    # NOTE: never wrap this attrset in lib.mkDefault — it silently drops
+    # every entry (verified: links vanish with no error). Plain attrset here;
+    # conflicts with HM-managed files are surfaced as build errors instead.
+    configFile = {
       "wezterm" = link "wezterm";
       "kanata" = link "kanata";
-      "helix" = link "helix";
+      # helix lives in nix (programs.helix), not dotfiles — linking it here
+      # would fight the HM-managed ~/.config/helix directory.
+      # starship.toml is linkable because catppuccin.starship is disabled
+      # (its generated file would collide and is poorer than the dotfiles
+      # version, which adds the devbox segment and custom palette).
       "starship.toml" = link "starship.toml";
       "fastfetch" = link "fastfetch";
     };

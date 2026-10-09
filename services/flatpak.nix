@@ -22,8 +22,15 @@
       onCalendar = "weekly";
     };
     packages = [
-      # Add Flathub app IDs for software with no nixpkgs build, e.g.
-      # "org.mozilla.firefox"
+      # No nixpkgs desktop builds; prefer flatpark over flathub.
+      {
+        appId = "ai.genoffice.GenOffice";
+        origin = "flatpark";
+      }
+      {
+        appId = "com.collaboraoffice.Office";
+        origin = "flathub";
+      }
     ];
   };
 }

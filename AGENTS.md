@@ -65,6 +65,17 @@ nix flake lock                                # after adding/changing flake inpu
 - `programs.nix-index` (bash integration) + `nix-index-database.comma` provide
   `command-not-found` via the prebuilt `nix-index-database` DB. Never add
   `nix-index` to `home.packages` (conflicts with the DB wrapper).
+- MCP servers are declared once in `profiles/dev/mcp.nix` and fanned out:
+  opencode/antigravity/zed via their `enableMcpIntegration` flags, VSCodium
+  via `profiles.default.enableMcpIntegration` (dedicated `mcp.json`, secrets
+  wrapped at startup). Servers needing tokens use `env.<VAR>.file` pointing
+  at an agenix-decrypted file — never literal secrets.
+- Zed runs opencode in-editor via a custom ACP `agent_servers` entry pointing
+  at the nix-pinned binary (same config, so MCP/skills parity is automatic).
+  VSCodium gets the `sst-dev.opencode-v2` extension from open-vsx via the
+  `nix4vscode` overlay (`pkgs.nix4vscode.forOpenVsx`). Antigravity has no
+  editor extensions — terminal only (Zed lists a registry `antigravity-acp`
+  default; untried).
 - GPU on non-NixOS via `targets.genericLinux.gpu.enable` (replicates the
   NixOS `/run/opengl-driver` link; needs a one-time `sudo` setup run that
   activation re-announces until done). Never mix with nixGL (unsupported).

@@ -55,15 +55,11 @@ in
 
   targets.genericLinux = {
     enable = true;
-#     gpu.enable = true;
-    nixGL = {
-      packages = inputs.nixgl.packages;
-      defaultWrapper = "mesa";
-      installScripts = [
-        "mesa"
-        "mesaPrime"
-      ];
-    };
+    # Mesa-only host (Intel Iris Xe): automatic driver setup via
+    # /run/opengl-driver. On first switch, activation prints a one-time
+    # `sudo …non-nixos-gpu-setup` command if drivers are missing or stale;
+    # the warning repeats on every switch until it is run.
+    gpu.enable = true;
   };
 
   nixpkgs.config = { allowUnfree = true; };

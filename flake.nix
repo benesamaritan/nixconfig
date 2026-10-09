@@ -7,7 +7,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixgl.url = "github:nix-community/nixGL";
     affinity-nix.url = "github:mrshmllow/affinity-nix";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";

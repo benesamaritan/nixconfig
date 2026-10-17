@@ -6,26 +6,7 @@
 
 {
   programs = {
-    # VSCodium reads MCP from a dedicated mcp.json (not settings.json).
-    # enableMcpIntegration merges the shared declaration into it; secret
-    # file-refs are wrapped so the token is read at startup, never stored.
-    # Needs an AI agent extension (e.g. Copilot Chat) to do anything with them.
-    vscodium = {
-      enable = true;
-      profiles.default = {
-        enableMcpIntegration = true;
-        extensions = pkgs.nix4vscode.forOpenVsx [
-          # Pairs with opencode CLI 1.x. Uses the same opencode.json + skills
-          # dir, so MCP/skills parity is automatic. If it cannot find the
-          # binary, point the extension at the nix store path explicitly.
-          "sst-dev.opencode-v2"
-        ];
-      };
-    };
     helix = {
-      enable = true;
-      # Editor behavior migrated from the (now inactive) dotfiles/helix
-      # config.toml. Theme stays catppuccin-mocha via the catppuccin module.
       settings.editor = {
         auto-format = true;
         line-number = "relative";
@@ -81,8 +62,6 @@
         };
         gutters.layout = [ "diff" "diagnostics" "line-numbers" "spacer" ];
       };
-      # Pin each language to its nix-provided server (stable store paths,
-      # no reliance on helix built-in defaults).
       languages = {
         language-server = {
           nil.command = lib.getExe pkgs.nil;
@@ -115,7 +94,7 @@
           {
             name = "nix";
             language-servers = [ "nil" ];
-            formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
+            formatter.command = lib.getExe pkgs.nixfmt;
           }
           {
             name = "markdown";
@@ -169,12 +148,8 @@
       };
     };
     zed-editor = {
-      enable = true;
       defaultEditor = true;
       enableMcpIntegration = true;
-      # OpenCode as an in-editor ACP agent. Same binary and config as the
-      # terminal (opencode.json, skills dir), so MCP/skills parity is
-      # automatic. Start via the Agent Panel / new-thread menu.
       userSettings.agent_servers.OpenCode = {
         command = lib.getExe pkgs.opencode;
         args = [ "acp" ];
@@ -218,6 +193,14 @@
 #         "live-server"
 #         "npm-package-json-checker"
       ];
+    };
+    vscodium = {
+      profiles.default = {
+        enableMcpIntegration = true;
+        extensions = pkgs.nix4vscode.forOpenVsx [
+          "sst-dev.opencode-v2"
+        ];
+      };
     };
   };
 }

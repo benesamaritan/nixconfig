@@ -6,15 +6,12 @@
 
 {
   home.packages = with pkgs; [
-    hub                      # GitHub CLI wrapper (no Home Manager module)
+    hub
+    gh
   ];
 
   programs.opencode = {
-    enable = true; # AI Agent on terminal
-    enableMcpIntegration = true; # merge programs.mcp.servers into opencode
-    # Provider/model/agent config migrated from the hand-maintained
-    # opencode.json so HM can own that file. The API key stays out of the
-    # store via {file:…} pointing at the agenix-decrypted secret.
+    enableMcpIntegration = true;
     settings = {
       lsp = true;
       model = "9router/oc/muse-spark-1.3-contributor-free";
@@ -56,19 +53,12 @@
     };
   };
 
-  programs.gh = {
-    enable = false;
-    extensions = pkgs.gh-dash;
-    settings.git_protocol = "ssh";
-  };
-
   programs.antigravity-cli = {
-    enable = true;
     enableMcpIntegration = true; # merge programs.mcp.servers into antigravity
     settings = {
       context.fileName = [
-        "AGENTS.md" 
-        "GEMINI.md" 
+        "AGENTS.md"
+        "GEMINI.md"
         "CLAUDE.md"
       ];
     };

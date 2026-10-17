@@ -30,59 +30,41 @@
   ];
 
   programs = {
-    bat.enable = true;
+    starship.enableBashIntegration = true;
+    zoxide.enableBashIntegration = true;
+    television.enableBashIntegration = true;
+    bat.extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+      batgrep
+      batwatch
+    ];
     atuin = {
-      enable = true;
       enableBashIntegration = true;
       daemon.enable = true;
     };
-    starship = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-    zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-    };
     fzf = {
-      enable = true;
       enableBashIntegration = true;
       historyWidget.command = "";
     };
     eza = {
-      enable = true;
       enableBashIntegration = true;
-      icons = "auto";
       git = true;
+      icons = "auto";
       extraOptions = [
         "--group-directories-first"
         "--header"
       ];
     };
-    television = {
-      enable = true;
-      enableBashIntegration = true;
-    };
-  };
-
-  programs = {
-    fastfetch.enable = true;
-    ripgrep = {
-      enable = true;
-      arguments = [
+    ripgrep.arguments = [
         "--max-columns=150"
         "--max-columns-preview"
-      ];
-    };
-    fd = {
-      enable = true;
-      extraOptions = [
+    ];
+    fd.extraOptions = [
         "--no-ignore"
         "--absolute-path"
-      ];
-    };
+    ];
     tealdeer = {
-      enable = true;
       enableAutoUpdates = true;
       settings.updates.auto_update = true;
     };

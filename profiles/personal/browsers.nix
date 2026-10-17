@@ -12,7 +12,6 @@
   ];
   
   programs.zen-browser = {
-    enable = true;
     nativeMessagingHosts = [ pkgs.firefoxpwa ];
     policies = {
       AutofillAddressEnabled = false;
@@ -35,7 +34,6 @@
   };
 
   programs.helium = {
-    enable = true;
     flags = [
       "--ozone-platform-hint=auto"
       "--start-maximized"

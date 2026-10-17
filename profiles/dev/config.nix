@@ -11,9 +11,9 @@
   home.shellAliases = {
     cd = "z";
     cat = "bat";
-    ls = "eza --icons";
-    ll = "eza -l --icons --git -a";
-    lt = "eza --tree --level=2 --icons";
+    ls = "eza";
+    ll = "eza -l --git -a";
+    lt = "eza --tree --level=2";
     g = "git";
     gi = "git init";
     gs = "git status";
@@ -33,10 +33,7 @@
     lzn = "lazynpm";
     lzw = "lazyworktree";
     lzj = "lazyjournal";
-    gem = "gemini";
     oc = "opencode";
-    dp = "dolphin .";
-    dx = "devbox";
     dv = "devenv";
   };
   home.sessionVariables = {

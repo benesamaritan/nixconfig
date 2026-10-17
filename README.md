@@ -33,11 +33,11 @@ The system username is set once in `flake.nix` (`username`, default `benesamarit
 # 2. Install git, restore ~/.ssh/ backup (chmod 700 ~/.ssh, 600 on private
 #    keys). Critical for first switch: ~/.ssh/id_age (agenix decrypt).
 # 3. Clone both repos to their exact paths (dotfiles must exist before switching):
-git clone git@github.com:benesamaritan/nixconfig.git ~/repositories/github/benesamaritan/nixconfig
-git clone git@github.com:benesamaritan/dotfiles.git ~/repositories/github/benesamaritan/dotfiles
+git clone git@github.com:benesamaritan/nixconfig.git ~/repos/benesamaritan/nixconfig
+git clone git@github.com:benesamaritan/dotfiles.git ~/repos/benesamaritan/dotfiles
 # 4. First switch from the repo root (accept the flake-config prompt; it is
 #    recorded in ~/.local/share/nix/trusted-settings.json):
-cd ~/repositories/github/benesamaritan/nixconfig
+cd ~/repos/benesamaritan/nixconfig
 nix run home-manager/master -- init --switch .#benesamaritan
 ```
 

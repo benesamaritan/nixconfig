@@ -56,9 +56,6 @@
       ...
     }:
     let
-      # Single source of truth for the system user. Home Manager modules
-      # receive it via extraSpecialArgs (see home.nix). The git identity and
-      # GitHub paths stay hardcoded — those identify the person, not the machine.
       username = "benesamaritan";
     in
     {

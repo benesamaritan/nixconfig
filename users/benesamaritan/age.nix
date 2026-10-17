@@ -16,17 +16,18 @@
       # at every activation and login (agenix user service).
       path = "${config.home.homeDirectory}/.config/agenix/github-token";
     };
-    # Raw API key for the 9router opencode provider, referenced from
-    # programs.opencode.settings via {file:…} so it never lands in the store.
-    secrets.nine-router-key = {
-      file = ../../secrets/opencode-9router-key.age;
-      path = "${config.home.homeDirectory}/.config/agenix/opencode-9router-key";
-    };
     # Raw GitHub token for the github MCP server (the github-token secret
     # above wraps it in nix.conf syntax, which the server cannot parse).
     secrets.github-mcp-token = {
       file = ../../secrets/github-mcp-token.age;
       path = "${config.home.homeDirectory}/.config/agenix/github-mcp-token";
+    };
+    # OmniRoute API key (localhost:20128), referenced from the user's
+    # ~/.config/opencode/opencode.jsonc via {file:…} so it never lands in git
+    # or in plaintext on disk.
+    secrets.omniroute-key = {
+      file = ../../secrets/omniroute-key.age;
+      path = "${config.home.homeDirectory}/.config/agenix/omniroute-key";
     };
   };
 

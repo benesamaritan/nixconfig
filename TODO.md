@@ -70,6 +70,7 @@
 - [x] fix command-not-found: use the nix-index-database flake for a prebuilt database
 - [x] consolidate remaining tools into profiles
 - [x] remove dead, empty, unused, redundant or not imported nix files
+- [x] auto-import profile/service modules and restore orphaned `languages.nix` + `formatting.nix` (LSP servers/formatters)
 - [x] caching for future build (binary substituters in flake nixConfig)
 
 ## References:

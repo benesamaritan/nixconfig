@@ -20,6 +20,7 @@ in
       "kanata" = link "kanata";
       "starship.toml" = link "starship.toml";
       "fastfetch" = link "fastfetch";
+      "opencode/opencode.json" = link "opencode/opencode.json";
     };
   };
 }

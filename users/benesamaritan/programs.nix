@@ -19,6 +19,8 @@
     devenv.enable = true;
     nh.enable = true;
     nix-index.enable = true;
+    lazygit.enable = true;
+    lazysql.enable = true;
   };
 
   programs = {

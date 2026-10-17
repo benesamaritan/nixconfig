@@ -6,6 +6,7 @@
 {
   home.packages = with pkgs; [
     papirus-icon-theme
+    tokei                       # Count LoC
   ];
 
   programs = {
@@ -27,8 +28,5 @@
     nix-index.enableBashIntegration = true;
     nix-index-database.comma.enable = true;
     yazi.shellWrapperName = "y";
-    lazygit.enable = true;
-    lazysql.enable = true;
-    fastfetch.enable = true;
   };
 }

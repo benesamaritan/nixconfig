@@ -7,6 +7,7 @@
 {
   programs = {
     helix = {
+      defaultEditor = true;
       settings.editor = {
         auto-format = true;
         line-number = "relative";
@@ -148,8 +149,11 @@
       };
     };
     zed-editor = {
-      defaultEditor = true;
+      # Helix owns EDITOR/VISUAL; don't also export zed's.
+      defaultEditor = false;
       enableMcpIntegration = true;
+      # Settings stay editable by zed (zed's own default, made explicit).
+      mutableUserSettings = true;
       userSettings.agent_servers.OpenCode = {
         command = lib.getExe pkgs.opencode;
         args = [ "acp" ];
@@ -197,6 +201,8 @@
     vscodium = {
       profiles.default = {
         enableMcpIntegration = true;
+        # Settings stay editable by vscodium.
+        mutableUserSettings = true;
         extensions = pkgs.nix4vscode.forOpenVsx [
           "sst-dev.opencode-v2"
         ];

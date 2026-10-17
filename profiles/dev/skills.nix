@@ -12,8 +12,7 @@ let
     })
     + "/skills";
 
-  # Personal skills vendored in ./skills/ (e.g. 9router, sourced from
-  # https://github.com/decolua/9router). Names must not collide with the
+  # Personal skills vendored in ./skills/. Names must not collide with the
   # collection above.
   local-skills = ./skills;
 

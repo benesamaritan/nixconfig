@@ -49,9 +49,13 @@ along inside the repo via agenix — nothing extra to restore.
 
 - `flake.nix` — inputs and the `homeConfigurations."benesamaritan"` output.
 - `users/<name>/home.nix` — entry point for a user; imports profiles and services.
-- `profiles/` — composable Home Manager bundles:
-  - `dev/` — shell config, CLI tools, editors (helix, vscode, zed).
-  - `personal/` — fonts, CLI tools, browsers (zen, helium), productivity, theming.
+- `profiles/` — composable Home Manager bundles. Each directory's `default.nix`
+  auto-imports its sibling `*.nix` modules (disabled modules use the
+  `*.nix.disabled` suffix):
+  - `dev/` — shell config, CLI tools, editors (helix, vscode, zed), LSP
+    servers (`languages.nix`), formatters (`formatting.nix`).
+  - `personal/` — fonts, CLI tools, browsers (zen, helium), productivity,
+    theming (`entertainment.nix.disabled` is excluded).
   - `work/` — work-specific tools (import currently commented out).
 - `services/` — user services (`services.user.nix`) and declarative Flatpaks
   (`flatpak.nix`: `services.flatpak` via the `nix-flatpak` flake, flathub
@@ -88,8 +92,10 @@ Catppuccin (mocha, pink accent) is applied through the `catppuccin` flake.
 
 ## Notes
 
-- Dotfiles (wezterm, helix, starship, ...) are linked out-of-store from a separate
-  `dotfiles` repository via `mkOutOfStoreSymlink` in `users/benesamaritan/home.nix`.
+- Dotfiles (wezterm, starship, fastfetch, opencode, ...) are linked out-of-store
+  from a separate `dotfiles` repository via `mkOutOfStoreSymlink` in
+  `users/benesamaritan/dotfiles.nix`. Helix is managed directly in nix through
+  `programs.helix` instead.
 - `programs.nix-index` uses the prebuilt database from the `nix-index-database`
   flake, so `command-not-found` works without generating a local index.
 

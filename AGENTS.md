@@ -8,15 +8,21 @@ Home Manager through a flake. There is no NixOS host configuration on `main`.
 
 - `flake.nix` — inputs + the single output `homeConfigurations."benesamaritan"`.
 - `users/<name>/home.nix` — per-user entry point; imports profiles, services,
-  and the `nix-index-database` home-manager module.
+  the `nix-index-database` home-manager module, and the per-user `dotfiles.nix`
+  (out-of-store XDG links), `genericLinux.nix` (non-NixOS targets),
+  `programs.nix` (central `programs.*.enable`), and `age.nix` (agenix).
 - `profiles/` — composable Home Manager bundles:
   - `dev/` — shell aliases/paths (`config.nix`), CLI + Nix tools (`tools.nix`),
-    editors (`editors.nix`), `gh`/AI CLIs (`platforms.nix`).
+    editors (`editors.nix`), LSP servers (`languages.nix`), formatters
+    (`formatting.nix`), `gh`/AI CLIs (`platforms.nix`), MCP (`mcp.nix`), and
+    agent skills (`skills.nix`).
   - `personal/` — fonts, CLI tools, browsers (zen, helium), productivity,
-    catppuccin theming.
+    catppuccin theming; `entertainment.nix.disabled` is intentionally excluded.
   - `work/` — work tools; import currently commented out in `home.nix`.
 - `services/` — user services (`services.user.nix`: ssh-agent, kdeconnect;
   gpg-agent present but disabled).
+- Each of `profiles/{dev,personal,work}` and `services/` has a `default.nix`
+  that auto-imports the sibling modules (see Conventions).
 - `secrets.nix` + `secrets/` — agenix recipients + encrypted secrets, wired via
   `users/<name>/age.nix` (identity `~/.ssh/id_age`, token injected with
   `nix.extraOptions = "!include …"`, so `nix.checkConfig = false`). Rekey with
@@ -62,14 +68,26 @@ nix flake lock                                # after adding/changing flake inpu
 
 - Home Manager modules receive flake inputs via `extraSpecialArgs`
   (`{ ..., inputs, ... }:`), e.g. `inputs.zen-browser.homeModules.twilight`.
+- `default.nix` entry points auto-import every regular `*.nix` sibling
+  (`builtins.readDir` + `lib.filterAttrs`; `default.nix`, directories, and
+  non-`.nix` files are excluded). Dropping a module file in the directory is
+  enough — but flakes only see tracked sources, so `git add -N <file>` first or
+  it is silently skipped. Never place helper/non-module `.nix` files there, and
+  disable a module by renaming it to `*.nix.disabled` (not by commenting it
+  out). Applies to `profiles/dev`, `profiles/personal`, `profiles/work`, and
+  `services`.
 - `programs.nix-index` (bash integration) + `nix-index-database.comma` provide
   `command-not-found` via the prebuilt `nix-index-database` DB. Never add
   `nix-index` to `home.packages` (conflicts with the DB wrapper).
 - MCP servers are declared once in `profiles/dev/mcp.nix` and fanned out:
-  opencode/antigravity/zed via their `enableMcpIntegration` flags, VSCodium
-  via `profiles.default.enableMcpIntegration` (dedicated `mcp.json`, secrets
-  wrapped at startup). Servers needing tokens use `env.<VAR>.file` pointing
-  at an agenix-decrypted file — never literal secrets.
+  antigravity/zed via their `enableMcpIntegration` flags, VSCodium via
+  `profiles.default.enableMcpIntegration` (dedicated `mcp.json`, secrets
+  wrapped at startup). opencode does **not** use `enableMcpIntegration`: its
+  config is hand-maintained (mutable) in the dotfiles repo
+  (`opencode/opencode.json`), which references the servers by bare name — so
+  `mcp.nix` also aggregates the server binaries into one `buildEnv` on PATH.
+  Servers needing tokens use `env.<VAR>.file` pointing at an
+  agenix-decrypted file — never literal secrets.
 - Zed runs opencode in-editor via a custom ACP `agent_servers` entry pointing
   at the nix-pinned binary (same config, so MCP/skills parity is automatic).
   VSCodium gets the `sst-dev.opencode-v2` extension from open-vsx via the
@@ -99,15 +117,17 @@ nix flake lock                                # after adding/changing flake inpu
   ~/.npm-global`) instead of `buildNpmPackage`, unless reproducibility
   across machines is needed.
 - LSP/formatter strategy: server binaries live once in `home.packages`
-  (`profiles/dev/tools.nix`); Helix consumes them via `programs.helix`
+  (`profiles/dev/languages.nix`) and formatters once in
+  `profiles/dev/formatting.nix`; Helix consumes them via `programs.helix`
   (`languages` with nix-pinned `lib.getExe` commands, `auto-format = true`).
   Where the LSP formats natively (intelephense, tsserver, gopls, taplo,
   astro) no formatter entry is needed; otherwise wire one explicitly
   (nixfmt, stylua, prettier). No universal LSP module exists — zed/vscodium
   wiring stays per-editor and is currently deferred.
 - Catppuccin (mocha, pink) theming via the `catppuccin` flake's home module.
-- Dotfiles (wezterm, kanata, starship, …) live in a separate `dotfiles` repo
-  and are linked with `config.lib.file.mkOutOfStoreSymlink` in `home.nix`.
+- Dotfiles (wezterm, kanata, starship, fastfetch, opencode, …) live in a
+  separate `dotfiles` repo and are linked with
+  `config.lib.file.mkOutOfStoreSymlink` in `users/<name>/dotfiles.nix`.
   Helix is the exception: fully managed in nix via `programs.helix`
   (`settings` + `languages` with nix-pinned LSP binaries), so never re-add a
   `helix` out-of-store link (it fights the HM-owned `~/.config/helix`).

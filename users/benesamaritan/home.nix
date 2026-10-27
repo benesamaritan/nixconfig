@@ -17,7 +17,6 @@
     ../../profiles/work
     ../../profiles/dotfiles
     ./programs.nix
-    ./dotfiles.nix
     ./genericLinux.nix
   ];
 

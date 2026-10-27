@@ -1,0 +1,222 @@
+input {
+  keyboard {
+    xkb {}
+  }
+  touchpad {
+    tap
+    drag-lock
+    natural-scroll
+    scroll-method "two-finger"
+  }
+  mouse {}
+  /-trackpoint {}
+  warp-mouse-to-focus
+  focus-follows-mouse 
+}
+
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+spawn-at-startup "nsticky"
+// spawn-sh-at-startup ""
+
+hotkey-overlay {
+  skip-at-startup
+}
+
+overview {
+  workspace-shadow {
+      off
+  }
+}
+
+gestures {
+  hot-corners {
+      off
+  }
+}
+
+layout {
+  default-column-display "tabbed"
+  always-center-single-column
+  gaps 12
+  tab-indicator {
+    width 6
+    gap -16
+    gaps-between-tabs 6
+    corner-radius 25
+    length total-proportion=0.20
+    position "bottom"
+    place-within-column
+    hide-when-single-tab
+  }
+  insert-hint {
+    on
+  }
+  preset-column-widths {
+    proportion 0.15
+    proportion 0.35
+    proportion 0.5
+    proportion 0.65
+    proportion 0.85
+    proportion 1.0
+  }
+  preset-window-heights {
+    proportion 0.35
+    proportion 0.5
+    proportion 0.65
+    proportion 1.0
+  }
+  default-column-width { proportion 0.85; } 
+  border {
+    width 2
+  }
+  struts {
+    left 4
+    right 4
+  }
+  shadow {
+    on
+    softness 35
+    spread -8
+    draw-behind-window true
+  }
+  focus-ring {
+    off
+  }
+}
+
+recent-windows {
+  on
+  debounce-ms 750
+  open-delay-ms 150
+  highlight {
+    padding 12
+  }
+  previews {
+    max-height 350
+    max-scale 0.5
+  }
+}
+
+animations {
+  on
+  slowdown 1.2
+  workspace-switch {
+    spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+  }
+  window-open {
+    duration-ms 150
+    curve "ease-out-expo"
+  }
+  window-close {
+    duration-ms 150
+    curve "ease-out-quad"
+  }
+  horizontal-view-movement {
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  window-movement {
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  window-resize {
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  config-notification-open-close {
+    spring damping-ratio=0.6 stiffness=1000 epsilon=0.001
+  }
+  exit-confirmation-open-close {
+    spring damping-ratio=0.6 stiffness=500 epsilon=0.01
+  }
+  screenshot-ui-open {
+    duration-ms 300
+    curve "ease-out-quad"
+  }
+  overview-open-close {
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+  }
+  recent-windows-close {
+    spring damping-ratio=1.0 stiffness=800 epsilon=0.001
+  }
+}
+
+/-layer-rule {
+  match namespace="dms:blurwallpaper"
+  place-within-backdrop true
+}
+
+layer-rule {
+  match namespace="^notifications$"
+  block-out-from "screen-capture"
+}
+
+layer-rule {
+  match namespace="^quickshell$"
+  place-within-backdrop true
+}
+
+/-window-rule {
+  // geometry-corner-radius 8
+  clip-to-geometry true
+  tiled-state true
+  draw-border-with-background false
+}
+
+window-rule {
+  match app-id=r#"org.quickshell$"#
+  open-floating true
+}
+
+window-rule {
+  match title="^Picture-in-Picture$"
+  open-floating true
+  block-out-from "screen-capture"
+  default-floating-position x=15 y=15 relative-to="bottom-left"
+  default-column-width { proportion 0.35; }
+  border {
+    off 
+  }
+  shadow {
+    off
+    softness 20
+    spread 3
+    offset x=0 y=0
+    color "#000000"
+  }
+}
+
+window-rule {
+  match app-id="showmethekey-gtk"
+  open-floating true
+  default-floating-position x=15 y=15 relative-to="bottom"
+  min-height 100
+  max-height 100
+}
+
+window-rule {
+  match app-id="osu!" 
+  match app-id="osu!lazer" 
+  default-column-width { proportion 1.0; }
+}
+
+window-rule {
+  match is-active=false
+  exclude title="^Picture-in-Picture$"
+  exclude app-id="showmethekey-gtk"
+  opacity 0.95
+}
+
+// environment {
+//   QT_QPA_PLATFORMTHEME "gtk3"
+//   QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+// }
+
+include "dms/outputs.kdl"
+include "dms/binds.kdl"
+include "dms/cursor.kdl"
+include "dms/layout.kdl"
+include "dms/colors.kdl"
+include "dms/alttab.kdl"
+include "dms/wpblur.kdl"
+
+include "dms/windowrules.kdl"

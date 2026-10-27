@@ -2,7 +2,7 @@
 
 let
   link = name: {
-    source = ./dotfiles/${name};
+    source = ./${name};
   };
 in
 {

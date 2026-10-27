@@ -1,4 +1,11 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  pkgs-stable,
+  inputs,
+  ...
+}:
 
 let
   # opencode's user-mutable config (dotfiles/opencode/opencode.json) references
@@ -9,14 +16,16 @@ let
   # single env exposing only bin/ to avoid a buildEnv collision.
   mcpBin = pkgs.buildEnv {
     name = "mcp-servers-bin";
-    paths = with pkgs; [
-      mcp-server-filesystem
-      mcp-server-fetch
-      mcp-server-memory
-      mcp-server-sequential-thinking
-      mcp-server-time
-      context7-mcp
-      github-mcp-server
+    paths = [
+      pkgs-stable.mcp-server-filesystem
+      pkgs-stable.mcp-server-fetch
+      pkgs-stable.mcp-server-memory
+      pkgs-stable.mcp-server-sequential-thinking
+      pkgs-stable.mcp-server-time
+      pkgs-stable.mcp-server-git
+      pkgs.github-mcp-server
+      pkgs.context7-mcp
+      pkgs.bun
     ];
     pathsToLink = [ "/bin" ];
   };
@@ -28,32 +37,41 @@ in
   programs.mcp = {
     servers = {
       filesystem = {
-        command = lib.getExe pkgs.mcp-server-filesystem;
+        command = lib.getExe pkgs-stable.mcp-server-filesystem;
         args = [ "${config.home.homeDirectory}/repos" ];
       };
-      fetch.command = lib.getExe pkgs.mcp-server-fetch;
-      memory.command = lib.getExe pkgs.mcp-server-memory;
-      sequential-thinking.command = lib.getExe pkgs.mcp-server-sequential-thinking;
-      time.command = lib.getExe pkgs.mcp-server-time;
+      fetch.command = lib.getExe pkgs-stable.mcp-server-fetch;
+      memory.command = lib.getExe pkgs-stable.mcp-server-memory;
+      sequential-thinking.command = lib.getExe pkgs-stable.mcp-server-sequential-thinking;
+      time.command = lib.getExe pkgs-stable.mcp-server-time;
       context7.command = lib.getExe pkgs.context7-mcp;
       github = {
         command = lib.getExe pkgs.github-mcp-server;
         args = [ "stdio" ];
         env.GITHUB_PERSONAL_ACCESS_TOKEN.file = config.age.secrets.github-mcp-token.path;
       };
-      # devenv project tooling. Runs in the client's cwd (a devenv project).
       devenv = {
         command = lib.getExe pkgs.devenv;
         args = [ "mcp" ];
       };
-      # Git history/diff/blame. Scoped to one repo; repeat --repository
-      # per repo or point it at a parent checkout as needed.
-      # git = {
-      #   command = lib.getExe pkgs.mcp-server-git;
-      #   args = [
-      #     "--repository"
-      #     "${config.home.homeDirectory}/repos/benesamaritan/nixconfig"
-      #   ];
+      chromedevtools = {
+        command = "${pkgs.bun}/bin/bunx";
+        args = [ "-y" "chrome-devtools-mcp@latest" ];
+        env.CHROME_PATH = "${inputs.helium-flake.packages.x86_64-linux.helium}/bin/helium";
+        env.CHROME_DEBUG_PORT = "9222";
+      };
+      codegraph = {
+        command = "${pkgs.bun}/bin/bunx";
+        args = [ "@colbymchenry/codegraph" "serve" "--mcp" ];
+      };
+
+      # jscpd = {
+      #   command = "${pkgs.bun}/bin/bunx";
+      #   args = [ "jscpd" "--mcp" ];
+      # };
+      # dbx = {
+      #   command = "${pkgs.bun}/bin/bunx";
+      #   args = [ "-y" "@dbx-app/mcp-server" ];
       # };
     };
   };

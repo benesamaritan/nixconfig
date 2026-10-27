@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -9,12 +10,71 @@
     gh
   ];
 
-  # opencode settings are intentionally not declared here: its config is
-  # user-mutable (out-of-store link to dotfiles/opencode/opencode.json, wired
-  # in users/benesamaritan/dotfiles.nix). This module still manages its skills
-  # dir.
+  programs.opencode = {
+    enable = true;
+    enableMcpIntegration = true;
+    settings = {
+      lsp = {
+        nil = {
+          command = [ "nil" ];
+          extensions = [ ".nix" ];
+        };
+      };
+      provider."9router" = {
+        npm = "@ai-sdk/openai-compatible";
+        options = {
+          baseURL = "http://127.0.0.1:20128/v1";
+          apiKey = "{file:${config.age.secrets.omniroute-key.path}}";
+        };
+        models = {
+          open = {
+            name = "open";
+            modalities = {
+              input = [ "text" "image" ];
+              output = [ "text" ];
+            };
+          };
+          premium = {
+            name = "premium";
+            modalities = {
+              input = [ "text" "image" ];
+              output = [ "text" ];
+            };
+          };
+          "9r-free" = {
+            name = "9r-free";
+            modalities = {
+              input = [ "text" "image" ];
+              output = [ "text" ];
+            };
+          };
+          "9r-code" = {
+            name = "9r-code";
+            modalities = {
+              input = [ "text" "image" ];
+              output = [ "text" ];
+            };
+          };
+          "9r-plan" = {
+            name = "9r-plan";
+            modalities = {
+              input = [ "text" "image" ];
+              output = [ "text" ];
+            };
+          };
+        };
+      };
+      model = "9router/open";
+      agent.explorer = {
+        description = "Fast explorer subagent for codebase exploration";
+        mode = "subagent";
+        model = "9router/kgw/kilo-auto/free";
+      };
+    };
+  };
+
   programs.antigravity-cli = {
-    enableMcpIntegration = true; # merge programs.mcp.servers into antigravity
+    enableMcpIntegration = true;
     settings = {
       context.fileName = [
         "AGENTS.md"

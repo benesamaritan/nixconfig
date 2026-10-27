@@ -1,15 +1,10 @@
-{
-  config,
-  lib,
-  ...
-}:
+{ config, lib, ... }:
 
 let
   link = name: {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/benesamaritan/dotfiles/${name}";
+    source = ./dotfiles/${name};
   };
 in
-
 {
   home.preferXdgDirectories = true;
 
@@ -20,7 +15,6 @@ in
       "kanata" = link "kanata";
       "starship.toml" = link "starship.toml";
       "fastfetch" = link "fastfetch";
-      "opencode/opencode.json" = link "opencode/opencode.json";
     };
   };
 }

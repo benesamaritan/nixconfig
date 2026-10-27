@@ -37,6 +37,7 @@
     flags = [
       "--ozone-platform-hint=auto"
       "--start-maximized"
+      "--remote-debugging-port=9222"
     ];
     policies = {
       "BrowserSignin" = 0;

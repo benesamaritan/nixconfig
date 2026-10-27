@@ -3,11 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    affinity-nix.url = "github:mrshmllow/affinity-nix";
+    affinity-nix = {
+      url = "github:mrshmllow/affinity-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,19 +40,6 @@
     };
   };
 
-  nixConfig = {
-    extra-substituters = [
-      "https://devenv.cachix.org"
-      "https://catppuccin.cachix.org"
-      "https://cache.forall.systems"    # affinity-nix
-    ];
-    extra-trusted-public-keys = [
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-      "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
-      "cache.forall.systems:5PmD7QO4MSF8YgyRZtkSGXRDo96H3bybIf2SsQh8ScI="
-    ];
-  };
-
   outputs = inputs @ {
       self,
       nixpkgs,
@@ -60,15 +51,20 @@
     in
     {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        config.allowUnfree = true;
-        overlays = [ inputs.nix4vscode.overlays.default ];
-      };
-        extraSpecialArgs = { inherit inputs username; };
-        modules = [
-          ./users/${username}/home.nix
-        ];
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          overlays = with inputs; [
+            nix4vscode.overlays.default
+            affinity-nix.overlays.default
+          ];
+        };
+        extraSpecialArgs = {
+          inherit inputs username;
+          pkgs-stable = import inputs.nixpkgs-stable {
+            system = "x86_64-linux";
+          };
+        };
+        modules = [ ./users/${username}/home.nix ];
       };
     };
 }

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ ... }:
 
 let
   link = name: {
@@ -11,20 +11,19 @@ in
   xdg = {
     enable = true;
     configFile = {
-      "wezterm" = link "wezterm";
-      "kanata" = link "kanata";
-      "starship.toml" = link "starship.toml";
-      "fastfetch" = link "fastfetch";
-      "alacritty" = link "alacritty";
-      "atuin" = link "atuin";
-      "btop" = link "btop";
-      "cava" = link "cava";
-      "Kvantum" = link "Kvantum";
-      "lazydocker" = link "lazydocker";
-      "lazygit" = link "lazygit";
-      "niri" = link "niri";
-      "nvim" = link "nvim";
-      "tmux" = link "tmux";
+      "btop"            = link "btop";
+      "cava"            = link "cava";
+      "niri"            = link "niri";
+      "nvim"            = link "nvim";
+      "tmux"            = link "tmux";
+      "atuin"           = link "atuin";
+      "kanata"          = link "kanata";
+      "wezterm"         = link "wezterm";
+      "lazygit"         = link "lazygit";
+      "Kvantum"         = link "Kvantum";
+      "alacritty"       = link "alacritty";
+      "lazydocker"      = link "lazydocker";
+      # starship.toml is now handled via programs.starship in starship.nix
     };
   };
 }

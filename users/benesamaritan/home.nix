@@ -7,17 +7,17 @@
 
 {
   imports = [
-    inputs.nix-index-database.homeModules.default
-    inputs.agenix.homeManagerModules.default
-    inputs.nix-flatpak.homeManagerModules.nix-flatpak
     ./age.nix
+    ./programs.nix
+    ./genericLinux.nix
     ../../services
     ../../profiles/personal
     ../../profiles/dev
     ../../profiles/work
     ../../profiles/dotfiles
-    ./programs.nix
-    ./genericLinux.nix
+    inputs.agenix.homeManagerModules.default
+    inputs.nix-index-database.homeModules.default
+    inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
   programs.home-manager = {

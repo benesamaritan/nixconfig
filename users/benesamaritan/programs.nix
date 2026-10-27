@@ -1,34 +1,28 @@
+{ ... }:
 {
-  pkgs,
-  ...
-}:
-
-{
-  home.packages = with pkgs; [ starship ];
-
   programs = {
-    mcp.enable = true;
-    antigravity-cli.enable = true;
-    opencode.enable = true;
-    helix.enable = true;
     zed-editor.enable = true;
-    vscodium.enable = true;
+    vscodium.enable = false;
+    mcp.enable = true;
+    opencode.enable = true;
+    antigravity-cli.enable = false;
     yazi.enable = true;
-    bash.enable = true;
     direnv.enable = true;
     devenv.enable = true;
-    nh.enable = true;
-    nix-index.enable = true;
     lazygit.enable = true;
-    lazysql.enable = true;
+    lazysql.enable = false;
   };
 
   programs = {
+    bash.enable = true;
+    nh.enable = true;
+    nix-index.enable = true;
+    helix.enable = true;
     zen-browser.enable = true;
     helium.enable = true;
     bat.enable = true;
     atuin.enable = true;
-#     starship.enable = true;
+    starship.enable = true;
     zoxide.enable = true;
     fzf.enable = true;
     eza.enable = true;

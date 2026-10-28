@@ -1,4 +1,4 @@
-{ inputs, pkgs, lib, stdenv, ... }:
+{ inputs, pkgs, ... }:
 {
   qt = {
     enable = true;
@@ -19,10 +19,10 @@
   home.packages = with pkgs; [
     libsForQt5.qt5ct
     kdePackages.qt6ct
-    inputs.better-blur-dx.packages.${stdenv.hostPlatform.system}.default
+    inputs.better-blur-dx.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   # Symlink effect so KWin discovers it
   home.file.".local/share/kwin/effects/better-blur-dx".source =
-    "${inputs.better-blur-dx.packages.${stdenv.hostPlatform.system}.default}/share/kwin/effects/better-blur-dx";
+    "${inputs.better-blur-dx.packages.${pkgs.stdenv.hostPlatform.system}.default}/share/kwin/effects/better-blur-dx";
 }

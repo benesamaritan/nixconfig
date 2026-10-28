@@ -24,6 +24,11 @@ in
       lines = 10;
       fixed-num-lines = true;
       padding = mkLiteral "10px";
+      modes = "combi";
+      combi-modes = "drun,window,calc,emoji,file-browser-extended";
+      show-icons = true;
+      drun-display-format = "{icon} {name}";
+      location = 0;
     };
     # top-level theme/window/widget sections (written to a custom theme file)
     theme = {

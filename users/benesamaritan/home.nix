@@ -20,6 +20,10 @@
     inputs.nix-flatpak.homeManagerModules.nix-flatpak
   ];
 
+  news.display = "show";
+
+  nix.settings.use-xdg-base-directories = true;
+
   programs.home-manager = {
     enable = true;
     path = lib.mkDefault "$HOME/.config/home-manager";
@@ -30,6 +34,8 @@
     username = username;
     homeDirectory = "/home/${username}";
     shell.enableShellIntegration = true;
+    overwriteBackup = true;
+    preferXdgDirectories = true;
     shellAliases = {
       ".." = "cd ..";
       cls = "clear";
@@ -40,6 +46,15 @@
     sessionVariables = {
       TERMINAL = "alacritty";
       BROWSER = "zen";
+      HISTFILE = "$XDG_STATE_HOME/bash/history";
+      GNUPGHOME = "$XDG_DATA_HOME/gnupg";
+      NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
+      NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
+      WINEPREFIX = "$XDG_DATA_HOME/wine";
+      GTK2_RC_FILES = lib.mkForce "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
+      XCURSOR_PATH = "$XDG_DATA_HOME/icons:/usr/share/icons";
+      CODEX_HOME = "$XDG_CONFIG_HOME/codex";
+      PI_CODING_AGENT_DIR = "$XDG_CONFIG_HOME/pi/agent";
     };
     file.".config/nixpkgs/config.nix".text = ''
       { allowUnfree = true; }

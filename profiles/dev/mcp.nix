@@ -8,12 +8,31 @@
 }:
 
 let
-  # opencode's user-mutable config (dotfiles/opencode/opencode.json) references
-  # these servers by bare name, so they must be resolvable on PATH. The
-  # programs.mcp config below embeds absolute nix-store paths, which the
-  # hand-maintained file can't know. The @modelcontextprotocol/servers
-  # packages all ship lib/node_modules/.../README.md, so aggregate them into a
-  # single env exposing only bin/ to avoid a buildEnv collision.
+  # codegraph: upstream prebuilt JS bundle (v1.6.2), but wrapped with Nix's
+  # system Node.js. The nixpkgs codegraph package segfaults in glibc 2.44's
+  # dl_main because its vendored Node binary is incompatible; the upstream
+  # release's JS works fine with our system node.
+  codegraph-fetch = pkgs.stdenv.mkDerivation {
+    name = "codegraph";
+    src = pkgs.fetchurl {
+      url = "https://github.com/colbymchenry/codegraph/releases/download/v1.6.2/codegraph-linux-x64.tar.gz";
+      sha256 = "0a5q6x7nx5mz136llq7yf5llmpvy1c08cdvjrhfgna1114bg82pg";
+    };
+    nativeBuildInputs = [ pkgs.nodejs_22 ];
+    dontBuild = true;
+    installPhase = ''
+      # The release tarball may contain a top-level codegraph-linux-x64/ dir
+      if [ -d codegraph-linux-x64 ]; then cd codegraph-linux-x64; fi
+      mkdir -p $out/bin
+      cp -r ./lib $out/lib
+      cat > $out/bin/codegraph <<EOF
+      #!/bin/sh
+      exec ${pkgs.nodejs_22}/bin/node --liftoff-only --disable-warning=ExperimentalWarning "$out/lib/dist/bin/codegraph.js" "\$@"
+      EOF
+      chmod +x $out/bin/codegraph
+    '';
+  };
+
   mcpBin = pkgs.buildEnv {
     name = "mcp-servers-bin";
     paths = [
@@ -25,6 +44,7 @@ let
       pkgs-stable.mcp-server-git
       pkgs.github-mcp-server
       pkgs.context7-mcp
+      codegraph-fetch
       pkgs.bun
     ];
     pathsToLink = [ "/bin" ];
@@ -32,7 +52,7 @@ let
 in
 
 {
-  home.packages = [ mcpBin ];
+  home.packages = [ mcpBin inputs.agenix.packages.${pkgs.stdenv.hostPlatform.system}.agenix ];
 
   programs.mcp = {
     servers = {
@@ -61,18 +81,23 @@ in
         env.CHROME_DEBUG_PORT = "9222";
       };
       codegraph = {
-        command = "${pkgs.bun}/bin/bunx";
-        args = [ "@colbymchenry/codegraph" "serve" "--mcp" ];
+        command = "${codegraph-fetch}/bin/codegraph";
+        args = [ "serve" "--mcp" ];
       };
-
-      # jscpd = {
-      #   command = "${pkgs.bun}/bin/bunx";
-      #   args = [ "jscpd" "--mcp" ];
-      # };
-      # dbx = {
-      #   command = "${pkgs.bun}/bin/bunx";
-      #   args = [ "-y" "@dbx-app/mcp-server" ];
-      # };
+#       jscpd = {
+#         command = "${pkgs.bun}/bin/bunx";
+#         args = [ "cpd" "--mcp" ];
+#         env.NODE_OPTIONS = "--max-old-space-size=1024";
+#       };
+      dbx = {
+        command = "${pkgs.bun}/bin/bunx";
+        args = [ "-y" "@dbx-app/mcp-server" ];
+      };
+      trilium = {
+        type = "http";
+        url = "http://127.0.0.1:37840/mcp";
+        headers.Authorization = "Bearer {file:${config.home.homeDirectory}/.config/agenix/trilium-mcp-token}";
+      };
     };
   };
 }

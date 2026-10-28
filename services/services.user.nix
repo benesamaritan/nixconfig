@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   services.ssh-agent.enable = true;
@@ -21,6 +21,7 @@
   # user manager environment so the shell process inherits it. Referencing
   # config.services.kdeconnect.package keeps plugin and plasmoid on the same
   # build across nixpkgs updates.
+  # Reference the package explicitly to avoid auto-adding all system-wide paths
   systemd.user.sessionVariables.QML2_IMPORT_PATH =
-    "${config.services.kdeconnect.package}/lib/qt-6/qml";
+    lib.mkForce "${config.services.kdeconnect.package}/lib/qt-6/qml";
 }

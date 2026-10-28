@@ -11,6 +11,7 @@
     devenv.enable = true;
     lazygit.enable = true;
     lazysql.enable = false;
+    rofi.enable = true;
   };
 
   programs = {

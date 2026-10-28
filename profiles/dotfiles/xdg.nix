@@ -20,10 +20,8 @@ in
       "kanata"          = link "kanata";
       "wezterm"         = link "wezterm";
       "lazygit"         = link "lazygit";
-      "Kvantum"         = link "Kvantum";
       "alacritty"       = link "alacritty";
       "lazydocker"      = link "lazydocker";
-      # starship.toml is now handled via programs.starship in starship.nix
     };
   };
 }

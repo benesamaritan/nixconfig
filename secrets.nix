@@ -15,4 +15,5 @@ in
   "secrets/github-token.age".publicKeys = allKeys;
   "secrets/github-mcp-token.age".publicKeys = allKeys;
   "secrets/omniroute-key.age".publicKeys = allKeys;
+  "secrets/trilium-mcp-token.age".publicKeys = allKeys;
 }

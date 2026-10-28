@@ -17,6 +17,10 @@
       file = ../../secrets/omniroute-key.age;
       path = "${config.home.homeDirectory}/.config/agenix/omniroute-key";
     };
+    secrets.trilium-mcp-token = {
+      file = ../../secrets/trilium-mcp-token.age;
+      path = "${config.home.homeDirectory}/.config/agenix/trilium-mcp-token";
+    };
   };
 
   nix.extraOptions = "!include ${config.age.secrets.github-token.path}";

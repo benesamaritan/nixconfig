@@ -5,7 +5,8 @@
 
 {
   home.packages = with pkgs; [
-    papirus-icon-theme
+    # papirus-icon-theme removed: catppuccin.gtk.icon provides Papirus
+    # with mocha/pink overlay; keeping both causes icon collision in buildEnv
     tokei                       # Count LoC
   ];
 

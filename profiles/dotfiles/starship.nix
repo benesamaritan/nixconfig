@@ -1,6 +1,6 @@
-{ ... }: {
+{ ... }:
+{
   programs.starship = {
-    enable = true;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
       format = "$all";
@@ -55,7 +55,7 @@
         };
       };
 
-      direnv.disabled = true;
+      direnv.disabled = false;
       line_break.disabled = false;
       character = {
         disabled = false;
@@ -68,9 +68,9 @@
       };
 
       cmd_duration = {
-        disabled = true;
-        show_milliseconds = true;
-        show_notifications = true;
+        disabled = false;
+        show_milliseconds = false;
+        show_notifications = false;
         format = " in [$duration](bold yellow) ";
       };
 

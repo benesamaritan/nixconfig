@@ -1,0 +1,62 @@
+{ lib, ... }:
+{
+  programs.btop = {
+    enable = true;
+    settings = {
+      color_theme = lib.mkForce "catppuccin_mocha";
+      theme_background = false;
+      truecolor = true;
+      force_tty = false;
+      rounded_corners = true;
+      graph_symbol = "braille";
+      shown_boxes = "cpu mem net proc";
+      update_ms = 2000;
+      proc_sorting = "memory";
+      proc_reversed = false;
+      proc_tree = true;
+      proc_colors = true;
+      proc_gradient = true;
+      proc_per_core = false;
+      proc_mem_bytes = true;
+      proc_cpu_graphs = true;
+      proc_left = false;
+      proc_filter_kernel = false;
+      proc_aggregate = false;
+      cpu_invert_lower = true;
+      cpu_single_graph = false;
+      cpu_bottom = false;
+      show_uptime = true;
+      check_temp = true;
+      show_coretemp = true;
+      temp_scale = "celsius";
+      base_10_sizes = false;
+      show_cpu_freq = true;
+      clock_format = "%X";
+      background_update = true;
+      disks_filter = "";
+      mem_graphs = true;
+      zfs_arc_cached = true;
+      show_swap = true;
+      show_disks = false;
+      only_physical = true;
+      use_fstab = true;
+      zfs_hide_datasets = false;
+      disk_free_priv = false;
+      show_io_stat = true;
+      io_mode = false;
+      io_graph_combined = false;
+      net_download = 100;
+      net_upload = 100;
+      net_auto = true;
+      net_sync = true;
+      base_10_bitrate = "Auto";
+      show_battery = true;
+      selected_battery = "Auto";
+      show_battery_watts = true;
+      log_level = "WARNING";
+      nvml_measure_pcie_speeds = true;
+      rsmi_measure_pcie_speeds = true;
+      gpu_mirror_graph = true;
+    };
+  };
+}

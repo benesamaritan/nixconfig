@@ -34,7 +34,7 @@
     CARGO_HOME = "$HOME/.local/share/cargo";
     BUN_INSTALL = "$HOME/.local/share/bun";
     HISTFILE = "$XDG_STATE_HOME/bash/history";
-    GNUPGHOME = "$XDG_DATA_HOME/gnupg";
+    GNUPGHOME = "$HOME/.local/share/gnupg";
     NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
     NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
     WINEPREFIX = "$XDG_DATA_HOME/wine";

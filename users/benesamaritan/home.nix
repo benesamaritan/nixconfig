@@ -47,6 +47,7 @@
             TERMINAL = "alacritty";
             BROWSER = "zen";
             PATH = "$XDG_STATE_HOME/nix/profile/bin:$PATH";
+            GNUPGHOME = "$HOME/.local/share/gnupg";
         };
         file.".config/nixpkgs/config.nix".text = ''
             { allowUnfree = true; }

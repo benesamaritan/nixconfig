@@ -1,16 +1,15 @@
 {
-  config,
   pkgs,
   inputs,
   ...
 }:
 
 {
-  imports = [ 
-    inputs.zen-browser.homeModules.twilight 
+  imports = [
+    inputs.zen-browser.homeModules.twilight
     inputs.helium-flake.homeModules.default
   ];
-  
+
   programs.zen-browser = {
     nativeMessagingHosts = [ pkgs.firefoxpwa ];
     policies = {

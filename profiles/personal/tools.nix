@@ -30,7 +30,6 @@
   ];
 
   programs = {
-    starship.enableBashIntegration = true;
     zoxide.enableBashIntegration = true;
     television.enableBashIntegration = true;
     bat.extraPackages = with pkgs.bat-extras; [
@@ -39,10 +38,6 @@
       batgrep
       batwatch
     ];
-    atuin = {
-      enableBashIntegration = true;
-      daemon.enable = true;
-    };
     fzf = {
       enableBashIntegration = true;
       historyWidget.command = "";

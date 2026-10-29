@@ -1,5 +1,6 @@
 {
-  ...
+    lib,
+    ...
 }:
 
 {
@@ -19,20 +20,10 @@
     gs = "git status";
     ga = "git add .";
     gc = "git commit -m";
-    gp = "git push --set-upstream";
-    gf = "git fetch && git pull --rebase";
-    gcl = "git clone";
-    gb = "git branch";
-    gco = "git checkout";
-    gu = "git submodule update --init --recursive";
     x = "hx .";
     yz = "yazi";
     lzg = "lazygit";
-    lzd = "lazydocker";
     lzs = "lazysql";
-    lzn = "lazynpm";
-    lzw = "lazyworktree";
-    lzj = "lazyjournal";
     oc = "opencode";
     dv = "devenv";
   };
@@ -42,5 +33,14 @@
     XCOMPOSECACHE = "$HOME/.cache/X11/xcompose";
     CARGO_HOME = "$HOME/.local/share/cargo";
     BUN_INSTALL = "$HOME/.local/share/bun";
+    HISTFILE = "$XDG_STATE_HOME/bash/history";
+    GNUPGHOME = "$XDG_DATA_HOME/gnupg";
+    NPM_CONFIG_CACHE = "$XDG_CACHE_HOME/npm";
+    NPM_CONFIG_TMP = "$XDG_RUNTIME_DIR/npm";
+    WINEPREFIX = "$XDG_DATA_HOME/wine";
+    GTK2_RC_FILES = lib.mkForce "$XDG_CONFIG_HOME/gtk-2.0/gtkrc";
+    XCURSOR_PATH = "$XDG_DATA_HOME/icons:/usr/share/icons";
+    CODEX_HOME = "$XDG_CONFIG_HOME/codex";
+    PI_CODING_AGENT_DIR = "$XDG_CONFIG_HOME/pi/agent";
   };
 }

@@ -8,61 +8,6 @@
   programs = {
     helix = {
       defaultEditor = true;
-      settings.editor = {
-        auto-format = true;
-        line-number = "relative";
-        mouse = true;
-        true-color = true;
-        color-modes = true;
-        cursor-shape = {
-          insert = "bar";
-          normal = "block";
-          select = "underline";
-        };
-        file-picker = {
-          hidden = true;
-          max-depth = 10;
-        };
-        soft-wrap = {
-          enable = true;
-          max-wrap = 20;
-        };
-        smart-tab.enable = false;
-        statusline = {
-          left = [ "mode" "spinner" ];
-          center = [ "file-name" ];
-          right = [ "diagnostics" "selections" "position" "file-type" ];
-          separator = "│";
-          mode = {
-            normal = "NOR";
-            insert = "INS";
-            select = "SEL";
-          };
-          diagnostics = [ "warning" "error" ];
-          workspace-diagnostics = [ "warning" "error" ];
-        };
-        whitespace.render = {
-          space = "all";
-          tab = "all";
-          nbsp = "all";
-          nnbsp = "none";
-          tabpad = "all";
-          newline = "none";
-        };
-        whitespace.characters = {
-          space = "_";
-          nbsp = "⍽";
-          nnbsp = "␣";
-          tab = "→";
-          tabpad = "·";
-        };
-        indent-guides = {
-          render = true;
-          character = "▏";
-          skip-levels = 1;
-        };
-        gutters.layout = [ "diff" "diagnostics" "line-numbers" "spacer" ];
-      };
       languages = {
         language-server = {
           nil.command = lib.getExe pkgs.nil;
@@ -149,10 +94,8 @@
       };
     };
     zed-editor = {
-      # Helix owns EDITOR/VISUAL; don't also export zed's.
       defaultEditor = false;
       enableMcpIntegration = true;
-      # Settings stay editable by zed (zed's own default, made explicit).
       mutableUserSettings = true;
       userSettings.agent_servers.OpenCode = {
         command = lib.getExe pkgs.opencode;
@@ -173,8 +116,8 @@
         "git-firefly"
         "make"
         "env"
-#         "caddyfile"
-#         "dockerfile"
+        "caddyfile"
+        "dockerfile"
 
         "html"
         "emmet"
@@ -184,24 +127,21 @@
         "blade"
         "laravel"
         "astro"
-#         "robots-txt"
-#         "templ"
-#         "twig"
-#         "less"
+        "robots-txt"
+        "templ"
+        "twig"
+        "less"
         "codebook"
-#         "graphql"
+        "graphql"
         "tsgo"
-#         "color-highlight"
-#         "design-tokens"
+        "color-highlight"
+        "design-tokens"
         "mdx"
-#         "live-server"
-#         "npm-package-json-checker"
       ];
     };
     vscodium = {
       profiles.default = {
         enableMcpIntegration = true;
-        # Settings stay editable by vscodium.
         mutableUserSettings = true;
         extensions = pkgs.nix4vscode.forOpenVsx [
           "sst-dev.opencode-v2"

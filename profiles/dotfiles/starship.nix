@@ -1,6 +1,7 @@
 { ... }:
 {
   programs.starship = {
+    enableBashIntegration = true;
     settings = {
       "$schema" = "https://starship.rs/config-schema.json";
       format = "$all";

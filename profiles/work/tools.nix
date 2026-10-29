@@ -9,7 +9,4 @@
     inkscape
     affinity-v3
   ];
-  programs.wezterm = {
-      enableBashIntegration = true;
-  };
 }
